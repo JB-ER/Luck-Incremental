@@ -1,11 +1,11 @@
-import '/node_modules/i18next/i18next.min.js'
+import './node_modules/i18next/i18next.min.js'
 
 const responseEn = await fetch('/locales/en.json');
 // const responseRu = await fetch('/locales/ru.json');
 const translationsEnData = await responseEn.json();
 // const translationsRuData = await responseRu.json();
 await i18next.init({
-    lng: language,
+    lng: player.language,
     resources: {
         en: { translation: translationsEnData },
         // ru: { translation: translationsRuData }
