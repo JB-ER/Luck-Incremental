@@ -97,7 +97,8 @@ let player = {
         saved: 0,
         auto_save: 0,
         start: new Date().getTime(),
-    }
+    },
+    language: "en"
 }
 
 let text = {
