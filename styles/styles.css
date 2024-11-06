@@ -1,0 +1,353 @@
+@font-face {
+    font-family: "monotyper";
+    src: url("MonospaceTypewriter.ttf") format("truetype");
+    font-style: normal; 
+    font-weight: normal; 
+}
+
+:root {
+    --nothing: rgba(255, 255, 255, 0);
+    --absolute-worst: rgb(0, 0, 0);
+    --worst: rgb(18, 18, 18);
+    --disgusting: rgb(45, 45, 45);
+    --abominable: rgb(61, 61, 61);
+    --repulsive: rgb(77, 77, 77);
+    --dreadful: rgb(96, 96, 96);
+    --appaling: rgb(119, 117, 117);
+    --horrible: rgb(132, 131, 131);
+    --awful: rgb(152, 150, 150);
+    --terrible: rgb(172, 169, 169);
+    --poor: rgb(180, 180, 180);
+    --unremarkable: rgb(200, 200, 200);
+    --bad: rgb(216, 216, 216);
+    --so-so: rgb(234, 234, 234);
+    --common: white;
+    --regular: rgb(228, 256, 227);
+    --standard: rgb(204, 256, 202);
+    --decent: rgb(177, 256, 174);
+    --average: rgb(150, 256, 150);
+}
+
+
+body {
+    background-color: rgb(153, 153, 153);
+}
+
+span {
+    user-select: none;
+    pointer-events: none;
+}
+
+button, div, span {
+    font-family: "monotyper" !important;
+}
+
+#game {
+    display: flex;
+    flex-direction: row;
+    font-family: "monotyper" !important;
+}
+
+#buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#buttons button, #yesHR, #no{
+    margin: 7px;
+    border: 1px black solid;
+    background-color: white;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.half {
+    width: 50%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#rollScreen, #raritiesScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#rollButton {
+    height: 70px;
+    width: 70px;
+    border: 1px black solid;
+    background-color: white;
+    border-radius: 3px;
+}
+
+#rollButton:hover, #buttons button:hover, .buyableUpgrade:hover, .settingButton:hover, .smallButton:hover {
+    background-color: rgb(220, 220, 220) !important;
+    cursor: pointer;
+}
+
+.rarityCount, .rarityText {
+    text-shadow: 0.75px 0.75px rgb(0, 0, 0), -0.75px -0.75px rgb(0, 0, 0), 0.75px -0.75px rgb(0, 0, 0), -0.75px 0.75px rgb(0, 0, 0);
+}
+
+.rarityText {
+    text-shadow: 0.5px 0.5px rgb(0, 0, 0), -0.5px -0.5px rgb(0, 0, 0), 0.5px -0.5px rgb(0, 0, 0), -0.5px 0.5px rgb(0, 0, 0);
+}
+
+.buyableUpgrade, .settingButton {
+    height: 80px;
+    width: 180px;
+    margin: 5px;
+    background-color: white;
+    border: 1px black solid;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+.settingButton {
+    font-size: 18px;
+}
+
+#upgradesScreen, #settingsScreen {
+    display: flex;
+    flex-direction: column;
+}
+
+.upgradeRow {
+    display: flex;
+    flex-direction: row;
+}
+
+#rollCooldown {
+    height: 15px;
+    width: 50px;
+    border: 3px black solid;
+    background-color: gray;
+    margin: 10px;
+}
+
+#rollCooldownProgress {
+    position: absolute;
+    height: 15px;
+    width: 0px;
+    background-color: #AAAAAA;
+}
+
+#cdText {
+    font-size:11px;
+    position:absolute;
+    z-index: 9999;
+    margin-left: 10px;
+}
+
+.settingsRow {
+    display: flex;
+    justify-content: center;
+}
+
+.loadfile {
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 79px;
+    width: 178.2px;
+}
+
+#file-upload {
+    display: none;
+}
+
+.file-name {
+    display: none;
+}
+
+.confirmationWindow {
+    display: none;
+    width: 400px;
+    height: 250px;
+}
+#windowTitleDiv {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.myPopupBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* цвет затемнения */
+    z-index: 9900; /* должен быть меньше, чем у самого окна */
+    display: none; /* начальное состояние - затемнение скрыто */
+}
+
+.gameWindow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #a1a1a1;
+    border: solid 2px #000000;
+    /* padding: 5px; */
+    width: 750px;
+    height: 550px;
+    z-index: 9989;
+    text-align: left;
+    display: none;
+    border-radius: 6px;
+}
+
+.centerText {
+    display: none;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 22px;
+    text-align: center;
+}
+
+.titleDivClass {
+    text-align: center;
+    align-items: center;
+}
+
+.windowTitle{
+    z-index: 9999;
+    color: #000;;
+    font-size: 25px;
+    margin: 0 auto;
+    margin-block: 10px;
+}
+
+.closeWindow {
+    z-index: 9998;
+    width:35px;
+    height:35px;
+    border: solid 2px #000000;
+    background-color: #a1a1a1;
+    position: fixed;
+    cursor: pointer;
+    padding: 1px;
+    padding-left: 5px;
+    border-radius: 4px;
+}
+
+.closeWindow::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url("images/close.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter:invert()
+}
+.closeWindow:hover {
+    background-color: #b9b9b9;
+}
+.confClose, .closeWindow{
+    left: 94%;
+    bottom: 92%;
+}
+
+.windowDesc {
+    overflow-y: auto;
+    color:rgb(0, 0, 0);
+    margin-top:0;
+    max-height: 460px;
+}
+
+#confirmationButtons {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 50%;
+}
+
+.smallButton {
+    font-size: 22px !important;
+    width: 50px;
+}
+
+#line {
+    background-color: rgb(0, 0, 0);
+    width: 0.1%;
+}
+
+#helpDiv {
+    width: 89%;
+    /* margin: 0px; */
+    max-height: 500px;
+    margin-right: 0px;
+}
+
+#helpDescription {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#helpPageTitle {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.versionButton {
+    border-style: solid;
+    width: 80px;
+    height: 33px;
+    border-color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0px;
+    border-width: 1px;
+    border-block-width: 0px;
+}
+
+.versionButtonVertical {
+    border-width: 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    margin: 0px;
+}
+
+.versionButton:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgb(190, 190, 190);
+}
+
+#gameHelpWindow {
+    flex-wrap: wrap;
+}
+
+#horizontalLine {
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    height:1.1px;
+}
+
+#helpPageChooser{
+    display: flex;
+    height: 90.5%;
+    width: 10.7%;
+    flex-direction: column;
+}
+
+#helpTitleDiv {
+    width: 100%;
+}
+
+#statsScreen{
+    text-align: center;
+}

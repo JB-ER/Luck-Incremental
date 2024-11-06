@@ -1,0 +1,8 @@
+-=Changelog=-
+
+06.11.2024 | Luck Incremental 0.0 | Null Update:
+GAME ALPHA RELEASE! There is gameplay for few hours to get endgame goal - Trophy I.
+20 RARITIES! 
+6 NEW UPGRADES WITH 5 LEVELS MAX EACH EXCEPT TROPHY!
+
+[Dev comment: this is very alpha version just to show you how chance mechanic works, in future versions I'm gonna add all missing QoL stuff. I made this within 4 days but it's only few hours of gameplay. For beta release (0.1-0.3) I want to add a lot details like info about game, discord server button, offline prod and so on. For final release (1.0) I'm gonna add at least few days of gameplay. Maybe I'll change my mind, unlike Digital God I barely have noted ideas for Luck Incremental. But I hope I receive positive feedback for this game so it would make motivate me more. Now I'm gonna finish Digital God 0.13 I swear.]

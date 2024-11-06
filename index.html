@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luck Incremental Alpha 0.0</title>
+    <link rel="icon" href="styles/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <div id="buttons">
+        <button onclick="selectTab('rollScreen', true)">Roll</button>
+        <button onclick="selectTab('upgradesScreen', true)">Upgrades</button>
+        <button onclick="selectTab('???Screen', true)">???</button>
+        <button onclick="selectTab('statsScreen', true)">Statistics</button>
+        <button onclick="selectTab('settingsScreen', true)">Settings</button>
+    </div>
+    <div id="game">
+        <div class="half">
+            <div id="rollScreen">
+                <div id="rollCooldown">
+                    <div id="rollCooldownProgress">
+                        
+                    </div>
+                    <span id="cdText"></span>
+                </div>
+                <button onclick="roll()" id="rollButton">Roll</button>
+                <span id="rollsCount">Rolls: 0</span>
+            </div>
+            <div id="upgradesScreen" style="display: none">
+                <div class="upgradeRow">
+                    <button class="buyableUpgrade"></button>
+                    <button class="buyableUpgrade"></button>
+                    <button class="buyableUpgrade">Upgrade #3</button>
+                </div>
+                <div class="upgradeRow">
+                    <button class="buyableUpgrade">Upgrade #4</button>
+                    <button class="buyableUpgrade">Upgrade #5</button>
+                    <button class="buyableUpgrade">Upgrade #6</button>
+                </div>
+            </div>
+            <div id="???Screen" style="display: none">
+                <span>there is nothing.</span>
+            </div>
+            <div id="statsScreen" style="display: none">
+                <span id="statistics">Stats</span>
+            </div>
+            <div id="settingsScreen" style="display: none">
+                <div class="settingsRow">
+                    <button class="settingButton" onclick="saveGame()">Save</button>
+                    <button class="settingButton" onclick="loadGame()">Load</button>
+                </div>
+                <div class="settingsRow">
+                <button class="settingButton" onclick="importGame()">Import</button>
+                <label id="fileUploader" for="file-upload" class="settingButton loadfile">
+                    Import from file
+                </label>
+                <input type="file" id="file-upload">
+                <p class="file-name"></p>
+                <button class="settingButton" onclick="exportGame()">Export</button>
+                </div>
+                <div class="settingsRow">
+                    <button class="settingButton" onclick="openWindow('hardReset', false)">Hard reset</button>
+                    <button class="settingButton" onclick="howToPlay()">How to play</button>
+                    <button class="settingButton" onclick="openChangelog()">Changelog</button>
+                </div>
+            </div>
+        </div>
+        <div id="raritiesScreen" class="half">
+                <span class="rarityCount" style="color: rgba(255, 255, 255, 0)">Nothing: 0 (1/2)</span>
+                <span class="rarityCount" style="color: rgb(0, 0, 0)">Absolute worst: 0 (1/4)</span>
+                <span class="rarityCount" style="color: rgb(18, 18, 18)">Worst: 0 (1/8)</span>
+                <span class="rarityCount" style="color: rgb(45, 45, 45)">Disgusting: 0 (1/16)</span>
+                <span class="rarityCount" style="color: rgb(61, 61, 61)">Abominable: 0 (1/32)</span>
+                <span class="rarityCount" style="color: rgb(77, 77, 77)">Repulsive: 0 (1/64)</span>
+                <span class="rarityCount" style="color: rgb(96, 96, 96)">Dreadful: 0 (1/128)</span>
+                <span class="rarityCount" style="color: rgb(119, 117, 117)">Appaling: 0 (1/256)</span>
+                <span class="rarityCount" style="color: rgb(132, 131, 131)">Horrible: 0 (1/512)</span>
+                <span class="rarityCount" style="color: rgb(152, 150, 150)">Awful: 0 (1/1024)</span>
+                <span class="rarityCount" style="color: rgb(172, 169, 169)">Terrible: 0 (1/2048)</span>
+                <span class="rarityCount" style="color: rgb(180, 180, 180)">Poor: 0 (1/4096)</span>
+                <span class="rarityCount" style="color: rgb(200, 200, 200)">Unremarkable: 0 (1/8192)</span>
+                <span class="rarityCount" style="color: rgb(216, 216, 216)">Bad: 0 (1/16384)</span>
+                <span class="rarityCount" style="color: rgb(234, 234, 234)">So so: 0 (1/32768)</span>
+                <span class="rarityCount" style="color: var(--common)">Common: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--regular)">regular: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--standard)">standard: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--decent)">decent: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--average)">average: 0 (1/65536)</span>
+        </div>
+    </div>
+    <div id="myPopupBackdrop1" class="myPopupBackdrop"></div>
+    <div id="windowGame" class="gameWindow confirmationWindow centerText">
+        <div id="windowTitleDiv" class="titleDivClass">
+        <span id="windowTitle2" class="windowTitle">Do you really want to hard reset the game?</span>
+        </div>
+        <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose"></button>
+
+        <div id="confirmationButtons" class="windowDesc" style="display: none">
+            <button onclick="reloadPage()" class="smallButton" id="yesHR">Yes</button>
+            <button onclick="hidePopup()" class="smallButton" id="no">No</button>
+        </div>
+        </div>
+        <div id="gameHelpWindow" class="gameWindow">
+            <div id="helpTitleDiv" class="titleDivClass">
+                <p id="helpTitle" class="windowTitle">How to play</p>
+            </div>
+            <button onclick="hidePopup()" class="closeWindow"></button>
+            <div id="horizontalLine"></div>
+            <div id="helpPageChooser">
+                <button onclick="showHelpPage(text.help[1], text.helpTitle[1])" id="helpTab1" class="versionButton versionButtonVertical">Beginning</button>
+                <button onclick="showHelpPage(text.help[2], text.helpTitle[2])" id="helpTab2" class="versionButton versionButtonVertical">Roll system</button>
+                <button onclick="showHelpPage(text.help[3], text.helpTitle[3])" id="helpTab3" class="versionButton versionButtonVertical">Rarities</button>
+                <button onclick="showHelpPage(text.help[4], text.helpTitle[4])" id="helpTab4" class="versionButton versionButtonVertical">Upgrades</button>
+                <button onclick="showHelpPage(text.help[5], text.helpTitle[5])" id="helpTab5" class="versionButton versionButtonVertical">FAQ</button>
+            </div>
+            <div id="line"></div>
+            <div id="helpDiv" class="windowDesc">
+                <p id="helpPageTitle">Press buttons on left to check it's page</p>
+                <p id="helpDescription"></p>
+            </div>
+            </div>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/functions.js"></script>
+    <script src="scripts/upgrades.js"></script>
+    <script src="scripts/player.js"></script>
+    <script src="scripts/save.js"></script>
+    <script type="module" src="scripts/localization.js"></script>
+
+    <script> 
+        window.onload = loadGame();
+    </script>
+</body>
+</html>
