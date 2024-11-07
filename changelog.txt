@@ -1,6 +1,6 @@
 -=Changelog=-
 
-06.11.2024 | Luck Incremental 0.0 | Null Update:
+07.11.2024 | Luck Incremental Alpha 1:
 GAME ALPHA RELEASE! There is gameplay for few hours to get endgame goal - Trophy I.
 20 RARITIES! 
 6 NEW UPGRADES WITH 5 LEVELS MAX EACH EXCEPT TROPHY!
