@@ -388,6 +388,10 @@ td {
     width: 200px;
 }
 
+table {
+    font-size: 14px;
+}
+
 .craftBlock {
     display: flex;
     flex-direction: column;
