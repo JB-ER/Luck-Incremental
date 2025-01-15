@@ -1,6 +1,30 @@
 let autoclicker
 let rarity = Object.keys(rarities)
 
+const BUY = {
+    q(x, rarity_arg, cost_arg) {
+        if (player.rarities[rarity[rarity_arg[x][0]]].current >= cost_arg[x][0]) {
+            player.rarities[rarity[rarity_arg[x][0]]].current -= cost_arg[x][0]
+            return 1
+        }
+    },
+    w(x, rarity_arg, cost_arg) {
+        if (player.rarities[rarity[rarity_arg[x][0]]].current >= cost_arg[x][0] && player.rarities[rarity[rarity_arg[x][1]]].current >= cost_arg[x][1]) {
+            player.rarities[rarity[rarity_arg[x][0]]].current -= cost_arg[x][0]
+            player.rarities[rarity[rarity_arg[x][1]]].current -= cost_arg[x][1]
+            return 1
+        }
+    },
+    e(x, rarity_arg, cost_arg) {
+        if (player.rarities[rarity[rarity_arg[x][0]]].current >= cost_arg[x][0] && player.rarities[rarity[rarity_arg[x][1]]].current >= cost_arg[x][1] && player.rarities[rarity[rarity_arg[x][2]]].current >= cost_arg[x][2]) {
+            player.rarities[rarity[rarity_arg[x][0]]].current -= cost_arg[x][0]
+            player.rarities[rarity[rarity_arg[x][1]]].current -= cost_arg[x][1]
+            player.rarities[rarity[rarity_arg[x][2]]].current -= cost_arg[x][2]
+            return 1
+        }
+    },
+}
+
 const UPGS = {
     buyable1: {
         id: 1,
@@ -10,6 +34,9 @@ const UPGS = {
             [20, 12],
             [15, 5],
             [177, 5],
+            [2222, 100, 33],
+            [10000, 1200, 10],
+            [200, 10],
             [9999]
         ],
         rarity: [
@@ -18,29 +45,52 @@ const UPGS = {
             [3, 4, 0],
             [5, 7, 0],
             [2, 9, 0],
+            [1, 6, 8],
+            [0, 4, 13],
+            [9, 15, 0],
             [19, 0, 0]
         ],
         buy(x=player.upgrades.buyables[this.id]) {
             let bought = false
             if (x==0) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==1) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==2) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==3) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==4) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==5) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==6) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==7) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (bought) player.upgrades.buyables[this.id]++
         },
@@ -56,6 +106,9 @@ const UPGS = {
             [1],
             [1000, 2],
             [600, 3],
+            [5, 1],
+            [3333, 222, 11],
+            [2],
             [9999],
         ],
         rarity: [
@@ -64,29 +117,52 @@ const UPGS = {
             [10, 0, 0],
             [0, 11, 0],
             [1, 12, 0],
+            [12, 15, 0],
+            [2, 8, 13],
+            [18, 0, 0],
             [19, 0, 0]
         ],
         buy(x=player.upgrades.buyables[this.id]) {
             let bought = false
             if (x==0) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==1) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] && player.rarities[rarity[this.rarity[x][2]]].current >= this.cost[x][2]? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], player.rarities[rarity[this.rarity[x][2]]].current -= this.cost[x][2], bought = true) : 0
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==2) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==3) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==4) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==5) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==6) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==7) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (bought) player.upgrades.buyables[this.id]++
         },
@@ -102,6 +178,9 @@ const UPGS = {
             [140, 7],
             [155, 1],
             [199, 5, 2],
+            [800, 50],
+            [3, 1],
+            [50000],
             [9999],
         ],
         rarity: [
@@ -110,29 +189,52 @@ const UPGS = {
             [0, 5, 0],
             [1, 9, 0],
             [3, 9, 10],
+            [5, 9, 0],
+            [14, 16, 0],
+            [0, 0, 0],
             [19, 0, 0]
         ],
         buy(x=player.upgrades.buyables[this.id]) {
             let bought = false
             if (x==0) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==1) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==2) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==3) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==4) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==5) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==6) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==7) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (bought) player.upgrades.buyables[this.id]++
         },
@@ -148,6 +250,9 @@ const UPGS = {
             [85, 4],
             [14, 4],
             [77, 3],
+            [40],
+            [15, 3, 1],
+            [2],
             [9999],
         ],
         rarity: [
@@ -156,29 +261,52 @@ const UPGS = {
             [2, 7, 0],
             [6, 8, 0],
             [5, 11, 0],
+            [10, 0, 0],
+            [11, 13, 15],
+            [16, 0, 0],
             [19, 0, 0]
         ],
         buy(x=player.upgrades.buyables[this.id]) {
             let bought = false
             if (x==0) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==1) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] && player.rarities[rarity[this.rarity[x][2]]].current >= this.cost[x][2]? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], player.rarities[rarity[this.rarity[x][2]]].current -= this.cost[x][2], bought = true) : 0
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==2) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==3) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==4) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==5) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==6) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==7) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (bought) {
                 player.upgrades.buyables[this.id]++
@@ -201,6 +329,9 @@ const UPGS = {
             [5, 2],
             [3, 1],
             [5],
+            [3,2,1],
+            [1000,60,1],
+            [2,1],
             [9999],
         ],
         rarity: [
@@ -208,30 +339,53 @@ const UPGS = {
             [0, 5, 8],
             [9, 11, 0],
             [12, 13, 0],
-            [15, 0, 0],
+            [14, 0, 0],
+            [15, 16, 17],
+            [7, 11, 18],
+            [18, 19, 0],
             [19, 0, 0]
         ],
         buy(x=player.upgrades.buyables[this.id]) {
             let bought = false
             if (x==0) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0            
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==1) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] && player.rarities[rarity[this.rarity[x][2]]].current >= this.cost[x][2]? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], player.rarities[rarity[this.rarity[x][2]]].current -= this.cost[x][2], bought = true) : 0
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==2) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==3) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] && player.rarities[rarity[this.rarity[x][1]]].current >= this.cost[x][1] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], player.rarities[rarity[this.rarity[x][1]]].current -= this.cost[x][1], bought = true) : 0
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (x==4) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0            
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==5) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==6) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==7) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
             if (bought) player.upgrades.buyables[this.id]++
         },
@@ -242,36 +396,262 @@ const UPGS = {
     buyable6: {
         id: 6,
         cost: [
-            [1],
+            [2],
+            [15000, 1000, 10],
+            [80, 10],
+            [77777, 1],
+            [1000000, 3],
             [9999],
         ],
         rarity: [
-            [16, 0, 0],
+            [13, 0, 0],
+            [0, 5, 11],
+            [10, 12, 0],
+            [1, 20, 0],
+            [0, 21, 0],
             [19, 0, 0],
         ],
         buy(x=player.upgrades.buyables[this.id]) {
             let bought = false
             if (x==0) {
-                player.rarities[rarity[this.rarity[x][0]]].current >= this.cost[x][0] ? 
-                (player.rarities[rarity[this.rarity[x][0]]].current -= this.cost[x][0], bought = true) : 0
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
             }
-            // if (x==1) {
-            //     player.rarities[this.rarity[0]].current >= this.cost[1][0] && player.rarities[this.rarity[8]].current >= this.cost[1][1] && player.rarities[this.rarity[9]].current >= this.cost[1][2]? 
-            //     (player.rarities[this.rarity[0]].current -= this.cost[1][0], player.rarities[this.rarity[8]].current -= this.cost[1][1], player.rarities[this.rarity[9]].current -= this.cost[1][2], bought = true) : 0
-            // }
-            // if (x==2) {
-            //     player.rarities[this.rarity[11]].current >= this.cost[2][0] && player.rarities[this.rarity[12]].current >= this.cost[2][1] ? 
-            //     (player.rarities[this.rarity[11]].current -= this.cost[2][0], player.rarities[this.rarity[12]].current -= this.cost[2][1], bought = true) : 0
-            // }
-            // if (x==3) {
-            //     player.rarities[this.rarity[14]].current >= this.cost[3][0] && player.rarities[this.rarity[15]].current >= this.cost[3][1] ? 
-            //     (player.rarities[this.rarity[14]].current -= this.cost[3][0], player.rarities[this.rarity[15]].current -= this.cost[3][1], bought = true) : 0
-            // }
-            // if (x==4) {
-            //     player.rarities[this.rarity[15]].current >= this.cost[4][0] && player.rarities[this.rarity[15]].current >= this.cost[4][1] ? 
-            //     (player.rarities[this.rarity[15]].current -= this.cost[4][0], player.rarities[this.rarity[15]].current -= this.cost[4][1], bought = true) : 0
-            // }
+            if (x==1) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==2) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==3) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==4) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
             if (bought) player.upgrades.buyables[this.id]++
         },
-    }
+    },
+    buyable7: {
+        id: 7,
+        cost: [
+            [18],
+            [300, 3],
+            [20, 6],
+            [2, 1],
+            [15],
+            [3],
+            [600,2],
+            [230,10,1],
+            [9999],
+        ],
+        rarity: [
+            [10, 0, 0],
+            [7, 12, 0],
+            [11, 13, 0],
+            [14, 15, 0],
+            [12, 0, 0],
+            [15, 0, 0],
+            [8, 16, 0],
+            [11, 15, 17],
+            [19, 0, 0]
+        ],
+        buy(x=player.upgrades.buyables[this.id]) {
+            let bought = false
+            if (x==0) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==1) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==2) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==3) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==4) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==5) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==6) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==7) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (bought) player.upgrades.buyables[this.id]++
+        },
+        effect(x=player.upgrades.buyables[this.id]) {
+            return 2*x
+        },
+    },
+    buyable8: {
+        id: 8,
+        cost: [
+            [8],
+            [80, 20],
+            [10],
+            [4, 3],
+            [500, 100],
+            [300, 1],
+            [5000, 1000],
+            [100000, 1],
+            [9999],
+        ],
+        rarity: [
+            [11, 0, 0],
+            [8, 10, 0],
+            [12, 0, 0],
+            [13, 14, 0],
+            [9, 11, 0],
+            [10, 16, 0],
+            [4, 8, 0],
+            [0, 18, 0],
+            [19, 0, 0]
+        ],
+        buy(x=player.upgrades.buyables[this.id]) {
+            let bought = false
+            if (x==0) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==1) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==2) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==3) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==4) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==5) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==6) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==7) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (bought) player.upgrades.buyables[this.id]++
+        },
+        effect(x=player.upgrades.buyables[this.id]) {
+            return 7*x
+        },
+    },
+    buyable9: {
+        id: 9,
+        cost: [
+            [1],
+            [3, 1],
+            [30000, 10],
+            [50, 10, 2],
+            [3, 1],
+            [250000, 5000],
+            [5],
+            [3, 2, 1],
+            [9999],
+        ],
+        rarity: [
+            [14, 0, 0],
+            [13, 15, 0],
+            [1, 13, 0],
+            [12, 14, 16],
+            [17, 18, 0],
+            [2, 10, 0],
+            [19, 0, 0],
+            [20, 21, 22],
+            [19, 0, 0]
+        ],
+        buy(x=player.upgrades.buyables[this.id]) {
+            let bought = false
+            if (x==0) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==1) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==2) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==3) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==4) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==5) {
+                if (BUY.w(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==6) {
+                if (BUY.q(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (x==7) {
+                if (BUY.e(x, this.rarity, this.cost)) {
+                    bought = true
+                }
+            }
+            if (bought) player.upgrades.buyables[this.id]++
+        },
+    },
 }

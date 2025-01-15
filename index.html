@@ -2,26 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luck Incremental Alpha 0.0</title>
+    <title>RNG Incremental Beta 1</title>
+    <meta name="description" content="Roll to get various rarities and try your luck! Can you get 1 Average with 1/1000000 chance? 🤔">
+    <meta name="keywords" content="RNG, luck, RNG Incremental, Incremental, clicker, idle, Luck Incremental, githack, github, idle game, incremental game, random generation number">
+    <meta name="author" content="Humfrey">
+    <meta name="robots" content="index, follow">
     <link rel="icon" href="styles/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+    <div class="marquee-container">
+        <div class="marquee-text" id="marquee-text">Loading...</div>
+    </div>
     <div id="buttons">
         <button onclick="selectTab('rollScreen', true)">Roll</button>
         <button onclick="selectTab('upgradesScreen', true)">Upgrades</button>
-        <button onclick="selectTab('???Screen', true)">???</button>
-        <button onclick="selectTab('statsScreen', true)">Statistics</button>
+        <button id="craftScreenButton" onclick="selectTab('craftScreen', true)">Crafter</button>
+        <button id="decraftScreenButton" onclick="selectTab('decraftScreen', true)">Decrafter</button>
+        <button onclick="selectTab('statsScreen', true)">Information</button>
         <button onclick="selectTab('settingsScreen', true)">Settings</button>
     </div>
+        <div class="center">
+            <span class="rarity_text" style="opacity: 0">You rolled RARITY with 1/128 chance at 50th roll</span>
+            <span class="rarity_text" style="opacity: 0">You doubled RARITY with 1/128 chance at 50th roll</span>
+            <span class="rarity_text" style="opacity: 0">You upgraded RARITY to RARITY 2 at 50th roll</span>
+        </div>
     <div id="game">
         <div class="half">
             <div id="rollScreen">
                 <div id="rollCooldown">
-                    <div id="rollCooldownProgress">
-                        
-                    </div>
+                    <div id="rollCooldownProgress"></div>
                     <span id="cdText"></span>
                 </div>
                 <button onclick="roll()" id="rollButton">Roll</button>
@@ -38,17 +48,640 @@
                     <button class="buyableUpgrade">Upgrade #5</button>
                     <button class="buyableUpgrade">Upgrade #6</button>
                 </div>
+                <div id="thirdUpgradeRow" class="upgradeRow">
+                    <button class="buyableUpgrade">Upgrade #4</button>
+                    <button class="buyableUpgrade">Upgrade #5</button>
+                    <button class="buyableUpgrade">Upgrade #6</button>
+                </div>
             </div>
-            <div id="???Screen" style="display: none">
-                <span>there is nothing.</span>
+            <div id="craftScreen" style="display: none">
+                <span class="rarity_text" style="text-align: center; font-size: 50px; margin-bottom: 7.5px;">Crafter (x3 -> x1)</span>
+            <div class="craftRow">
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgba(255, 255, 255, 0)">Nothing</span> ➔
+                        <span class="rarityText" style="color: rgb(0, 0, 0)">Absolute worst</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('nothing', 'absolute_worst', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('nothing', 'absolute_worst', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('nothing', 'absolute_worst', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('nothing', 'absolute_worst', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('nothing', 'absolute_worst', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(0, 0, 0)">Absolute worst</span> ➔
+                        <span class="rarityText" style="color: rgb(18, 18, 18)">Worst</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('absolute_worst', 'worst', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('absolute_worst', 'worst', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('absolute_worst', 'worst', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('absolute_worst', 'worst', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('absolute_worst', 'worst', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(18, 18, 18)">Worst</span> ➔
+                        <span class="rarityText" style="color: rgb(45, 45, 45)">Disgusting</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('worst', 'disgusting', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('worst', 'disgusting', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('worst', 'disgusting', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('worst', 'disgusting', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('worst', 'disgusting', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(45, 45, 45)">Disgusting</span> ➔
+                        <span class="rarityText" style="color: rgb(61, 61, 61)">Abominable</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('disgusting', 'abominable', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('disgusting', 'abominable', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('disgusting', 'abominable', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('disgusting', 'abominable', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('disgusting', 'abominable', 10000)">x30000 ➔ x10000</button>
+                </div>
+            </div>
+            <div class="craftRow">
+            <div class="craftBlock">
+                <span>
+                    <span class="rarityText" style="color: rgb(61, 61, 61)">Abominable</span> ➔
+                    <span class="rarityText" style="color: rgb(77, 77, 77)">Repulsive</span>
+                </span>
+                <button class="craftButton" onclick="craft('abominable', 'repulsive', 1)">x3 ➔ x1</button>
+                <button class="craftButton" onclick="craft('abominable', 'repulsive', 10)">x30 ➔ x10</button>
+                <button class="craftButton" onclick="craft('abominable', 'repulsive', 100)">x300 ➔ x100</button>
+                <button class="craftButton" onclick="craft('abominable', 'repulsive', 1000)">x3000 ➔ x1000</button>
+                <button class="craftButton" onclick="craft('abominable', 'repulsive', 10000)">x30000 ➔ x10000</button>
+            </div>
+            <div class="craftBlock">
+                <span>
+                    <span class="rarityText" style="color: rgb(61, 61, 61)">Repulsive</span> ➔
+                    <span class="rarityText" style="color: rgb(77, 77, 77)">Dreadful</span>
+                </span>
+                <button class="craftButton" onclick="craft('repulsive', 'dreadful', 1)">x3 ➔ x1</button>
+                <button class="craftButton" onclick="craft('repulsive', 'dreadful', 10)">x30 ➔ x10</button>
+                <button class="craftButton" onclick="craft('repulsive', 'dreadful', 100)">x300 ➔ x100</button>
+                <button class="craftButton" onclick="craft('repulsive', 'dreadful', 1000)">x3000 ➔ x1000</button>
+                <button class="craftButton" onclick="craft('repulsive', 'dreadful', 10000)">x30000 ➔ x10000</button>
+            </div>
+            <div class="craftBlock">
+                <span>
+                    <span class="rarityText" style="color: rgb(77, 77, 77)">Dreadful</span> ➔
+                    <span class="rarityText" style="color: rgb(96, 96, 96)">Appaling</span>
+                </span>
+                <button class="craftButton" onclick="craft('dreadful', 'appaling', 1)">x3 ➔ x1</button>
+                <button class="craftButton" onclick="craft('dreadful', 'appaling', 10)">x30 ➔ x10</button>
+                <button class="craftButton" onclick="craft('dreadful', 'appaling', 100)">x300 ➔ x100</button>
+                <button class="craftButton" onclick="craft('dreadful', 'appaling', 1000)">x3000 ➔ x1000</button>
+                <button class="craftButton" onclick="craft('dreadful', 'appaling', 10000)">x30000 ➔ x10000</button>
+            </div>
+            <div class="craftBlock">
+                <span>
+                    <span class="rarityText" style="color: rgb(96, 96, 96)">Appaling</span> ➔
+                    <span class="rarityText" style="color: rgb(119, 119, 119)">Horrible</span>
+                </span>
+                <button class="craftButton" onclick="craft('appaling', 'horrible', 1)">x3 ➔ x1</button>
+                <button class="craftButton" onclick="craft('appaling', 'horrible', 10)">x30 ➔ x10</button>
+                <button class="craftButton" onclick="craft('appaling', 'horrible', 100)">x300 ➔ x100</button>
+                <button class="craftButton" onclick="craft('appaling', 'horrible', 1000)">x3000 ➔ x1000</button>
+                <button class="craftButton" onclick="craft('appaling', 'horrible', 10000)">x30000 ➔ x10000</button>
+            </div>
+            </div>
+            <div class="craftRow">
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(119, 117, 117)">Horrible</span> ➔
+                        <span class="rarityText" style="color: rgb(132, 131, 131)">Awful</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('horrible', 'awful', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('horrible', 'awful', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('horrible', 'awful', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('horrible', 'awful', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('horrible', 'awful', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(132, 131, 131)">Awful</span> ➔
+                        <span class="rarityText" style="color: rgb(152, 150, 150)">Terrible</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('awful', 'terrible', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('awful', 'terrible', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('awful', 'terrible', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('awful', 'terrible', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('awful', 'terrible', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(152, 150, 150)">Terrible</span> ➔
+                        <span class="rarityText" style="color: rgb(172, 169, 169)">Poor</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('terrible', 'poor', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('terrible', 'poor', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('terrible', 'poor', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('terrible', 'poor', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('terrible', 'poor', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(172, 169, 169)">Poor</span> ➔
+                        <span class="rarityText" style="color: rgb(180, 180, 180)">Unremarkable</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('poor', 'unremarkable', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('poor', 'unremarkable', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('poor', 'unremarkable', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('poor', 'unremarkable', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('poor', 'unremarkable', 10000)">x30000 ➔ x10000</button>
+                </div>
+            </div>
+            <div class="craftRow">
+            <div class="craftBlock">
+                <span>
+                    <span class="rarityText" style="color: var(--unremarkable)">Unremarkable</span> ➔
+                    <span class="rarityText" style="color: var(--bad)">Bad</span>
+                </span>
+                <button class="craftButton" onclick="craft('unremarkable', 'bad', 1)">x3 ➔ x1</button>
+                <button class="craftButton" onclick="craft('unremarkable', 'bad', 10)">x30 ➔ x10</button>
+                <button class="craftButton" onclick="craft('unremarkable', 'bad', 100)">x300 ➔ x100</button>
+                <button class="craftButton" onclick="craft('unremarkable', 'bad', 1000)">x3000 ➔ x1000</button>
+                <button class="craftButton" onclick="craft('unremarkable', 'bad', 10000)">x30000 ➔ x10000</button>
+            </div>
+            <div class="craftBlock">
+                <span>
+                    <span class="rarityText" style="color: var(--bad)">Bad</span> ➔
+                    <span class="rarityText" style="color: var(--so_so)">So so</span>
+                </span>
+                <button class="craftButton" onclick="craft('bad', 'so_so', 1)">x3 ➔ x1</button>
+                <button class="craftButton" onclick="craft('bad', 'so_so', 10)">x30 ➔ x10</button>
+                <button class="craftButton" onclick="craft('bad', 'so_so', 100)">x300 ➔ x100</button>
+                <button class="craftButton" onclick="craft('bad', 'so_so', 1000)">x3000 ➔ x1000</button>
+                <button class="craftButton" onclick="craft('bad', 'so_so', 10000)">x30000 ➔ x10000</button>
+            </div>
+            <div class="craftBlock">
+                <span>
+                    <span class="rarityText" style="color: var(--so_so)">So so</span> ➔
+                    <span class="rarityText" style="color: var(--common)">Common</span>
+                </span>
+                <button class="craftButton" onclick="craft('so_so', 'common', 1)">x3 ➔ x1</button>
+                <button class="craftButton" onclick="craft('so_so', 'common', 10)">x30 ➔ x10</button>
+                <button class="craftButton" onclick="craft('so_so', 'common', 100)">x300 ➔ x100</button>
+                <button class="craftButton" onclick="craft('so_so', 'common', 1000)">x3000 ➔ x1000</button>
+                <button class="craftButton" onclick="craft('so_so', 'common', 10000)">x30000 ➔ x10000</button>
+            </div>
+            <div class="craftBlock">
+                <span>
+                    <span class="rarityText" style="color: var(--common)">Common</span> ➔
+                    <span class="rarityText" style="color: var(--regular)">Regular</span>
+                </span>
+                <button class="craftButton" onclick="craft('common', 'regular', 1)">x3 ➔ x1</button>
+                <button class="craftButton" onclick="craft('common', 'regular', 10)">x30 ➔ x10</button>
+                <button class="craftButton" onclick="craft('common', 'regular', 100)">x300 ➔ x100</button>
+                <button class="craftButton" onclick="craft('common', 'regular', 1000)">x3000 ➔ x1000</button>
+                <button class="craftButton" onclick="craft('common', 'regular', 10000)">x30000 ➔ x10000</button>
+            </div>
+            </div>
+            <div class="craftRow">
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--regular)">Regular</span> ➔
+                        <span class="rarityText" style="color: var(--standard)">Standard</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('regular', 'standard', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('regular', 'standard', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('regular', 'standard', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('regular', 'standard', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('regular', 'standard', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--standard)">Standard</span> ➔
+                        <span class="rarityText" style="color: var(--decent)">Decent</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('standard', 'decent', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('standard', 'decent', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('standard', 'decent', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('standard', 'decent', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('standard', 'decent', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--decent)">Decent</span> ➔
+                        <span class="rarityText" style="color: var(--average)">Average</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('decent', 'average', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('decent', 'average', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('decent', 'average', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('decent', 'average', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('decent', 'average', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--average)">Average</span> ➔
+                        <span class="rarityText" style="color: var(--usual)">Usual</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('average', 'usual', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('average', 'usual', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('average', 'usual', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('average', 'usual', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('average', 'usual', 10000)">x30000 ➔ x10000</button>
+                </div>
+                </div>
+            <div class="craftRow">
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--usual)">Usual</span> ➔
+                        <span class="rarityText" style="color: var(--moderate)">Moderate</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('usual', 'moderate', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('usual', 'moderate', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('usual', 'moderate', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('usual', 'moderate', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('usual', 'moderate', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--moderate)">Moderate</span> ➔
+                        <span class="rarityText" style="color: var(--adequate)">Adequate</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('moderate', 'adequate', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('moderate', 'adequate', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('moderate', 'adequate', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('moderate', 'adequate', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('moderate', 'adequate', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--adequate)">Adequate</span> ➔
+                        <span class="rarityText" style="color: var(--fair)">Fair</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('adequate', 'fair', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('adequate', 'fair', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('adequate', 'fair', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('adequate', 'fair', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('adequate', 'fair', 10000)">x30000 ➔ x10000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--fair)">Fair</span> ➔
+                        <span class="rarityText" style="color: var(--fine)">Fine</span>
+                    </span>
+                    <button class="craftButton" onclick="craft('fair', 'fine', 1)">x3 ➔ x1</button>
+                    <button class="craftButton" onclick="craft('fair', 'fine', 10)">x30 ➔ x10</button>
+                    <button class="craftButton" onclick="craft('fair', 'fine', 100)">x300 ➔ x100</button>
+                    <button class="craftButton" onclick="craft('fair', 'fine', 1000)">x3000 ➔ x1000</button>
+                    <button class="craftButton" onclick="craft('fair', 'fine', 10000)">x30000 ➔ x10000</button>
+                </div>
+                </div>
+            </div>
+            <div id="decraftScreen" style="display: none">
+                <span class="rarity_text" style="text-align: center; font-size: 50px; margin-bottom: 7.5px;">Decrafter (x1 -> x2)</span>
+                <div class="craftRow">
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: rgb(0, 0, 0)">Absolute worst</span> ➔
+                            <span class="rarityText" style="color: rgba(255, 255, 255, 0)">Nothing</span>
+                        </span>
+                        <button class="craftButton" onclick="decraft('nothing', 'absolute_worst', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('nothing', 'absolute_worst', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('nothing', 'absolute_worst', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('nothing', 'absolute_worst', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('nothing', 'absolute_worst', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: rgb(18, 18, 18)">Worst</span> ➔
+                            <span class="rarityText" style="color: rgb(0, 0, 0)">Absolute worst</span>
+                        </span>
+                        <button class="craftButton" onclick="decraft('absolute_worst', 'worst', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('absolute_worst', 'worst', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('absolute_worst', 'worst', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('absolute_worst', 'worst', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('absolute_worst', 'worst', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: rgb(45, 45, 45)">Disgusting</span> ➔
+                            <span class="rarityText" style="color: rgb(18, 18, 18)">Worst</span>
+                        </span>
+                        <button class="craftButton" onclick="decraft('worst', 'disgusting', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('worst', 'disgusting', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('worst', 'disgusting', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('worst', 'disgusting', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('worst', 'disgusting', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: rgb(61, 61, 61)">Abominable</span> ➔
+                            <span class="rarityText" style="color: rgb(45, 45, 45)">Disgusting</span>
+                        </span>
+                        <button class="craftButton" onclick="decraft('disgusting', 'abominable', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('disgusting', 'abominable', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('disgusting', 'abominable', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('disgusting', 'abominable', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('disgusting', 'abominable', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                </div>
+                <div class="craftRow">
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(77, 77, 77)">Repulsive</span> ➔
+                        <span class="rarityText" style="color: rgb(61, 61, 61)">Abominable</span>
+
+                    </span>
+                    <button class="craftButton" onclick="decraft('abominable', 'repulsive', 1)">x1 ➔ x2</button>
+                    <button class="craftButton" onclick="decraft('abominable', 'repulsive', 10)">x10 ➔ x20</button>
+                    <button class="craftButton" onclick="decraft('abominable', 'repulsive', 100)">x100 ➔ x200</button>
+                    <button class="craftButton" onclick="decraft('abominable', 'repulsive', 1000)">x1000 ➔ x2000</button>
+                    <button class="craftButton" onclick="decraft('abominable', 'repulsive', 10000)">x10000 ➔ x20000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(77, 77, 77)">Dreadful</span> ➔
+                        <span class="rarityText" style="color: rgb(61, 61, 61)">Repulsive</span>
+
+                    </span>
+                    <button class="craftButton" onclick="decraft('repulsive', 'dreadful', 1)">x1 ➔ x2</button>
+                    <button class="craftButton" onclick="decraft('repulsive', 'dreadful', 10)">x10 ➔ x20</button>
+                    <button class="craftButton" onclick="decraft('repulsive', 'dreadful', 100)">x100 ➔ x200</button>
+                    <button class="craftButton" onclick="decraft('repulsive', 'dreadful', 1000)">x1000 ➔ x2000</button>
+                    <button class="craftButton" onclick="decraft('repulsive', 'dreadful', 10000)">x10000 ➔ x20000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(96, 96, 96)">Appaling</span> ➔
+                        <span class="rarityText" style="color: rgb(77, 77, 77)">Dreadful</span>
+
+                    </span>
+                    <button class="craftButton" onclick="decraft('dreadful', 'appaling', 1)">x1 ➔ x2</button>
+                    <button class="craftButton" onclick="decraft('dreadful', 'appaling', 10)">x10 ➔ x20</button>
+                    <button class="craftButton" onclick="decraft('dreadful', 'appaling', 100)">x100 ➔ x200</button>
+                    <button class="craftButton" onclick="decraft('dreadful', 'appaling', 1000)">x1000 ➔ x2000</button>
+                    <button class="craftButton" onclick="decraft('dreadful', 'appaling', 10000)">x10000 ➔ x20000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: rgb(119, 119, 119)">Horrible</span> ➔
+                        <span class="rarityText" style="color: rgb(96, 96, 96)">Appaling</span>
+
+                    </span>
+                    <button class="craftButton" onclick="decraft('appaling', 'horrible', 1)">x1 ➔ x2</button>
+                    <button class="craftButton" onclick="decraft('appaling', 'horrible', 10)">x10 ➔ x20</button>
+                    <button class="craftButton" onclick="decraft('appaling', 'horrible', 100)">x100 ➔ x200</button>
+                    <button class="craftButton" onclick="decraft('appaling', 'horrible', 1000)">x1000 ➔ x2000</button>
+                    <button class="craftButton" onclick="decraft('appaling', 'horrible', 10000)">x10000 ➔ x20000</button>
+                </div>
+                </div>
+                <div class="craftRow">
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: rgb(132, 131, 131)">Awful</span> ➔
+                            <span class="rarityText" style="color: rgb(119, 117, 117)">Horrible</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('horrible', 'awful', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('horrible', 'awful', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('horrible', 'awful', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('horrible', 'awful', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('horrible', 'awful', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: rgb(152, 150, 150)">Terrible</span> ➔
+                            <span class="rarityText" style="color: rgb(132, 131, 131)">Awful</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('awful', 'terrible', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('awful', 'terrible', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('awful', 'terrible', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('awful', 'terrible', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('awful', 'terrible', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: rgb(172, 169, 169)">Poor</span> ➔
+                            <span class="rarityText" style="color: rgb(152, 150, 150)">Terrible</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('terrible', 'poor', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('terrible', 'poor', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('terrible', 'poor', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('terrible', 'poor', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('terrible', 'poor', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: rgb(180, 180, 180)">Unremarkable</span> ➔
+                            <span class="rarityText" style="color: rgb(172, 169, 169)">Poor</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('poor', 'unremarkable', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('poor', 'unremarkable', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('poor', 'unremarkable', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('poor', 'unremarkable', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('poor', 'unremarkable', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                </div>
+                <div class="craftRow">
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--bad)">Bad</span> ➔
+                        <span class="rarityText" style="color: var(--unremarkable)">Unremarkable</span>
+
+                    </span>
+                    <button class="craftButton" onclick="decraft('unremarkable', 'bad', 1)">x1 ➔ x2</button>
+                    <button class="craftButton" onclick="decraft('unremarkable', 'bad', 10)">x10 ➔ x20</button>
+                    <button class="craftButton" onclick="decraft('unremarkable', 'bad', 100)">x100 ➔ x200</button>
+                    <button class="craftButton" onclick="decraft('unremarkable', 'bad', 1000)">x1000 ➔ x2000</button>
+                    <button class="craftButton" onclick="decraft('unremarkable', 'bad', 10000)">x10000 ➔ x20000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--so_so)">So so</span> ➔
+                        <span class="rarityText" style="color: var(--bad)">Bad</span>
+
+                    </span>
+                    <button class="craftButton" onclick="decraft('bad', 'so_so', 1)">x1 ➔ x2</button>
+                    <button class="craftButton" onclick="decraft('bad', 'so_so', 10)">x10 ➔ x20</button>
+                    <button class="craftButton" onclick="decraft('bad', 'so_so', 100)">x100 ➔ x200</button>
+                    <button class="craftButton" onclick="decraft('bad', 'so_so', 1000)">x1000 ➔ x2000</button>
+                    <button class="craftButton" onclick="decraft('bad', 'so_so', 10000)">x10000 ➔ x20000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--common)">Common</span> ➔
+                        <span class="rarityText" style="color: var(--so_so)">So so</span>
+
+                    </span>
+                    <button class="craftButton" onclick="decraft('so_so', 'common', 1)">x1 ➔ x2</button>
+                    <button class="craftButton" onclick="decraft('so_so', 'common', 10)">x10 ➔ x20</button>
+                    <button class="craftButton" onclick="decraft('so_so', 'common', 100)">x100 ➔ x200</button>
+                    <button class="craftButton" onclick="decraft('so_so', 'common', 1000)">x1000 ➔ x2000</button>
+                    <button class="craftButton" onclick="decraft('so_so', 'common', 10000)">x10000 ➔ x20000</button>
+                </div>
+                <div class="craftBlock">
+                    <span>
+                        <span class="rarityText" style="color: var(--regular)">Regular</span> ➔
+                        <span class="rarityText" style="color: var(--common)">Common</span>
+
+                    </span>
+                    <button class="craftButton" onclick="decraft('common', 'regular', 1)">x1 ➔ x2</button>
+                    <button class="craftButton" onclick="decraft('common', 'regular', 10)">x10 ➔ x20</button>
+                    <button class="craftButton" onclick="decraft('common', 'regular', 100)">x100 ➔ x200</button>
+                    <button class="craftButton" onclick="decraft('common', 'regular', 1000)">x1000 ➔ x2000</button>
+                    <button class="craftButton" onclick="decraft('common', 'regular', 10000)">x10000 ➔ x20000</button>
+                </div>
+                </div>
+                <div class="craftRow">
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: var(--standard)">Standard</span> ➔
+                            <span class="rarityText" style="color: var(--regular)">Regular</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('regular', 'standard', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('regular', 'standard', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('regular', 'standard', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('regular', 'standard', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('regular', 'standard', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: var(--decent)">Decent</span> ➔
+                            <span class="rarityText" style="color: var(--standard)">Standard</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('standard', 'decent', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('standard', 'decent', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('standard', 'decent', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('standard', 'decent', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('standard', 'decent', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: var(--average)">Average</span> ➔
+                            <span class="rarityText" style="color: var(--decent)">Decent</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('decent', 'average', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('decent', 'average', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('decent', 'average', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('decent', 'average', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('decent', 'average', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: var(--usual)">Usual</span> ➔
+                            <span class="rarityText" style="color: var(--average)">Average</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('average', 'usual', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('average', 'usual', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('average', 'usual', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('average', 'usual', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('average', 'usual', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    </div>
+                <div class="craftRow">
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: var(--moderate)">Moderate</span> ➔
+                            <span class="rarityText" style="color: var(--usual)">Usual</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('usual', 'moderate', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('usual', 'moderate', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('usual', 'moderate', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('usual', 'moderate', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('usual', 'moderate', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: var(--adequate)">Adequate</span> ➔
+                            <span class="rarityText" style="color: var(--moderate)">Moderate</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('moderate', 'adequate', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('moderate', 'adequate', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('moderate', 'adequate', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('moderate', 'adequate', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('moderate', 'adequate', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: var(--fair)">Fair</span> ➔
+                            <span class="rarityText" style="color: var(--adequate)">Adequate</span>
+
+                        </span>
+                        <button class="craftButton" onclick="decraft('adequate', 'fair', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('adequate', 'fair', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('adequate', 'fair', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('adequate', 'fair', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('adequate', 'fair', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    <div class="craftBlock">
+                        <span>
+                            <span class="rarityText" style="color: var(--fine)">Fine</span> ➔
+                            <span class="rarityText" style="color: var(--fair)">Fair</span> 
+                        </span>
+                        <button class="craftButton" onclick="decraft('fair', 'fine', 1)">x1 ➔ x2</button>
+                        <button class="craftButton" onclick="decraft('fair', 'fine', 10)">x10 ➔ x20</button>
+                        <button class="craftButton" onclick="decraft('fair', 'fine', 100)">x100 ➔ x200</button>
+                        <button class="craftButton" onclick="decraft('fair', 'fine', 1000)">x1000 ➔ x2000</button>
+                        <button class="craftButton" onclick="decraft('fair', 'fine', 10000)">x10000 ➔ x20000</button>
+                    </div>
+                    </div>
             </div>
             <div id="statsScreen" style="display: none">
-                <span id="statistics">Stats</span>
+                <div id="statsButtons">
+                <button onclick="selectSubTab('gameStatsScreen', true)">Statistics</button>
+                <button onclick="selectSubTab('raritiesStatsScreen', true)">Rarities</button>
+                </div>
+                <div id="gameStatsScreen" class="statsScreens">
+                    <span id="statistics">Stats</span>
+                </div>
+                <div id="raritiesStatsScreen" class="statsScreens" style="display: none">
+                <table>
+                    <tr><td>Name</td><td>Amount</td><td>Chance</td><td>Unlocked at Xth roll</td><td>Total amount</td></tr>
+                    <tr class="rarityTable" style="color: rgba(255, 255, 255, 0)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(0, 0, 0)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(18, 18, 18)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(45, 45, 45)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(61, 61, 61)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(77, 77, 77)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(96, 96, 96)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(119, 117, 117)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(132, 131, 131)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(152, 150, 150)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(172, 169, 169)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(180, 180, 180)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(200, 200, 200)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(216, 216, 216)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: rgb(234, 234, 234)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--common)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--regular)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--standard)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--decent)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--average)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--usual)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--moderate)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--adequate)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--fair)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--fine)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--solid)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--worthy)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--admirable)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--unusual)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--uncommon)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--good)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--valuable)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                </table>   
+                </div>
             </div>
             <div id="settingsScreen" style="display: none">
                 <div class="settingsRow">
                     <button class="settingButton" onclick="saveGame()">Save</button>
                     <button class="settingButton" onclick="loadGame()">Load</button>
+                    <button id="autosave_enable" class="settingButton" onclick="switchAutosave()">Autosave: </button>
                 </div>
                 <div class="settingsRow">
                 <button class="settingButton" onclick="importGame()">Import</button>
@@ -66,7 +699,7 @@
                 </div>
             </div>
         </div>
-        <div id="raritiesScreen" class="half">
+        <div id="raritiesScreen" class="half">         
                 <span class="rarityCount" style="color: rgba(255, 255, 255, 0)">Nothing: 0 (1/2)</span>
                 <span class="rarityCount" style="color: rgb(0, 0, 0)">Absolute worst: 0 (1/4)</span>
                 <span class="rarityCount" style="color: rgb(18, 18, 18)">Worst: 0 (1/8)</span>
@@ -87,6 +720,18 @@
                 <span class="rarityCount" style="color: var(--standard)">standard: 0 (1/65536)</span>
                 <span class="rarityCount" style="color: var(--decent)">decent: 0 (1/65536)</span>
                 <span class="rarityCount" style="color: var(--average)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--usual)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--moderate)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--adequate)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--fair)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--fine)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--solid)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--worthy)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--admirable)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--unusual)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--uncommon)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--good)">average: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--valuable)">average: 0 (1/65536)</span>
         </div>
     </div>
     <div id="myPopupBackdrop1" class="myPopupBackdrop"></div>
@@ -112,7 +757,9 @@
                 <button onclick="showHelpPage(text.help[2], text.helpTitle[2])" id="helpTab2" class="versionButton versionButtonVertical">Roll system</button>
                 <button onclick="showHelpPage(text.help[3], text.helpTitle[3])" id="helpTab3" class="versionButton versionButtonVertical">Rarities</button>
                 <button onclick="showHelpPage(text.help[4], text.helpTitle[4])" id="helpTab4" class="versionButton versionButtonVertical">Upgrades</button>
-                <button onclick="showHelpPage(text.help[5], text.helpTitle[5])" id="helpTab5" class="versionButton versionButtonVertical">FAQ</button>
+                <button onclick="showHelpPage(text.help[5], text.helpTitle[5])" id="helpTab5" class="versionButton versionButtonVertical">Crafter</button>
+                <button onclick="showHelpPage(text.help[6], text.helpTitle[6])" id="helpTab6" class="versionButton versionButtonVertical">Decrafter</button>
+                <button onclick="showHelpPage(text.help[7], text.helpTitle[7])" id="helpTab7" class="versionButton versionButtonVertical">FAQ</button>
             </div>
             <div id="line"></div>
             <div id="helpDiv" class="windowDesc">
@@ -120,6 +767,9 @@
                 <p id="helpDescription"></p>
             </div>
             </div>
+    <footer>
+        Autosave: 10.34s
+    </footer>
     <script src="scripts/game.js"></script>
     <script src="scripts/functions.js"></script>
     <script src="scripts/upgrades.js"></script>

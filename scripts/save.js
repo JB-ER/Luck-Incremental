@@ -1,5 +1,6 @@
 function saveGame () { 
         player.time.auto_save = 0
+        showNotification("Game saved!")
         let stringifiedData = JSON.stringify(player); //превратим в строчку
         localStorage.setItem('player_luck_incremental', stringifiedData);
 }
@@ -22,6 +23,7 @@ for (const key in sourceObj) {
 function loadGame() {
     let storedData = localStorage.getItem('player_luck_incremental'); 
     let parsedData = JSON.parse(storedData);
+    showNotification("Game loaded!")
     updateNestedProperties(player, parsedData)
     player.time.saved = Date.now()
 
@@ -33,6 +35,7 @@ function loadGame() {
 function exportGame() {
     let exportedData = JSON.stringify(player); //превратим в строчку
     let base64 = btoa(exportedData); // кодируем строку в base64
+    showNotification("Game exported!")
     navigator.clipboard.writeText(base64)
     
     let today = new Date();

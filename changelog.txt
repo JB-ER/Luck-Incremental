@@ -1,6 +1,23 @@
 -=Changelog=-
 
-06.11.2024 | Luck Incremental 0.0 | Null Update:
+15.01.2024 | RNG Incremental Beta 1:
+GAME BETA RELEASE!
+GAMEPLAY CONTINUED! Current endgame is Trophy IV
+12 NEW RARITIES!
+3 NEW UPGRADES!
++3 NEW LEVELS FOR ALL UPGRADES! Except Trophy.
+CRAFTER! Assemble lower rarities to get higher one!
+DECRAFTER! Dissemble higher rarity to get lower ones!
+NEWS TICKER! Join discord server to suggest more funny tickers!
+Improvement in roll button.
+Added autosave disable and timer.
+Added notification when you save, load, export.
+Added "Rarities" tab in Information.
+Added new How To Play tabs.
+
+
+
+07.11.2024 | RNG Incremental Alpha 1:
 GAME ALPHA RELEASE! There is gameplay for few hours to get endgame goal - Trophy I.
 20 RARITIES! 
 6 NEW UPGRADES WITH 5 LEVELS MAX EACH EXCEPT TROPHY!

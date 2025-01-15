@@ -77,35 +77,35 @@
     "<b>Roll buster! V</b><br>Reduce chance of 3 rarities and increase rest by 25%<br>Level: max"
     ],
     "buyableUpgrade2": [
-    "<b>Double smasher I</b><br>Let you do double roll with 4% chance (0% -> 4%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--absolute-worst);\">25 Absolute worst</span>",
-    "<b>Double smasher II</b><br>Increase double roll chance to 8% (4% -> 8%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--disgusting);\">40 Disgusting</span> and <span class=\"rarityText\" style=\"color: var(--repulsive);\">6 Repulsive</span> and <span class=\"rarityText\" style=\"color: var(--appaling);\">2 Appaling</span>",
-    "<b>Double smasher III</b><br>Increase double roll chance to 12% (8% -> 12%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--poor);\">1 Poor</span>",
-    "<b>Double smasher IV</b><br>Increase double roll chance to 16% (12% -> 16%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--nothing);\">1000 Nothing</span> and <br><span class=\"rarityText\" style=\"color: var(--unremarkable);\">2 Unremarkable</span>",
-    "<b>Double smasher V</b><br>Increase double roll chance to 20% (16% -> 20%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--bad);\">3 Bad</span>",
+    "<b>Double smasher I</b><br>Let you do double roll with 4% chance (0% ➔ 4%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--absolute-worst);\">25 Absolute worst</span>",
+    "<b>Double smasher II</b><br>Increase double roll chance to 8% (4% ➔ 8%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--disgusting);\">40 Disgusting</span> and <span class=\"rarityText\" style=\"color: var(--repulsive);\">6 Repulsive</span> and <span class=\"rarityText\" style=\"color: var(--appaling);\">2 Appaling</span>",
+    "<b>Double smasher III</b><br>Increase double roll chance to 12% (8% ➔ 12%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--poor);\">1 Poor</span>",
+    "<b>Double smasher IV</b><br>Increase double roll chance to 16% (12% ➔ 16%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--nothing);\">1000 Nothing</span> and <br><span class=\"rarityText\" style=\"color: var(--unremarkable);\">2 Unremarkable</span>",
+    "<b>Double smasher V</b><br>Increase double roll chance to 20% (16% ➔ 20%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--bad);\">3 Bad</span>",
     "<b>Double smasher V</b><br>Increase double roll chance (20%)<br>Level: max"
     ],
     "buyableUpgrade3": [
-    "<b>Speed up I</b><br>Reduce roll cooldown by 33% (2s -> 1.33s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--worst);\">12 Worst</span>",
-    "<b>Speed up II</b><br>Reduce roll cooldown by 33% (1.33s -> 0.88s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--abominable);\">5 Abominable</span> and <span class=\"rarityText\" style=\"color: var(--dreadful);\">1 Dreadful</span>",
-    "<b>Speed up III</b><br>Reduce roll cooldown by 33% (0.88s -> 0.59s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--nothing);\">140 Nothing</span> and <span class=\"rarityText\" style=\"color: var(--dreadful);\">7 Dreadful</span>",
-    "<b>Speed up IV</b><br>Reduce roll cooldown by 33% (0.59s -> 0.4s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--absolute-worst);\">155 Absolute worst</span> and <br><span class=\"rarityText\" style=\"color: var(--awful);\">1 Awful</span>",
-    "<b>Speed up V</b><br>Reduce roll cooldown by 33% (0.4 -> 0.26s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--awful);\">5 Awful</span> and <span class=\"rarityText\" style=\"color: var(--terrible);\">2 Terrible</span>",
+    "<b>Speed up I</b><br>Reduce roll cooldown by 33% (2s ➔ 1.33s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--worst);\">12 Worst</span>",
+    "<b>Speed up II</b><br>Reduce roll cooldown by 33% (1.33s ➔ 0.88s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--abominable);\">5 Abominable</span> and <span class=\"rarityText\" style=\"color: var(--dreadful);\">1 Dreadful</span>",
+    "<b>Speed up III</b><br>Reduce roll cooldown by 33% (0.88s ➔ 0.59s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--nothing);\">140 Nothing</span> and <span class=\"rarityText\" style=\"color: var(--dreadful);\">7 Dreadful</span>",
+    "<b>Speed up IV</b><br>Reduce roll cooldown by 33% (0.59s ➔ 0.4s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--absolute-worst);\">155 Absolute worst</span> and <br><span class=\"rarityText\" style=\"color: var(--awful);\">1 Awful</span>",
+    "<b>Speed up V</b><br>Reduce roll cooldown by 33% (0.4 ➔ 0.26s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--awful);\">5 Awful</span> and <span class=\"rarityText\" style=\"color: var(--terrible);\">2 Terrible</span>",
     "<b>Speed up V</b><br>Reduce roll cooldown (0.26s)<br>Level: max"
     ],
     "buyableUpgrade4": [
     "<b>Autoclicker I</b><br>Rolls every 3 seconds<br>Cost: <span class=\"rarityText\" style=\"color: var(--disgusting);\">2 Disgusting</span>",
-    "<b>Autoclicker II</b><br>Reduce autoclicker interval by 25% (2s -> 1.5s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--nothing);\">64 Nothing</span> and <span class=\"rarityText\" style=\"color: var(--absolute-worst);\">40 Absolute worst</span> and <span class=\"rarityText\" style=\"color: var(--abominable);\">3 Abominable</span>",
-    "<b>Autoclicker III</b><br>Reduce autoclicker interval by 25% (1.5s -> 1.12s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--worst);\">85 Worst</span> and <span class=\"rarityText\" style=\"color: var(--appaling);\">4 Appaling</span>",
-    "<b>Autoclicker IV</b><br>Reduce autoclicker interval by 25% (1.12s -> 0.84s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--dreadful);\">14 Dreadful</span> and <br><span class=\"rarityText\" style=\"color: var(--horrible);\">4 Horrible</span>",
-    "<b>Autoclicker V</b><br>Reduce autoclicker interval by 25% (0.84s -> 0.63s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--poor);\">7 Terrible</span> and <span class=\"rarityText\" style=\"color: var(--bad);\">3 Poor</span>",
+    "<b>Autoclicker II</b><br>Reduce autoclicker interval by 25% (2s ➔ 1.5s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--nothing);\">64 Nothing</span> and <span class=\"rarityText\" style=\"color: var(--absolute-worst);\">40 Absolute worst</span> and <span class=\"rarityText\" style=\"color: var(--abominable);\">3 Abominable</span>",
+    "<b>Autoclicker III</b><br>Reduce autoclicker interval by 25% (1.5s ➔ 1.12s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--worst);\">85 Worst</span> and <span class=\"rarityText\" style=\"color: var(--appaling);\">4 Appaling</span>",
+    "<b>Autoclicker IV</b><br>Reduce autoclicker interval by 25% (1.12s ➔ 0.84s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--dreadful);\">14 Dreadful</span> and <br><span class=\"rarityText\" style=\"color: var(--horrible);\">4 Horrible</span>",
+    "<b>Autoclicker V</b><br>Reduce autoclicker interval by 25% (0.84s ➔ 0.63s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--poor);\">7 Terrible</span> and <span class=\"rarityText\" style=\"color: var(--bad);\">3 Poor</span>",
     "<b>Autoclicker V</b><br>Reduce autoclicker interval (0.63s)<br>Level: max"
     ],
     "buyableUpgrade5": [
-    "<b>Extended dice I</b><br>Increase maximum number of RNG (1024 -> 8192)<br>Cost: <span class=\"rarityText\" style=\"color: var(--appaling);\">1 Appaling</span>",
-    "<b>Extended dice II</b><br>Increase maximum number of RNG (8192 -> 32768)<br>Cost: <span class=\"rarityText\" style=\"color: var(--nothing);\">128 Nothing</span> and <span class=\"rarityText\" style=\"color: var(--repulsive);\">11 Repulsive</span> and <span class=\"rarityText\" style=\"color: var(--horrible);\">2 Horrible</span>",
-    "<b>Extended dice III</b><br>Increase maximum number of RNG (32768 -> 131072)<br>Cost: <span class=\"rarityText\" style=\"color: var(--awful);\">5 Awful</span> and <span class=\"rarityText\" style=\"color: var(--poor);\">2 Poor</span>",
-    "<b>Extended dice IV</b><br>Increase maximum number of RNG (131072 -> 524288)<br>Cost: <span class=\"rarityText\" style=\"color: var(--unremarkable);\">3 Unremarkable</span> and <span class=\"rarityText\" style=\"color: var(--bad);\">1 Bad</span>",
-    "<b>Extended dice V</b><br>Increase maximum number of RNG (524288 -> 2097152)<br>Cost: <span class=\"rarityText\" style=\"color: var(--common);\">5 Common</span>",
+    "<b>Extended dice I</b><br>Increase maximum number of RNG (1024 ➔ 8192)<br>Cost: <span class=\"rarityText\" style=\"color: var(--appaling);\">1 Appaling</span>",
+    "<b>Extended dice II</b><br>Increase maximum number of RNG (8192 ➔ 32768)<br>Cost: <span class=\"rarityText\" style=\"color: var(--nothing);\">128 Nothing</span> and <span class=\"rarityText\" style=\"color: var(--repulsive);\">11 Repulsive</span> and <span class=\"rarityText\" style=\"color: var(--horrible);\">2 Horrible</span>",
+    "<b>Extended dice III</b><br>Increase maximum number of RNG (32768 ➔ 131072)<br>Cost: <span class=\"rarityText\" style=\"color: var(--awful);\">5 Awful</span> and <span class=\"rarityText\" style=\"color: var(--poor);\">2 Poor</span>",
+    "<b>Extended dice IV</b><br>Increase maximum number of RNG (131072 ➔ 524288)<br>Cost: <span class=\"rarityText\" style=\"color: var(--unremarkable);\">3 Unremarkable</span> and <span class=\"rarityText\" style=\"color: var(--bad);\">1 Bad</span>",
+    "<b>Extended dice V</b><br>Increase maximum number of RNG (524288 ➔ 2097152)<br>Cost: <span class=\"rarityText\" style=\"color: var(--common);\">5 Common</span>",
     "<b>Extended dice V</b><br>Increase maximum number of RNG (2097152)<br>Level: max"
     ],
     "buyableUpgrade6": [
@@ -128,6 +128,8 @@
 
     Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>
 
-         and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span>
+    and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> 
+
+         and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>
 
          and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>

@@ -6,7 +6,7 @@
 }
 
 :root {
-    --nothing: rgba(255, 255, 255, 0);
+    --nothing: rgba(0, 0, 0, 0);
     --absolute-worst: rgb(0, 0, 0);
     --worst: rgb(18, 18, 18);
     --disgusting: rgb(45, 45, 45);
@@ -20,17 +20,30 @@
     --poor: rgb(180, 180, 180);
     --unremarkable: rgb(200, 200, 200);
     --bad: rgb(216, 216, 216);
-    --so-so: rgb(234, 234, 234);
+    --so_so: rgb(234, 234, 234);
     --common: white;
     --regular: rgb(228, 256, 227);
     --standard: rgb(204, 256, 202);
-    --decent: rgb(177, 256, 174);
-    --average: rgb(150, 256, 150);
+    --decent: rgb(190, 256, 174);
+    --average: rgb(170, 256, 150); 
+    --usual: rgb(158, 255, 145);
+    --moderate: rgb(165, 255, 140);;
+    --adequate: rgb(175, 255, 135);;
+    --fair: rgb(185, 255, 130);;
+    --fine: rgb(195, 255, 125);;
+    --solid: rgb(205, 255, 120);;
+    --worthy: rgb(215, 255, 115);;
+    --admirable: rgb(225, 255, 110);;
+    --unusual: rgb(235, 255, 105);;
+    --uncommon: rgb(245, 255, 100);;
+    --good: rgb(255, 255, 95);;
+    --valuable: rgb(255, 240, 80);;
 }
 
 
 body {
     background-color: rgb(153, 153, 153);
+    margin: 0;
 }
 
 span {
@@ -38,7 +51,7 @@ span {
     pointer-events: none;
 }
 
-button, div, span {
+button, div, span, footer {
     font-family: "monotyper" !important;
 }
 
@@ -48,13 +61,13 @@ button, div, span {
     font-family: "monotyper" !important;
 }
 
-#buttons {
+#buttons, #statsButtons {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-#buttons button, #yesHR, #no{
+#buttons button, #statsButtons button, #yesHR, #no{
     margin: 7px;
     border: 1px black solid;
     background-color: white;
@@ -79,19 +92,20 @@ button, div, span {
 }
 
 #rollButton {
-    height: 70px;
-    width: 70px;
+    height:100px;
+    width: 100px;
     border: 1px black solid;
     background-color: white;
     border-radius: 3px;
+    font-size: 25px;
 }
 
-#rollButton:hover, #buttons button:hover, .buyableUpgrade:hover, .settingButton:hover, .smallButton:hover {
+#rollButton:hover, #buttons button:hover, #statsButtons button:hover, .buyableUpgrade:hover, .settingButton:hover, .smallButton:hover {
     background-color: rgb(220, 220, 220) !important;
     cursor: pointer;
 }
 
-.rarityCount, .rarityText {
+.rarityCount, .rarityText, .name, .amount, .chance, .total_amount, .first_roll {
     text-shadow: 0.75px 0.75px rgb(0, 0, 0), -0.75px -0.75px rgb(0, 0, 0), 0.75px -0.75px rgb(0, 0, 0), -0.75px 0.75px rgb(0, 0, 0);
 }
 
@@ -100,13 +114,13 @@ button, div, span {
 }
 
 .buyableUpgrade, .settingButton {
-    height: 80px;
-    width: 180px;
+    height: 100px;
+    width: 200px;
     margin: 5px;
     background-color: white;
     border: 1px black solid;
     border-radius: 3px;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .settingButton {
@@ -124,8 +138,8 @@ button, div, span {
 }
 
 #rollCooldown {
-    height: 15px;
-    width: 50px;
+    height: 20px;
+    width: 80px;
     border: 3px black solid;
     background-color: gray;
     margin: 10px;
@@ -133,16 +147,17 @@ button, div, span {
 
 #rollCooldownProgress {
     position: absolute;
-    height: 15px;
+    height: 20px;
     width: 0px;
     background-color: #AAAAAA;
 }
 
 #cdText {
-    font-size:11px;
+    font-size:15px;
     position:absolute;
     z-index: 9999;
-    margin-left: 10px;
+    margin-left: 18px;
+    margin-top: -2px;
 }
 
 .settingsRow {
@@ -155,8 +170,8 @@ button, div, span {
     justify-content: center;
     text-align: center;
     align-items: center;
-    height: 79px;
-    width: 178.2px;
+    height: 99px;
+    width: 198.2px;
 }
 
 #file-upload {
@@ -249,7 +264,7 @@ button, div, span {
     background-repeat: no-repeat;
     filter:invert()
 }
-.closeWindow:hover {
+.closeWindow:hover, .craftButton:hover {
     background-color: #b9b9b9;
 }
 .confClose, .closeWindow{
@@ -350,4 +365,116 @@ button, div, span {
 
 #statsScreen{
     text-align: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    position: absolute;
+    top: 90px;
+}
+
+.center span{
+    margin: 4px;
+}
+
+td {
+    border: 1px solid black;
+    margin: 0;
+    width: 200px;
+}
+
+.craftBlock {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    padding: 5px;
+    width: 250px;
+    text-align: center;
+}
+
+.craftButton {
+    border: solid 2px black;
+    background-color: #b4b4b4;
+    margin: 1px;
+    cursor: pointer;
+}
+
+.craftRow {
+    display: flex;
+    flex-direction: row;
+}
+
+#craftScreen, #decraftScreen{
+    display: flex;
+    flex-direction: column;
+}
+
+#statsScreen {
+    flex-direction: column;
+    justify-content: start;
+    height: 100%
+}
+
+.statsScreens {
+    display: flex;
+    align-items: center;
+    height: 100%
+}
+
+.marquee-container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px; /* Высота строки */
+    background-color: #3b3b3b; /* Фон */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    color: #fff; /* Цвет текста */
+    font-size: 14px; /* Размер шрифта */
+    z-index: 9999;
+}
+
+.marquee-text {
+    position: relative;
+    white-space: nowrap;
+    will-change: transform;
+    text-align: right;
+}
+
+footer {
+    background-color: #3b3b3b;
+    color: #fff;
+    text-align: left;
+    padding: 3px;
+    height:20px;
+    width: 170px;
+    bottom: 0;
+    position: fixed;
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(1000%)
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+.custom-notification {
+    position: fixed;
+    top: 20px;
+    right: -500px;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: right 1s ease;
 }

@@ -1,11 +1,11 @@
-import '/node_modules/i18next/i18next.min.js'
+import '../node_modules/i18next/i18next.min.js'
 
-const responseEn = await fetch('/locales/en.json');
-// const responseRu = await fetch('/locales/ru.json');
+const responseEn = await fetch('./scripts/en.json');
+// const responseRu = await fetch('../locales/ru.json');
 const translationsEnData = await responseEn.json();
 // const translationsRuData = await responseRu.json();
 await i18next.init({
-    lng: language,
+    lng: player.language,
     resources: {
         en: { translation: translationsEnData },
         // ru: { translation: translationsRuData }
@@ -32,89 +32,109 @@ setInterval(() => {
 
 // Загрузка переводов
 function loadTranslations() {
-    document.getElementsByClassName('buyableUpgrade')[0].innerHTML = i18next.t(`buyableUpgrade1.${player.upgrades.buyables[1]}`, {
-        color1: rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][0]],
-        color2: rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][1]],
-        color3: rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][2]],
-        cost1: UPGS.buyable1.cost[player.upgrades.buyables[1]][0],
-        cost2: UPGS.buyable1.cost[player.upgrades.buyables[1]][1],
-        cost3: UPGS.buyable1.cost[player.upgrades.buyables[1]][2],
-        rarity1: rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][0]].charAt(0).toUpperCase() + rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][0]].slice(1).replace(/_/g, ' '),
-        rarity2: rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][1]].charAt(0).toUpperCase() + rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][1]].slice(1).replace(/_/g, ' '),
-        rarity3: rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][2]].charAt(0).toUpperCase() + rarity[UPGS.buyable1.rarity[player.upgrades.buyables[1]][2]].slice(1).replace(/_/g, ' '),
-    });
-    document.getElementsByClassName('buyableUpgrade')[1].innerHTML = i18next.t(`buyableUpgrade2.${player.upgrades.buyables[2]}`, {
-        color1: rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][0]],
-        color2: rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][1]],
-        color3: rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][2]],
-        cost1: UPGS.buyable2.cost[player.upgrades.buyables[2]][0],
-        cost2: UPGS.buyable2.cost[player.upgrades.buyables[2]][1],
-        cost3: UPGS.buyable2.cost[player.upgrades.buyables[2]][2],
-        rarity1: rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][0]].charAt(0).toUpperCase() + rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][0]].slice(1).replace(/_/g, ' '),
-        rarity2: rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][1]].charAt(0).toUpperCase() + rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][1]].slice(1).replace(/_/g, ' '),
-        rarity3: rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][2]].charAt(0).toUpperCase() + rarity[UPGS.buyable2.rarity[player.upgrades.buyables[2]][2]].slice(1).replace(/_/g, ' '),
-    });
-    document.getElementsByClassName('buyableUpgrade')[2].innerHTML = i18next.t(`buyableUpgrade3.${player.upgrades.buyables[3]}`, {
-        color1: rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][0]],
-        color2: rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][1]],
-        color3: rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][2]],
-        cost1: UPGS.buyable3.cost[player.upgrades.buyables[3]][0],
-        cost2: UPGS.buyable3.cost[player.upgrades.buyables[3]][1],
-        cost3: UPGS.buyable3.cost[player.upgrades.buyables[3]][2],
-        rarity1: rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][0]].charAt(0).toUpperCase() + rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][0]].slice(1).replace(/_/g, ' '),
-        rarity2: rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][1]].charAt(0).toUpperCase() + rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][1]].slice(1).replace(/_/g, ' '),
-        rarity3: rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][2]].charAt(0).toUpperCase() + rarity[UPGS.buyable3.rarity[player.upgrades.buyables[3]][2]].slice(1).replace(/_/g, ' '),
-    });
-    document.getElementsByClassName('buyableUpgrade')[3].innerHTML = i18next.t(`buyableUpgrade4.${player.upgrades.buyables[4]}`, {
-        color1: rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][0]],
-        color2: rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][1]],
-        color3: rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][2]],
-        cost1: UPGS.buyable4.cost[player.upgrades.buyables[4]][0],
-        cost2: UPGS.buyable4.cost[player.upgrades.buyables[4]][1],
-        cost3: UPGS.buyable4.cost[player.upgrades.buyables[4]][2],
-        rarity1: rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][0]].charAt(0).toUpperCase() + rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][0]].slice(1).replace(/_/g, ' '),
-        rarity2: rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][1]].charAt(0).toUpperCase() + rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][1]].slice(1).replace(/_/g, ' '),
-        rarity3: rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][2]].charAt(0).toUpperCase() + rarity[UPGS.buyable4.rarity[player.upgrades.buyables[4]][2]].slice(1).replace(/_/g, ' '),
-    });
-    document.getElementsByClassName('buyableUpgrade')[4].innerHTML = i18next.t(`buyableUpgrade5.${player.upgrades.buyables[5]}`, {
-        color1: rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][0]],
-        color2: rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][1]],
-        color3: rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][2]],
-        cost1: UPGS.buyable5.cost[player.upgrades.buyables[5]][0],
-        cost2: UPGS.buyable5.cost[player.upgrades.buyables[5]][1],
-        cost3: UPGS.buyable5.cost[player.upgrades.buyables[5]][2],
-        rarity1: rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][0]].charAt(0).toUpperCase() + rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][0]].slice(1).replace(/_/g, ' '),
-        rarity2: rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][1]].charAt(0).toUpperCase() + rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][1]].slice(1).replace(/_/g, ' '),
-        rarity3: rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][2]].charAt(0).toUpperCase() + rarity[UPGS.buyable5.rarity[player.upgrades.buyables[5]][2]].slice(1).replace(/_/g, ' '),
-    });
-    document.getElementsByClassName('buyableUpgrade')[5].innerHTML = i18next.t(`buyableUpgrade6.${player.upgrades.buyables[6]}`, {
-        color1: rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][0]],
-        color2: rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][1]],
-        color3: rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][2]],
-        cost1: UPGS.buyable6.cost[player.upgrades.buyables[6]][0],
-        cost2: UPGS.buyable6.cost[player.upgrades.buyables[6]][1],
-        cost3: UPGS.buyable6.cost[player.upgrades.buyables[6]][2],
-        rarity1: rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][0]].charAt(0).toUpperCase() + rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][0]].slice(1).replace(/_/g, ' '),
-        rarity2: rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][1]].charAt(0).toUpperCase() + rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][1]].slice(1).replace(/_/g, ' '),
-        rarity3: rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][2]].charAt(0).toUpperCase() + rarity[UPGS.buyable6.rarity[player.upgrades.buyables[6]][2]].slice(1).replace(/_/g, ' '),
-    });
+    let buyables = document.getElementsByClassName('buyableUpgrade')
+    for (let i = 0; i < buyables.length; i++) {
+        const index = i+1
+        buyables[i].innerHTML = i18next.t(`buyableUpgrade${index}.${player.upgrades.buyables[index]}`, {
+            color1: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]],
+            color2: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]],
+            color3: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]],
+            cost1: formatNumber(UPGS[`buyable${index}`].cost[player.upgrades.buyables[index]][0]),
+            cost2: formatNumber(UPGS[`buyable${index}`].cost[player.upgrades.buyables[index]][1]),
+            cost3: formatNumber(UPGS[`buyable${index}`].cost[player.upgrades.buyables[index]][2]),
+            rarity1: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]].charAt(0).toUpperCase() + rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]].slice(1).replace(/_/g, ' '),
+            rarity2: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]].charAt(0).toUpperCase() + rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]].slice(1).replace(/_/g, ' '),
+            rarity3: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]].charAt(0).toUpperCase() + rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]].slice(1).replace(/_/g, ' '),
+        })
+    }
 
     for (let rarity in rarities) {
-            document.getElementsByClassName('rarityCount')[Object.keys(rarities).indexOf(rarity)].textContent = `${rarity.charAt(0).toUpperCase() + rarity.slice(1).replace(/_/g, ' ')}: ${player.rarities[rarity].current} (1/${formatNumber(max/rarities[rarity].chance())})`;
+            document.getElementsByClassName('rarityCount')[Object.keys(rarities).indexOf(rarity)].textContent = `${rarity.charAt(0).toUpperCase() + rarity.slice(1).replace(/_/g, ' ')}: ${formatNumber(player.rarities[rarity].current)} (1/${formatNumber(max/rarities[rarity].chance(), 'chance')})`;
+
+            document.getElementsByClassName('name')[Object.keys(rarities).indexOf(rarity)].textContent = `${rarity.charAt(0).toUpperCase() + rarity.slice(1).replace(/_/g, ' ')}`
+            document.getElementsByClassName('amount')[Object.keys(rarities).indexOf(rarity)].textContent = `${formatNumber(player.rarities[rarity].current)}`
+            document.getElementsByClassName('chance')[Object.keys(rarities).indexOf(rarity)].textContent = `(1/${formatNumber(max/rarities[rarity].chance())})`
+            document.getElementsByClassName('first_roll')[Object.keys(rarities).indexOf(rarity)].textContent = `${formatNumber(player.rarities[rarity].first_roll)}`
+            document.getElementsByClassName('total_amount')[Object.keys(rarities).indexOf(rarity)].textContent = `${formatNumber(player.rarities[rarity].total)}`
         }
-    document.getElementById('rollsCount').textContent = `Rolls: ${player.rolls}`;
+    document.getElementById('rollsCount').textContent = `Rolls: ${formatNumber(player.rolls)}`;
 
     text.help.start = i18next.t('startHelpDescription');
     helpTitle.innerHTML = i18next.t('helpTitleText');
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 7; i++) {
         text.help[i] = i18next.t(`help${i}`);
     }
 
     statistics.innerHTML = i18next.t(`statistics`, {
-        time: ((player.time.current - player.time.start)/1000).toFixed(0),
-        rolls: player.rolls,
+        time: formatNumber((player.time.current - player.time.start)/1000),
+        rolls: formatNumber(player.rolls),
         start1: player.time.start1,
         start2: player.time.start2
     });
+
+    player.settings.autosave_enabled == 'enabled' ? document.querySelector('footer').textContent = `Autosave: ${(player.time.auto_save/1000).toFixed(2)}s` : document.querySelector('footer').textContent = `Autosave: disabled`
+    document.getElementById('autosave_enable').textContent = `Autosave: ${player.settings.autosave_enabled}`
+
+    rollButton.textContent = `Roll (x${calculate_roll()})`
 }
+
+const marqueeText = document.getElementById("marquee-text");
+let currentIndex = -1;
+
+function createKeyframes() {
+    const textWidth = marqueeText.offsetWidth; // Ширина текста
+    const screenWidth = window.innerWidth; // Ширина окна
+
+    // Генерируем ключевые кадры
+    const keyframes = `
+        @keyframes scrollText {
+            0% {
+                transform: translateX(${screenWidth+500}px); /* Начальная точка */
+            }
+            100% {
+                transform: translateX(-${textWidth}px); /* Конечная точка */
+            }
+        }
+    `;
+
+    // Удаляем старые ключевые кадры, если они существуют
+    const existingStyle = document.getElementById("dynamic-keyframes");
+    if (existingStyle) {
+        existingStyle.remove();
+    }
+
+    // Вставляем новые ключевые кадры
+    const styleSheet = document.createElement("style");
+    styleSheet.id = "dynamic-keyframes";
+    styleSheet.textContent = keyframes;
+    document.head.appendChild(styleSheet);
+}
+
+function showRandomMessage() {
+    // Получаем массив сообщений
+    const messages = i18next.t("messages", { returnObjects: true });
+
+    // Генерируем случайный индекс
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * messages.length);
+    } while (randomIndex === currentIndex); // Исключаем повторения подряд
+
+    currentIndex = randomIndex;
+
+    // Устанавливаем текст
+    marqueeText.textContent = messages[currentIndex];
+
+    // Создаём анимацию с учётом размеров текста и окна
+    createKeyframes();
+
+    // Сбрасываем и перезапускаем анимацию
+    marqueeText.style.animation = "none";
+    void marqueeText.offsetWidth; // Трюк для сброса анимации
+    marqueeText.style.animation = "scrollText 13s linear infinite";
+}
+
+// Интервал для смены текста
+setInterval(showRandomMessage, 13000); // Меняем текст каждые 13 секунд
+showRandomMessage(); // Показываем первый текст сразу

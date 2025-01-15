@@ -1,6 +1,6 @@
 min = 1, max = 1024; //131072
 let rollCD = 0;
-let tick = 0, language = 'en';
+let tick = 0, language = 'en', to_roll = 1 
 
 rollButton.addEventListener("keydown", function(event) {
     if (event.key == "Enter") {
@@ -11,45 +11,61 @@ function roll() {
     if (rollCD == 0){
         rollCD += 2000/UPGS.buyable3.effect()
 
-        let double_roll = Math.floor(Math.random() * 100)+1, to_roll = 1 
-        if (double_roll > 0 && double_roll < UPGS.buyable2.effect()) to_roll = 2
-
-        for (let i = 0; i < to_roll; i++) {
-            player.rolls++;
-
-            let number = Math.floor(Math.random() * max);
-            let lowerBound = 1;
-        
-            for (let rarity in rarities) {
-                let upperBound = lowerBound + rarities[rarity].chance();
-                
-                if (number >= lowerBound && number < upperBound) {
-                    player.rarities[rarity].current++;
-                    player.rarities[rarity].total++;
-                }
-        
-                lowerBound = upperBound; // Сдвигаем нижнюю границу для следующей редкости
-            }
-        }
+        auto_roll()
     }
 }
 
 function auto_roll() {
-        let double_roll = Math.floor(Math.random() * 100)+1, to_roll = 1 
-        if (double_roll > 0 && double_roll < UPGS.buyable2.effect()) to_roll = 2
+        let double_roll = Math.floor(Math.random() * 100)+1
+        to_roll = calculate_roll()
+
+        if (double_roll > 0 && double_roll < UPGS.buyable2.effect()) to_roll *= 2
 
         for (let i = 0; i < to_roll; i++) {
             player.rolls++;
 
             let number = Math.floor(Math.random() * max);
+            let number_double_rarity = Math.floor(Math.random() * 100)+1;
+            let number_upgrade_rarity = Math.floor(Math.random() * 100)+1;
             let lowerBound = 1;
+            let to_double = 1, to_upgrade = 0
         
-            for (let rarity in rarities) {
-                let upperBound = lowerBound + rarities[rarity].chance();
-                
+            for (let rariti in rarities) {
+                let upperBound = lowerBound + rarities[rariti].chance();
+
                 if (number >= lowerBound && number < upperBound) {
-                    player.rarities[rarity].current++;
-                    player.rarities[rarity].total++;
+                    const index = Object.keys(rarities).indexOf(rariti)
+                    if (number_double_rarity >= 0 && number_double_rarity <= UPGS.buyable7.effect()) {
+                        to_double = 2
+                        if (index >= player.best_.rarity.id-5 || player.rarities[rariti].current <= 10 || player.rarities[rariti].total <= 25) {
+                            text_disappear[1] = 15000
+                            ELS.rarity_text[1].style.opacity = 1
+                            ELS.rarity_text[1].innerHTML = `You doubled <span class=\"rarityText\" style=\"color: var(--${rariti})\">${rariti.charAt(0).toUpperCase() + rariti.slice(1).replace(/_/g, ' ')}</span> at ${formatNumber(player.rolls)}th roll`
+                        }
+                    }
+                    if (number_upgrade_rarity >= 0 && number_upgrade_rarity <= UPGS.buyable8.effect()) {
+                        to_upgrade = 1
+                        if (index >= player.best_.rarity.id-5) {
+                            text_disappear[2] = 15000
+                            ELS.rarity_text[2].style.opacity = 1
+                            ELS.rarity_text[2].innerHTML = `You upgraded <span class=\"rarityText\" style=\"color: var(--${rariti})\">${rariti.charAt(0).toUpperCase() + rariti.slice(1).replace(/_/g, ' ')}</span> to <span class=\"rarityText\" style=\"color: var(--${Object.keys(rarities)[index+1]})\">${Object.keys(rarities)[index+1].charAt(0).toUpperCase() + Object.keys(rarities)[index+1].slice(1).replace(/_/g, ' ')}</span> at ${formatNumber(player.rolls)}th roll`
+                        }
+                    }
+
+                    const actual_rarity = Object.keys(rarities)[index+to_upgrade]
+                    player.rarities[actual_rarity].current += to_double;
+                    player.rarities[actual_rarity].total += to_double;
+                    if (player.rarities[actual_rarity].first_roll == 0) player.rarities[actual_rarity].first_roll = player.rolls
+
+                    if (player.best_.rarity.id < index) {
+                        player.best_.rarity.text = rarity[index]
+                        player.best_.rarity.id = index
+                    }
+                    if (index >= player.best_.rarity.id-5) {
+                        text_disappear[0] = 15000
+                        ELS.rarity_text[0].style.opacity = 1
+                        ELS.rarity_text[0].innerHTML = `You rolled <span class=\"rarityText\" style=\"color: var(--${rariti})\">${rariti.charAt(0).toUpperCase() + rariti.slice(1).replace(/_/g, ' ')}</span> with (1/${formatNumber(max/rarities[rariti].chance())}) chance at ${formatNumber(player.rolls)}th roll`
+                    }
                 }
         
             lowerBound = upperBound; // Сдвигаем нижнюю границу для следующей редкости
@@ -61,7 +77,7 @@ function rollCooldown() {
     if (rollCD > 0) {
         rollCD -= tick
         document.getElementById('cdText').textContent = rollCD > 0 ? `${(rollCD/1000).toFixed(2)}s` : ''
-        document.getElementById('rollCooldownProgress').style.width = rollCD > 0 ? (rollCD/2000*UPGS.buyable3.effect())*50 + 'px' : 0
+        document.getElementById('rollCooldownProgress').style.width = rollCD > 0 ? (rollCD/2000*UPGS.buyable3.effect())*80 + 'px' : 0
     }
     else {
         rollCD = 0
@@ -78,15 +94,24 @@ function runRollDev(x=10) {
 function updateTick() {
     updateTime()
     rollCooldown()
-    if (player.time.auto_save >= 5000) saveGame()
+    UNL.display.check()
+    if (player.time.auto_save >= 30000) {
+        saveGame()
+    }
     max = 1024 * UPGS.buyable5.effect()
 }
 
+let text_disappear = [0,0,0]
 function updateTime() {
     player.time.current = new Date().getTime()
     tick = player.time.current - player.time.saved
     player.time.saved = new Date().getTime()
-    player.time.auto_save += tick
+    if (player.settings.autosave_enabled == 'enabled') player.time.auto_save += tick
+    for (let i = 0; i < document.getElementsByClassName('rarity_text').length; i++) {
+        const element = document.getElementsByClassName('rarity_text')[i];
+        text_disappear[i] -= tick
+        element.style.opacity = text_disappear[i]/15000
+    }
 }
 
 setInterval(() => {
@@ -158,4 +183,69 @@ let rarities = {
     average: {
         chance: () => rarities.decent.chance() / 2, // 2/2=1
     },
+    usual: {
+        chance: () => rarities.average.chance() / 2, // 2/2=1
+    },
+    moderate: {
+        chance: () => rarities.usual.chance() / 2, // 2/2=1
+    },
+    adequate: {
+        chance: () => rarities.moderate.chance() / 2, // 2/2=1
+    },
+    fair: {
+        chance: () => rarities.adequate.chance() / 2, // 2/2=1
+    },
+    fine: {
+        chance: () => rarities.fair.chance() / 2, // 2/2=1
+    },
+    solid: {
+        chance: () => rarities.fine.chance() / 2, // 2/2=1
+    },
+    worthy: {
+        chance: () => rarities.solid.chance() / 2, // 2/2=1
+    },
+    admirable: {
+        chance: () => rarities.worthy.chance() / 2, // 2/2=1
+    },
+    unusual: {
+        chance: () => rarities.admirable.chance() / 2, // 2/2=1
+    },
+    uncommon: {
+        chance: () => rarities.unusual.chance() / 2, // 2/2=1
+    },
+    good: {
+        chance: () => rarities.uncommon.chance() / 2, // 2/2=1
+    },
+    valuable: {
+        chance: () => rarities.good.chance() / 2, // 2/2=1
+    },
 };
+
+const UNL = {
+    display: {
+        unl(x, y = 'none') { return this[x].req() ? (this[x].element).style.display = this[x].type : (this[x].element).style.display = y},
+        check() {
+            for (let i = 1; i <= 3; i++)
+            if (this[i].type != 'none') this.unl(i)
+            else this.unl(i, 'flex')
+        },
+        1: {
+            name: '',
+            type: 'block',
+            element: document.getElementById('craftScreenButton'),
+            req() {return player.upgrades.buyables[6] >= 2},
+        },
+        2: {
+            name: '',
+            type: 'block',
+            element: document.getElementById('decraftScreenButton'),
+            req() {return player.upgrades.buyables[6] >= 3},
+        },
+        3: {
+            name: 'buyAll',
+            type: 'flex',
+            element: document.getElementById('thirdUpgradeRow'),
+            req() {return player.upgrades.buyables[6] >= 1},
+        },
+    }
+}
