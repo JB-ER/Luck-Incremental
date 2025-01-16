@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0, user-scalable=no">
-    <title>RNG Incremental Beta 1</title>
+    <title>RNG Incremental Beta 1.1</title>
     <meta name="description" content="Roll to get various rarities and try your luck! Can you get 1 Average with 1/1000000 chance? 🤔">
     <meta name="keywords" content="RNG, luck, RNG Incremental, Incremental, clicker, idle, Luck Incremental, githack, github, idle game, incremental game, random generation number">
     <meta name="author" content="Humfrey">
@@ -636,6 +635,7 @@
                 <div id="statsButtons">
                 <button onclick="selectSubTab('gameStatsScreen', true)">Statistics</button>
                 <button onclick="selectSubTab('raritiesStatsScreen', true)">Rarities</button>
+                <button onclick="selectSubTab('aboutStatsScreen', true)">About game</button>
                 </div>
                 <div id="gameStatsScreen" class="statsScreens">
                     <span id="statistics">Stats</span>
@@ -676,6 +676,9 @@
                     <tr class="rarityTable" style="color: var(--good)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
                     <tr class="rarityTable" style="color: var(--valuable)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
                 </table>   
+                </div>
+                <div id="aboutStatsScreen" class="statsScreens" style="display: none">
+                    <span id="aboutGame">Stats</span>
                 </div>
             </div>
             <div id="settingsScreen" style="display: none">
