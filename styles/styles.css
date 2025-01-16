@@ -479,3 +479,7 @@ footer {
     z-index: 1000;
     transition: right 1s ease;
 }
+
+table {
+    scale: 0.8
+}
