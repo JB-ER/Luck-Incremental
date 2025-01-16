@@ -31,7 +31,7 @@ function selectTab(argument, isFlex) {
 }
 
 function selectSubTab(argument, isFlex) {
-    const tabsToHide = ['gameStatsScreen', 'raritiesStatsScreen']
+    const tabsToHide = ['gameStatsScreen', 'raritiesStatsScreen', 'aboutStatsScreen']
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
         if (tab) {
@@ -176,16 +176,16 @@ function calculate_roll() {
             multi_rolls = 100
             break;
         case player.upgrades.buyables[9] >= 7:
-            multi_rolls = 50
+            multi_rolls = 75
             break;
         case player.upgrades.buyables[9] >= 6:
-            multi_rolls = 35
+            multi_rolls = 50
             break;
         case player.upgrades.buyables[9] >= 5:
-            multi_rolls = 25
+            multi_rolls = 35
             break;
         case player.upgrades.buyables[9] >= 4:
-            multi_rolls = 15
+            multi_rolls = 20
             break;
         case player.upgrades.buyables[9] >= 3:
             multi_rolls = 10

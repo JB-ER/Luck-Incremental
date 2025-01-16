@@ -2,11 +2,6 @@ min = 1, max = 1024; //131072
 let rollCD = 0;
 let tick = 0, language = 'en', to_roll = 1 
 
-rollButton.addEventListener("keydown", function(event) {
-    if (event.key == "Enter") {
-            event.preventDefault();
-        }})
-
 function roll() {
     if (rollCD == 0){
         rollCD += 2000/UPGS.buyable3.effect()

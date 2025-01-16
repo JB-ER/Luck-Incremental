@@ -77,7 +77,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.e(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -149,7 +149,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.w(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -221,7 +221,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.w(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -293,7 +293,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.q(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -372,7 +372,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.e(x, this.rarity, this.cost)) {
                     bought = true
                 }

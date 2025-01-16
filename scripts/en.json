@@ -8,7 +8,8 @@
     "<b>Roll buster! VI</b><br>Reduce chance of 3 rarities and increase of rest by 30%<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>",
     "<b>Roll buster! VII</b><br>Reduce chance of 3 rarities and increase of rest by 35%<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>",
     "<b>Roll buster! VIII</b><br>Reduce chance of 3 rarities and increase of rest by 40%<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span>",
-    "<b>Roll buster! VIII</b><br>Reduce chance of 3 rarities and increase rest by 40%<br>Level: max"
+    "<b>Roll buster! VIII</b><br>Reduce chance of 3 rarities and increase rest by 40%<br>Level: max",
+    "<b>Roll buster! V</b><br>Reduce chance of 3 rarities and increase rest by 25%<br>Level: max"
     ],
     "buyableUpgrade2": [
     "<b>Double smasher I</b><br>Let you do double roll with 4% chance (0% ➔ 4%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
@@ -19,7 +20,8 @@
     "<b>Double smasher VI</b><br>Increase double roll chance to 24% (20% ➔ 24%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> ",
     "<b>Double smasher VII</b><br>Increase double roll chance to 28% (24% ➔ 28%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>",
     "<b>Double smasher VIII</b><br>Increase double roll chance to 32% (28% ➔ 32%)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
-    "<b>Double smasher VIII</b><br>Increase double roll chance (32%)<br>Level: max"
+    "<b>Double smasher VIII</b><br>Increase double roll chance (32%)<br>Level: max",
+    "<b>Double smasher V</b><br>Increase double roll chance (20%)<br>Level: max"
     ],
     "buyableUpgrade3": [
     "<b>Speed up I</b><br>Reduce roll cooldown by 33% (2s ➔ 1.33s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
@@ -30,7 +32,8 @@
     "<b>Speed up VI</b><br>Reduce roll cooldown by 33% (0.26s ➔ 0.17s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> ",
     "<b>Speed up VII</b><br>Reduce roll cooldown by 33% (0.17s ➔ 0.11s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> ",
     "<b>Speed up VIII</b><br>Reduce roll cooldown by 33% (0.11s ➔ 78ms)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
-    "<b>Speed up VIII</b><br>Reduce roll cooldown (78ms)<br>Level: max"
+    "<b>Speed up VIII</b><br>Reduce roll cooldown (78ms)<br>Level: max",
+    "<b>Speed up V</b><br>Reduce roll cooldown (0.26s)<br>Level: max"
     ],
     "buyableUpgrade4": [
     "<b>Autoclicker I</b><br>Rolls every 3 seconds<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
@@ -41,7 +44,8 @@
     "<b>Autoclicker VI</b><br>Reduce autoclicker interval by 25% (0.63s ➔ 0.47s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
     "<b>Autoclicker VII</b><br>Reduce autoclicker interval by 25% (0.47s ➔ 0.35s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>",
     "<b>Autoclicker VIII</b><br>Reduce autoclicker interval by 25% (0.35s ➔ 0.27s)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
-    "<b>Autoclicker VIII</b><br>Reduce autoclicker interval (0.27s)<br>Level: max"
+    "<b>Autoclicker VIII</b><br>Reduce autoclicker interval (0.27s)<br>Level: max",
+    "<b>Autoclicker V</b><br>Reduce autoclicker interval (0.63s)<br>Level: max"
     ],
     "buyableUpgrade5": [
     "<b>Extended dice I</b><br>Increase maximum number of RNG (1,024 ➔ 8,192)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
@@ -52,13 +56,14 @@
     "<b>Extended dice VI</b><br>Increase maximum number of RNG (2,097,152 ➔ 8,388,608)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>",
     "<b>Extended dice VII</b><br>Increase maximum number of RNG (8,388,608 ➔ 33,554,432)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>",
     "<b>Extended dice VIII</b><br>Increase maximum number of RNG (33,554,432 ➔ 134,217,728)<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> ",
-    "<b>Extended dice VIII</b><br>Increase maximum number of RNG (134,217,728)<br>Level: max"
+    "<b>Extended dice VIII</b><br>Increase maximum number of RNG (134,217,728)<br>Level: max",
+    "<b>Extended dice V</b><br>Increase maximum number of RNG (2,097,152)<br>Level: max"
     ],
     "buyableUpgrade6": [
         "<b>Trophy I</b><br> Unlock new upgrades and +3 max levels for rest <br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
         "<b>Trophy II</b><br> Unlock Crafter <br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>",
         "<b>Trophy III</b><br> Unlock Decrafter <br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> ",
-        "<b>Trophy IV</b><br> Unlock Mastery (coming soon in Beta 2) <br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> ",
+        "<b>Trophy IV</b><br> Unlock Mastery (coming soon in Beta 3) <br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> ",
         "<b>Trophy V</b><br> Unlock Prestige (coming soon in Final release) <br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> ",
         "<b>Trophy V</b><br> Unlock Prestige <br>Level: max"
     ],
@@ -136,6 +141,7 @@
             ],
     
     "statistics": "<b>Statistics</b><br>You have been played for {{time}} seconds.<br>You made {{rolls}} rolls.",
+    "aboutGame": "<b>About game</b><br>RNG Incremental Beta 1.1<br>Developed by Humfrey<br>Inspired by Luck Idle level by 000000000000011 in Geometry Dash.",
     "startHelpDescription": "Choose the page to read it",
     "helpTitleText": "How to play?",
 
