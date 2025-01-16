@@ -412,6 +412,7 @@ td {
 #craftScreen, #decraftScreen{
     display: flex;
     flex-direction: column;
+    scale: 0.7
 }
 
 #statsScreen {
