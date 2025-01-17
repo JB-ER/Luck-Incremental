@@ -152,7 +152,7 @@ function offline_prod(){ //10000 ticks per second = 1000 per 100ms = 100 per 10m
         offlineProd.innerHTML = `Loading: ${formatNumber((OFFLINE.completed_ticks/ticks)*100)}% <br> Ticks: ${formatNumber(OFFLINE.completed_ticks)}/${formatNumber(ticks)}`
         if (OFFLINE.ticks <= 0) {
             clearInterval(offline_interval)
-            offlineProdText()
+            module.offlineProdText()
             startGame()
             closeOffline.disabled = false
         }
