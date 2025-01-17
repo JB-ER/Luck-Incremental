@@ -46,6 +46,10 @@ body {
     margin: 0;
 }
 
+body.mobile {
+    font-size: 22px;
+}
+
 span {
     user-select: none;
     pointer-events: none;
@@ -59,6 +63,11 @@ button, div, span, footer {
     display: flex;
     flex-direction: row;
     font-family: "monotyper" !important;
+    align-items: center;
+}
+
+#game.mobile {
+    flex-direction: column;
 }
 
 #buttons, #statsButtons {
@@ -67,12 +76,16 @@ button, div, span, footer {
     justify-content: center;
 }
 
-#buttons button, #statsButtons button, #yesHR, #no{
+.whiteButton{
     margin: 7px;
     border: 1px black solid;
     background-color: white;
     border-radius: 3px;
     font-size: 16px;
+}
+
+.whiteButton.mobile{
+    font-size: 30px;
 }
 
 .half {
@@ -84,11 +97,27 @@ button, div, span, footer {
     flex-direction: column;
 }
 
+.half.mobile {
+    width: 100%; 
+    height: 35vh; 
+}
+
 #rollScreen, #raritiesScreen {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#raritiesScreen {
+    overflow-y: auto;
+    height: 70vh;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+#raritiesScreen.mobile {
+    height: 35vh;
 }
 
 #rollButton {
@@ -100,17 +129,49 @@ button, div, span, footer {
     font-size: 25px;
 }
 
+#rollButton.mobile {
+    height:150px;
+    width: 150px;
+    font-size: 30px;
+}
+
 #rollButton:hover, #buttons button:hover, #statsButtons button:hover, .buyableUpgrade:hover, .settingButton:hover, .smallButton:hover {
     background-color: rgb(220, 220, 220) !important;
     cursor: pointer;
 }
 
+#raritiesScreen::-webkit-scrollbar {
+    width: 6px; /* Ширина полосы прокрутки */
+  }
+  
+#raritiesScreen::-webkit-scrollbar-thumb {
+    background-color: #555; /* Темно-серая полоса */
+    border-radius: 3px; /* Округлённые края */
+  }
+  
+#raritiesScreen::-webkit-scrollbar-track {
+    background: transparent; /* Прозрачный фон */
+  }
+
 .rarityCount, .rarityText, .name, .amount, .chance, .total_amount, .first_roll {
     text-shadow: 0.75px 0.75px rgb(0, 0, 0), -0.75px -0.75px rgb(0, 0, 0), 0.75px -0.75px rgb(0, 0, 0), -0.75px 0.75px rgb(0, 0, 0);
 }
 
+.rarityCount {
+    width: 300px;
+}
+
+.rarityCount.mobile {
+    width: 600px;
+    font-size: 32px;
+}
+
 .rarityText {
     text-shadow: 0.5px 0.5px rgb(0, 0, 0), -0.5px -0.5px rgb(0, 0, 0), 0.5px -0.5px rgb(0, 0, 0), -0.5px 0.5px rgb(0, 0, 0);
+}
+
+#rollsCount.mobile {
+    font-size: 30px;
 }
 
 .buyableUpgrade, .settingButton {
@@ -123,8 +184,18 @@ button, div, span, footer {
     font-size: 11px;
 }
 
+.buyableUpgrade.mobile, .settingButton.mobile {
+    height: 145px;
+    width: 290px;
+    font-size: 16px;
+}
+
 .settingButton {
     font-size: 18px;
+}
+
+.settingButton.mobile {
+    font-size: 30px;
 }
 
 #upgradesScreen, #settingsScreen {
@@ -145,6 +216,11 @@ button, div, span, footer {
     margin: 10px;
 }
 
+#rollCooldown.mobile {
+    height: 30px;
+    width: 120px;
+}
+
 #rollCooldownProgress {
     position: absolute;
     height: 20px;
@@ -152,12 +228,21 @@ button, div, span, footer {
     background-color: #AAAAAA;
 }
 
+#rollCooldownProgress.mobile {
+    height: 30px;
+}
+
 #cdText {
+    text-align: center;
     font-size:15px;
     position:absolute;
     z-index: 9999;
     margin-left: 18px;
-    margin-top: -2px;
+}
+
+#cdText.mobile {
+    font-size:22px;
+    margin-left: 27px;
 }
 
 .settingsRow {
@@ -296,11 +381,20 @@ button, div, span, footer {
     width: 0.1%;
 }
 
-#helpDiv {
+#helpDiv{
     width: 89%;
     /* margin: 0px; */
     max-height: 500px;
     margin-right: 0px;
+}
+
+#offlineDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: -100px;
+    text-align: center;
+    font-size: 18px;
 }
 
 #helpDescription {
@@ -346,6 +440,17 @@ button, div, span, footer {
     flex-wrap: wrap;
 }
 
+#offlineWindow {
+    width: 400px;
+    height: 400px;
+    flex-wrap: wrap;
+}
+
+#closeOffline {
+    left: 90%;
+    bottom: 90%;
+}
+
 #horizontalLine {
     background-color: rgb(0, 0, 0);
     width: 100%;
@@ -359,7 +464,7 @@ button, div, span, footer {
     flex-direction: column;
 }
 
-#helpTitleDiv {
+.titleDivClass {
     width: 100%;
 }
 
@@ -367,30 +472,31 @@ button, div, span, footer {
     text-align: center;
 }
 
-.center {
+#center {
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     text-align: center;
-    font-size: 24px;
+    font-size: 16px;
     position: absolute;
     top: 90px;
 }
 
-.center span{
-    margin: 4px;
+#center.mobile {
+    top: 150px;
+    font-size: 22px;
+}
+
+#center .rarity_text{
+    margin: 4px 20px;
+    width: 33%
 }
 
 td {
     border: 1px solid black;
     margin: 0;
     width: 200px;
-}
-
-table {
-    font-size: 14px;
-    margin-top: 250px;
 }
 
 .craftBlock {
@@ -400,6 +506,10 @@ table {
     padding: 5px;
     width: 250px;
     text-align: center;
+}
+
+.craftBlock.mobile {
+    width: 310px;
 }
 
 .craftButton {
@@ -417,6 +527,7 @@ table {
 #craftScreen, #decraftScreen{
     display: flex;
     flex-direction: column;
+    scale: 0.7
 }
 
 #statsScreen {
@@ -428,7 +539,8 @@ table {
 .statsScreens {
     display: flex;
     align-items: center;
-    height: 100%
+    height: 100%;
+    justify-content: center;
 }
 
 .marquee-container {
@@ -443,6 +555,11 @@ table {
     color: #fff; /* Цвет текста */
     font-size: 14px; /* Размер шрифта */
     z-index: 9999;
+}
+
+.marquee-container.mobile {
+    height: 40px; /* Высота строки */
+    font-size: 24px; /* Размер шрифта */
 }
 
 .marquee-text {
@@ -462,6 +579,12 @@ footer {
     bottom: 0;
     position: fixed;
 }
+
+footer.mobile {
+    height:30px;
+    width: 230px;
+}
+
 
 @keyframes scrollText {
     0% {
@@ -483,3 +606,15 @@ footer {
     z-index: 1000;
     transition: right 1s ease;
 }
+
+table {
+    scale: 0.8
+}
+
+table.mobile {
+    scale: 1.1
+}
+
+input[type="range"] {
+    width: 100%;
+  }

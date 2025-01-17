@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>RNG Incremental Beta 1.1</title>
     <meta name="viewport" content="maximum-scale=1.0, user-scalable=no">
-    <title>RNG Incremental Beta 1</title>
     <meta name="description" content="Roll to get various rarities and try your luck! Can you get 1 Average with 1/1000000 chance? 🤔">
     <meta name="keywords" content="RNG, luck, RNG Incremental, Incremental, clicker, idle, Luck Incremental, githack, github, idle game, incremental game, random generation number">
     <meta name="author" content="Humfrey">
@@ -16,14 +16,14 @@
         <div class="marquee-text" id="marquee-text">Loading...</div>
     </div>
     <div id="buttons">
-        <button onclick="selectTab('rollScreen', true)">Roll</button>
-        <button onclick="selectTab('upgradesScreen', true)">Upgrades</button>
-        <button id="craftScreenButton" onclick="selectTab('craftScreen', true)">Crafter</button>
-        <button id="decraftScreenButton" onclick="selectTab('decraftScreen', true)">Decrafter</button>
-        <button onclick="selectTab('statsScreen', true)">Information</button>
-        <button onclick="selectTab('settingsScreen', true)">Settings</button>
+        <button onclick="selectTab('rollScreen', true)" class="whiteButton">Roll</button>
+        <button onclick="selectTab('upgradesScreen', true)" class="whiteButton">Upgrades</button>
+        <button id="craftScreenButton" onclick="selectTab('craftScreen', true)" class="whiteButton">Crafter</button>
+        <button id="decraftScreenButton" onclick="selectTab('decraftScreen', true)" class="whiteButton">Decrafter</button>
+        <button onclick="selectTab('statsScreen', true)" class="whiteButton">Information</button>
+        <button onclick="selectTab('settingsScreen', true)" class="whiteButton">Settings</button>
     </div>
-        <div class="center">
+        <div id="center">
             <span class="rarity_text" style="opacity: 0">You rolled RARITY with 1/128 chance at 50th roll</span>
             <span class="rarity_text" style="opacity: 0">You doubled RARITY with 1/128 chance at 50th roll</span>
             <span class="rarity_text" style="opacity: 0">You upgraded RARITY to RARITY 2 at 50th roll</span>
@@ -634,8 +634,9 @@
             </div>
             <div id="statsScreen" style="display: none">
                 <div id="statsButtons">
-                <button onclick="selectSubTab('gameStatsScreen', true)">Statistics</button>
-                <button onclick="selectSubTab('raritiesStatsScreen', true)">Rarities</button>
+                <button onclick="selectSubTab('gameStatsScreen', true)" class="whiteButton">Statistics</button>
+                <button onclick="selectSubTab('raritiesStatsScreen', true)" class="whiteButton">Rarities</button>
+                <button onclick="selectSubTab('aboutStatsScreen', true)" class="whiteButton">About game</button>
                 </div>
                 <div id="gameStatsScreen" class="statsScreens">
                     <span id="statistics">Stats</span>
@@ -677,6 +678,9 @@
                     <tr class="rarityTable" style="color: var(--valuable)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
                 </table>   
                 </div>
+                <div id="aboutStatsScreen" class="statsScreens" style="display: none">
+                    <span id="aboutGame">Stats</span>
+                </div>
             </div>
             <div id="settingsScreen" style="display: none">
                 <div class="settingsRow">
@@ -697,6 +701,10 @@
                     <button class="settingButton" onclick="openWindow('hardReset', false)">Hard reset</button>
                     <button class="settingButton" onclick="howToPlay()">How to play</button>
                     <button class="settingButton" onclick="openChangelog()">Changelog</button>
+                    <div class="settingButton loadfile" style="flex-direction: column; font-size: 16px">
+                        <label for="customRange">Max offline ticks: <span id="outputValue">1000000</span></label>
+                        <input id="customRange" type="range" min="0" max="8" step="1">
+                      </div>
                 </div>
             </div>
         </div>
@@ -736,6 +744,7 @@
         </div>
     </div>
     <div id="myPopupBackdrop1" class="myPopupBackdrop"></div>
+    <div id="myPopupBackdrop2" class="myPopupBackdrop"></div>
     <div id="windowGame" class="gameWindow confirmationWindow centerText">
         <div id="windowTitleDiv" class="titleDivClass">
         <span id="windowTitle2" class="windowTitle">Do you really want to hard reset the game?</span>
@@ -743,12 +752,12 @@
         <button onclick="hidePopup()" id="closeWindow2" class="closeWindow confClose"></button>
 
         <div id="confirmationButtons" class="windowDesc" style="display: none">
-            <button onclick="reloadPage()" class="smallButton" id="yesHR">Yes</button>
-            <button onclick="hidePopup()" class="smallButton" id="no">No</button>
+            <button onclick="reloadPage()" class="smallButton" id="yesHR" class="whiteButton">Yes</button>
+            <button onclick="hidePopup()" class="smallButton" id="no" class="whiteButton">No</button>
         </div>
         </div>
         <div id="gameHelpWindow" class="gameWindow">
-            <div id="helpTitleDiv" class="titleDivClass">
+            <div class="titleDivClass">
                 <p id="helpTitle" class="windowTitle">How to play</p>
             </div>
             <button onclick="hidePopup()" class="closeWindow"></button>
@@ -768,6 +777,15 @@
                 <p id="helpDescription"></p>
             </div>
             </div>
+        <div id="offlineWindow" class="gameWindow">
+            <div class="titleDivClass">
+                <p class="windowTitle">Offline production</p>
+            </div>
+            <button onclick="hidePopup2()" id="closeOffline" class="closeWindow" disabled></button>
+            <div id="offlineDiv" class="windowDesc">
+                <p id="offlineProd">Loading...</p>
+            </div>
+        </div>
     <footer>
         Autosave: 10.34s
     </footer>
@@ -780,6 +798,9 @@
 
     <script> 
         window.onload = loadGame();
+        if (player.rarities.nothing.total >= 1 && player.upgrades.buyables[4] > 0) setTimeout(() => {window.onload = offline_prod()}, 150); 
+        else startGame()
+        console.log(player.time.saved)
     </script>
 </body>
 </html>

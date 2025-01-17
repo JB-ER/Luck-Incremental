@@ -2,11 +2,6 @@ min = 1, max = 1024; //131072
 let rollCD = 0;
 let tick = 0, language = 'en', to_roll = 1 
 
-rollButton.addEventListener("keydown", function(event) {
-    if (event.key == "Enter") {
-            event.preventDefault();
-        }})
-
 function roll() {
     if (rollCD == 0){
         rollCD += 2000/UPGS.buyable3.effect()
@@ -74,10 +69,11 @@ function auto_roll() {
 }
 
 function rollCooldown() {
+    const isMobile = (window.outerWidth <= 768)
     if (rollCD > 0) {
         rollCD -= tick
         document.getElementById('cdText').textContent = rollCD > 0 ? `${(rollCD/1000).toFixed(2)}s` : ''
-        document.getElementById('rollCooldownProgress').style.width = rollCD > 0 ? (rollCD/2000*UPGS.buyable3.effect())*80 + 'px' : 0
+        document.getElementById('rollCooldownProgress').style.width = rollCD > 0 ? isMobile ? (rollCD/2000*UPGS.buyable3.effect())*120 + 'px' : (rollCD/2000*UPGS.buyable3.effect())*80 : 0
     }
     else {
         rollCD = 0
@@ -99,6 +95,7 @@ function updateTick() {
         saveGame()
     }
     max = 1024 * UPGS.buyable5.effect()
+    checkMobile()
 }
 
 let text_disappear = [0,0,0]
@@ -114,9 +111,7 @@ function updateTime() {
     }
 }
 
-setInterval(() => {
-    updateTick()
-}, 50);
+
 
 let rarities = {
     nothing: {
@@ -247,5 +242,88 @@ const UNL = {
             element: document.getElementById('thirdUpgradeRow'),
             req() {return player.upgrades.buyables[6] >= 1},
         },
+    }
+}
+
+
+
+function checkMobile() {
+    const isMobile = (window.outerWidth <= 768)
+    const elements = document.querySelectorAll('.half'); 
+    const elements2 = document.querySelectorAll('.whiteButton');
+    const elements3 = document.querySelectorAll('.rarityCount');
+    const elements4 = document.querySelectorAll('.buyableUpgrade');
+    const elements5 = document.querySelectorAll('.settingButton');
+    const elements6 = document.querySelectorAll('.craftBlock');
+    const elements7 = document.querySelectorAll('.craftButton');
+    if (isMobile) {
+        document.getElementById('game').classList.add('mobile')
+        elements.forEach(element => {
+        element.classList.add('mobile')
+        });
+        elements2.forEach(element => {
+            element.classList.add('mobile')
+        });
+        elements3.forEach(element => {
+            element.classList.add('mobile')
+        });
+        elements4.forEach(element => {
+            element.classList.add('mobile')
+        });
+        elements5.forEach(element => {
+            element.classList.add('mobile')
+        });
+        elements6.forEach(element => {
+            element.classList.add('mobile')
+        });
+        elements7.forEach(element => {
+            element.classList.add('mobile')
+        });
+        document.querySelector('body').classList.add('mobile')
+        document.querySelector('footer').classList.add('mobile')
+        document.querySelector('table').classList.add('mobile')
+        document.getElementById('raritiesScreen').classList.add('mobile')
+        document.getElementById('rollCooldown').classList.add('mobile')
+        document.getElementById('rollCooldownProgress').classList.add('mobile')
+        document.getElementById('rollsCount').classList.add('mobile')
+        document.getElementById('rollButton').classList.add('mobile')
+        document.getElementById('cdText').classList.add('mobile')
+        document.getElementById('center').classList.add('mobile')
+        document.getElementsByClassName('marquee-container')[0].classList.add('mobile')
+    }
+    else {
+        document.getElementById('game').classList.remove('mobile')
+        elements.forEach(element => {
+            element.classList.remove('mobile')
+        });
+        elements2.forEach(element => {
+            element.classList.remove('mobile')
+        });
+        elements3.forEach(element => {
+            element.classList.remove('mobile')
+        });
+        elements4.forEach(element => {
+            element.classList.remove('mobile')
+        });
+        elements5.forEach(element => {
+            element.classList.remove('mobile')
+        });
+        elements6.forEach(element => {
+            element.classList.remove('mobile')
+        });
+        elements7.forEach(element => {
+            element.classList.remove('mobile')
+        });
+        document.querySelector('body').classList.remove('mobile')
+        document.querySelector('footer').classList.remove('mobile')
+        document.querySelector('table').classList.remove('mobile')
+        document.getElementById('raritiesScreen').classList.remove('mobile')
+        document.getElementById('rollCooldown').classList.remove('mobile')
+        document.getElementById('rollCooldownProgress').classList.remove('mobile')
+        document.getElementById('cdText').classList.remove('mobile')
+        document.getElementById('rollsCount').classList.remove('mobile')
+        document.getElementById('rollButton').classList.remove('mobile')
+        document.getElementById('center').classList.remove('mobile')
+        document.getElementsByClassName('marquee-container')[0].classList.remove('mobile')
     }
 }

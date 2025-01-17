@@ -177,7 +177,7 @@ let player = {
     },
     time: {
         current: new Date().getTime(),
-        saved: 0,
+        saved: new Date().getTime(),
         auto_save: 0,
         start: new Date().getTime(),
     },
@@ -189,7 +189,8 @@ let player = {
     },
     language: "en",
     settings: {
-        autosave_enabled: 'enabled'
+        autosave_enabled: 'enabled',
+        slider_value: 8
     }
 }
 
@@ -218,4 +219,11 @@ let text = {
 const ELS = {
     helpDesc: document.getElementById("helpDescription"),
     rarity_text: document.getElementsByClassName('rarity_text')
+}
+
+const OFFLINE = {
+    interval: 0,
+    ticks: 0,
+    completed_ticks: 0,
+    completed_rolls: 0,
 }

@@ -34,9 +34,9 @@ const UPGS = {
             [20, 12],
             [15, 5],
             [177, 5],
-            [2222, 100, 33],
-            [10000, 1200, 10],
-            [200, 10],
+            [2500, 122, 37],
+            [15000, 1600, 12],
+            [225, 14],
             [9999]
         ],
         rarity: [
@@ -77,7 +77,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.e(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -107,7 +107,7 @@ const UPGS = {
             [1000, 2],
             [600, 3],
             [5, 1],
-            [3333, 222, 11],
+            [3999, 289, 16],
             [2],
             [9999],
         ],
@@ -149,7 +149,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.w(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -178,9 +178,9 @@ const UPGS = {
             [140, 7],
             [155, 1],
             [199, 5, 2],
-            [800, 50],
+            [1000, 64],
             [3, 1],
-            [50000],
+            [66666],
             [9999],
         ],
         rarity: [
@@ -221,7 +221,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.w(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -293,7 +293,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.q(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -314,7 +314,7 @@ const UPGS = {
                 autoclicker = ''
                 autoclicker = setInterval(() => {
                     if (player.upgrades.buyables[4] != 0) auto_roll()
-                }, 2000/this.effect());
+                }, 4000/this.effect());
             }
         },
         effect(x=player.upgrades.buyables[this.id]) {
@@ -372,7 +372,7 @@ const UPGS = {
                     bought = true
                 }
             }
-            if (x==5) {
+            if (x==5 && player.upgrades.buyables[6] != 0) {
                 if (BUY.e(x, this.rarity, this.cost)) {
                     bought = true
                 }
@@ -521,9 +521,9 @@ const UPGS = {
             [10],
             [4, 3],
             [500, 100],
-            [300, 1],
-            [5000, 1000],
-            [100000, 1],
+            [333, 1],
+            [5500, 1000],
+            [125000, 1],
             [9999],
         ],
         rarity: [
@@ -582,7 +582,7 @@ const UPGS = {
             if (bought) player.upgrades.buyables[this.id]++
         },
         effect(x=player.upgrades.buyables[this.id]) {
-            return 7*x
+            return 6*x
         },
     },
     buyable9: {

@@ -25,11 +25,13 @@ function loadGame() {
     let parsedData = JSON.parse(storedData);
     showNotification("Game loaded!")
     updateNestedProperties(player, parsedData)
-    player.time.saved = Date.now()
 
     autoclicker = setInterval(() => {
         if (player.upgrades.buyables[4] != 0) auto_roll()
-    }, 2000/UPGS.buyable4.effect());
+    }, 4000/UPGS.buyable4.effect());
+
+    slider.value = player.settings.slider_value
+    outputValue.textContent = values[slider.value]
 }
 
 function exportGame() {

@@ -1,5 +1,25 @@
 -=Changelog=-
 
+17.01.2024 | RNG Incremental Beta 1.2:
+- Added offline production which 5 times slower than autoroll. You can control max ticks in settings.
+- Added mobile adaptation.
+- Game layout improvements.
+- Upgrades prices increased.
+- Nerfed Play Dice to max effect x50.
+- Nerfed Autoclicker from 2s to 4s.
+- Blacksmith base effect reduced from 7% to 6%.
+- Added info about current -> next effects in 7-9 upgrades.
+
+
+
+16.01.2024 | RNG Incremental Beta 1.1:
+- Added "About game" tab.
+- Removed "Enter" block button, so you can hold button to roll.
+- Fixed bug with 5+ levels of upgrades being available before Trophy I.
+- Improved Play Dice effect scaling.
+
+
+
 15.01.2024 | RNG Incremental Beta 1:
 GAME BETA RELEASE!
 GAMEPLAY CONTINUED! Current endgame is Trophy IV

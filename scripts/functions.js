@@ -12,6 +12,7 @@ function formatNumber(number, type='') {
 
 function selectTab(argument, isFlex) {
     const tabsToHide = ['rollScreen', 'upgradesScreen', 'craftScreen', 'decraftScreen', 'statsScreen', 'settingsScreen', 'raritiesScreen']
+    const isMobile = (window.outerWidth <= 768)
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
         if (tab) {
@@ -24,14 +25,22 @@ function selectTab(argument, isFlex) {
     if (argument == 'rollScreen' || argument == 'upgradesScreen' || argument == 'craftScreen' || argument == 'decraftScreen') {
         rarity_arg.style.display = "flex"
         halfElement.style.width = '50%'
+        if (isMobile) {
+            halfElement.style.height = '35vh'
+        }
     }
-    else halfElement.style.width = '100%'
+    else {
+        halfElement.style.width = '100%'
+        if (isMobile) {
+            halfElement.style.height = '80vh'
+        }
+    }
     if (!isFlex) arg.style.display = "block"
     else arg.style.display = "flex"
 }
 
 function selectSubTab(argument, isFlex) {
-    const tabsToHide = ['gameStatsScreen', 'raritiesStatsScreen']
+    const tabsToHide = ['gameStatsScreen', 'raritiesStatsScreen', 'aboutStatsScreen']
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
         if (tab) {
@@ -75,6 +84,12 @@ function hidePopup() {
     windowGame.style.display = "none";
     myPopupBackdrop1.style.display = "none";
     gameHelpWindow.style.display = "none"
+    offlineWindow.style.display = 'none'
+}
+
+function hidePopup2() {
+    myPopupBackdrop2.style.display = "none";
+    offlineWindow.style.display = 'none'
 }
 
 myPopupBackdrop1.addEventListener("click", hidePopup);
@@ -108,6 +123,40 @@ function reloadPage2() {
 function howToPlay(){
     gameHelpWindow.style.display = "flex"
     myPopupBackdrop1.style.display = "flex";
+}
+
+function startGame() {
+    setInterval(() => {
+        updateTick()
+    }, 33);
+}
+
+function offline_prod(){ //10000 ticks per second = 1000 per 100ms = 100 per 10ms
+    offlineWindow.style.display = "flex"
+    myPopupBackdrop2.style.display = "flex";
+    UNL.display.check()
+
+    OFFLINE.interval = new Date().getTime() - player.time.saved
+    OFFLINE.ticks = Math.min(OFFLINE.interval/50, values[slider.value]) // 50000
+    ticks = Math.min(OFFLINE.interval/50, values[slider.value]) // 50000
+    OFFLINE.completed_ticks = 0
+    let offline_rolls
+
+    let offline_interval = setInterval(() => {
+        let received_ticks = Math.min(533, OFFLINE.ticks)
+        OFFLINE.ticks -= received_ticks
+        offline_rolls = Math.max(Math.floor(received_ticks/5/2/UPGS.buyable4.effect()), 0)
+        OFFLINE.completed_ticks += Math.min(533, OFFLINE.ticks)
+        runRollDev(offline_rolls)
+        OFFLINE.completed_rolls += Math.floor(offline_rolls)
+        offlineProd.innerHTML = `Loading: ${formatNumber((OFFLINE.completed_ticks/ticks)*100)}% <br> Ticks: ${formatNumber(OFFLINE.completed_ticks)}/${formatNumber(ticks)}`
+        if (OFFLINE.ticks <= 0) {
+            clearInterval(offline_interval)
+            myModule.offlineProdText()
+            startGame()
+            closeOffline.disabled = false
+        }
+    }, 33);
 }
 
 function showHelpPage(help, helpName) {
@@ -173,31 +222,41 @@ function calculate_roll() {
     let multi_rolls = 1 
     switch (true) {
         case player.upgrades.buyables[9] >= 8:
-            multi_rolls = 100
-            break;
-        case player.upgrades.buyables[9] >= 7:
             multi_rolls = 50
             break;
-        case player.upgrades.buyables[9] >= 6:
+        case player.upgrades.buyables[9] >= 7:
             multi_rolls = 35
             break;
-        case player.upgrades.buyables[9] >= 5:
+        case player.upgrades.buyables[9] >= 6:
             multi_rolls = 25
             break;
-        case player.upgrades.buyables[9] >= 4:
+        case player.upgrades.buyables[9] >= 5:
             multi_rolls = 15
             break;
-        case player.upgrades.buyables[9] >= 3:
+        case player.upgrades.buyables[9] >= 4:
             multi_rolls = 10
             break;
-        case player.upgrades.buyables[9] >= 2:
+        case player.upgrades.buyables[9] >= 3:
             multi_rolls = 5
             break;
-        case player.upgrades.buyables[9] >= 1:
+        case player.upgrades.buyables[9] >= 2:
             multi_rolls = 3
+            break;
+        case player.upgrades.buyables[9] >= 1:
+            multi_rolls = 2
             break;
         default:
             to_roll = 1
     }
     return multi_rolls
 }
+
+const slider = document.getElementById("customRange");
+const output = document.getElementById("outputValue");
+
+const values = [1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000];
+
+slider.addEventListener("input", () => {
+    output.textContent = values[slider.value];
+    player.settings.slider_value = slider.value
+});

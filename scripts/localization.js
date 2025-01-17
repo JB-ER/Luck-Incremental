@@ -15,16 +15,6 @@ await i18next.init({
     }
     });
 
-// const loadTranslationsFromChangeLanguage = async () => {
-// try {
-
-// }
-// catch (error) {
-//     console.error('Ошибка загрузки и инициализации переводов:', error);
-// }
-// }
-
-// loadTranslationsFromChangeLanguage()
 
 setInterval(() => {
     loadTranslations()
@@ -35,7 +25,9 @@ function loadTranslations() {
     let buyables = document.getElementsByClassName('buyableUpgrade')
     for (let i = 0; i < buyables.length; i++) {
         const index = i+1
-        buyables[i].innerHTML = i18next.t(`buyableUpgrade${index}.${player.upgrades.buyables[index]}`, {
+        let number_loop = player.upgrades.buyables[index]
+        player.upgrades.buyables[6] == 0 && player.upgrades.buyables[index] >= 5 ? number_loop = 9 : number_loop = player.upgrades.buyables[index]
+        buyables[i].innerHTML = i18next.t(`buyableUpgrade${index}.${number_loop}`, {
             color1: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]],
             color2: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]],
             color3: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]],
@@ -72,6 +64,8 @@ function loadTranslations() {
         start1: player.time.start1,
         start2: player.time.start2
     });
+
+    aboutGame.innerHTML = i18next.t('aboutGame');
 
     player.settings.autosave_enabled == 'enabled' ? document.querySelector('footer').textContent = `Autosave: ${(player.time.auto_save/1000).toFixed(2)}s` : document.querySelector('footer').textContent = `Autosave: disabled`
     document.getElementById('autosave_enable').textContent = `Autosave: ${player.settings.autosave_enabled}`
@@ -138,3 +132,9 @@ function showRandomMessage() {
 // Интервал для смены текста
 setInterval(showRandomMessage, 13000); // Меняем текст каждые 13 секунд
 showRandomMessage(); // Показываем первый текст сразу
+
+function offlineProdText() {
+    offlineProd.innerHTML = i18next.t("offlineProduction", { s: formatNumber(OFFLINE.interval/1000), rolls: OFFLINE.completed_rolls });
+}
+
+window.myModule = { offlineProdText };
