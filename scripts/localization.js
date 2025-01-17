@@ -137,4 +137,4 @@ function offlineProdText() {
     offlineProd.innerHTML = i18next.t("offlineProduction", { s: formatNumber(OFFLINE.interval/1000), rolls: OFFLINE.completed_rolls });
 }
 
-window.module = { offlineProdText };
+window.offlineProdText = offlineProdText;
