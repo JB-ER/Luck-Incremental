@@ -132,9 +132,3 @@ function showRandomMessage() {
 // Интервал для смены текста
 setInterval(showRandomMessage, 13000); // Меняем текст каждые 13 секунд
 showRandomMessage(); // Показываем первый текст сразу
-
-function offlineProdText() {
-    offlineProd.innerHTML = i18next.t("offlineProduction", { s: formatNumber(OFFLINE.interval/1000), rolls: OFFLINE.completed_rolls });
-}
-
-window.module = { offlineProdText };
