@@ -222,22 +222,22 @@ function calculate_roll() {
     let multi_rolls = 1 
     switch (true) {
         case player.upgrades.buyables[9] >= 8:
-            multi_rolls = 50
-            break;
-        case player.upgrades.buyables[9] >= 7:
-            multi_rolls = 35
-            break;
-        case player.upgrades.buyables[9] >= 6:
-            multi_rolls = 25
-            break;
-        case player.upgrades.buyables[9] >= 5:
             multi_rolls = 15
             break;
-        case player.upgrades.buyables[9] >= 4:
+        case player.upgrades.buyables[9] >= 7:
             multi_rolls = 10
             break;
-        case player.upgrades.buyables[9] >= 3:
+        case player.upgrades.buyables[9] >= 6:
+            multi_rolls = 8
+            break;
+        case player.upgrades.buyables[9] >= 5:
+            multi_rolls = 6
+            break;
+        case player.upgrades.buyables[9] >= 4:
             multi_rolls = 5
+            break;
+        case player.upgrades.buyables[9] >= 3:
+            multi_rolls = 4
             break;
         case player.upgrades.buyables[9] >= 2:
             multi_rolls = 3

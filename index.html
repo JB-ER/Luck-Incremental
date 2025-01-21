@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RNG Incremental Beta 1.2</title>
+    <title>RNG Incremental Beta 1.3</title>
     <meta name="viewport" content="maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Roll to get various rarities and try your luck! Can you get 1 Average with 1/1000000 chance? 🤔">
     <meta name="keywords" content="RNG, luck, RNG Incremental, Incremental, clicker, idle, Luck Incremental, githack, github, idle game, incremental game, random generation number">
@@ -684,7 +684,7 @@
             </div>
             <div id="settingsScreen" style="display: none">
                 <div class="settingsRow">
-                    <button class="settingButton" onclick="saveGame()">Save</button>
+                    <button class="settingButton" onclick="saveGame(JSON.stringify(player));">Save</button>
                     <button class="settingButton" onclick="loadGame()">Load</button>
                     <button id="autosave_enable" class="settingButton" onclick="switchAutosave()">Autosave: </button>
                 </div>
@@ -696,6 +696,7 @@
                 <input type="file" id="file-upload">
                 <p class="file-name"></p>
                 <button class="settingButton" onclick="exportGame()">Export</button>
+
                 </div>
                 <div class="settingsRow">
                     <button class="settingButton" onclick="openWindow('hardReset', false)">Hard reset</button>
@@ -705,6 +706,12 @@
                         <label for="customRange">Max offline ticks: <span id="outputValue">1000000</span></label>
                         <input id="customRange" type="range" min="0" max="8" step="1">
                       </div>
+                </div>
+                <div class="settingsRow">
+                    <button class="settingButton" onclick="saveGameDB(JSON.stringify(player))">Cloud save</button>
+                    <button class="settingButton" onclick="loadGameDB()">Load from cloud</button>
+                    <button class="settingButton" id="syncCloudSave" onclick="switchSave()">Sync cloud save: </button>
+                    <button class="settingButton" onclick="editCloudKey()">Edit cloud key</button>
                 </div>
             </div>
         </div>
@@ -797,7 +804,15 @@
     <script type="module" src="scripts/localization.js"></script>
 
     <script> 
-        window.onload = loadGame();
+        function choose_to_load() {
+            loadKeys()
+            if (local.settings.cloud_sync == 'yes') {
+                autoLoadGameDB(local.key)
+            }
+            else loadGame()
+        }
+
+        window.onload = choose_to_load();
         if (player.rarities.nothing.total >= 1 && player.upgrades.buyables[4] > 0) setTimeout(() => {window.onload = offline_prod()}, 100); 
         else startGame()
         console.log(player.time.saved)

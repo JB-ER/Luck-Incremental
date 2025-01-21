@@ -190,7 +190,7 @@ let player = {
     language: "en",
     settings: {
         autosave_enabled: 'enabled',
-        slider_value: 8
+        slider_value: 8,
     }
 }
 
@@ -226,4 +226,11 @@ const OFFLINE = {
     ticks: 0,
     completed_ticks: 0,
     completed_rolls: 0,
+}
+
+let local = {
+    settings: {
+        cloud_sync: 'no'
+    },
+    key: ''
 }

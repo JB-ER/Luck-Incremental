@@ -92,7 +92,14 @@ function updateTick() {
     rollCooldown()
     UNL.display.check()
     if (player.time.auto_save >= 30000) {
-        saveGame()
+        if (local.settings.cloud_sync == 'yes') {
+            if (player.rolls >= 100) autoSaveGameDB(local.key, JSON.stringify(player))
+            else {
+            saveGame()
+            showNotification("You need 100 or more rolls to sync with cloud. Game saved locally.", "white", "500px") 
+            }
+        }
+        else saveGame()
     }
     max = 1024 * UPGS.buyable5.effect()
     checkMobile()
