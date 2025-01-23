@@ -20,6 +20,7 @@ async function saveGameDB(saveData) {
             throw new Error(`SERVER ERROR (contact developer): ${response.status}`);
         }
         const result = await response.json();
+        console.log(result)
         if (userId != null) showNotification("Game saved into cloud!", "white", "250px")
         else alert('Request cancelled.')
     } catch (error) {
@@ -87,9 +88,9 @@ async function listUsers() {
 }
 
 
-function saveGame () { 
-        player.time.auto_save = 0
-        showNotification("Game saved!")
+function saveGame(auto=false) { 
+        temp.time.auto_save = 0
+        if (auto == false) showNotification("Game saved!")
         let stringifiedData = JSON.stringify(player); 
         localStorage.setItem('player_luck_incremental', stringifiedData);
         
@@ -110,11 +111,11 @@ for (const key in sourceObj) {
 }
 }
 
-function loadGame() {
+function loadGame(show=true) {
     let storedData = localStorage.getItem('player_luck_incremental'); 
     let parsedData = JSON.parse(storedData);
 
-    showNotification("Game loaded!")
+    if (show) showNotification("Game loaded!")
     updateNestedProperties(player, parsedData)
 
     clearInterval(autoclicker)
@@ -217,7 +218,7 @@ async function editCloudKey() {
 }
 
 async function autoSaveGameDB(key, saveData) {
-    player.time.auto_save = 0
+    temp.time.auto_save = 0
     try {
         const response = await fetch(API_URL, {
             method: 'POST',
@@ -242,37 +243,51 @@ async function autoSaveGameDB(key, saveData) {
 }
 
 async function autoLoadGameDB(key) {
-    const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            action: 'load',
-            userId: key
-        }),
-    });
-    const result = await response.json();
-    if (result.status === 'success') {
-        let storedData = atob(result.saveData)
-        let parsedData = JSON.parse(storedData);
-        showNotification("Game loaded from cloud!", "white", "250px")
-        updateNestedProperties(player, parsedData)
+    try{
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'load',
+                userId: key
+            }),
+        });
+        const result = await response.json();
+        if (result.status === 'success') {
+            let storedData = atob(result.saveData)
+            let parsedData = JSON.parse(storedData);
+            showNotification("Game loaded from cloud!", "white", "250px")
+            updateNestedProperties(player, parsedData)
+            
+            clearInterval(autoclicker)
+            autoclicker = setInterval(() => {
+                if (player.upgrades.buyables[4] != 0) auto_roll()
+            }, 4000/UPGS.buyable4.effect());
         
-        clearInterval(autoclicker)
-        autoclicker = setInterval(() => {
-            if (player.upgrades.buyables[4] != 0) auto_roll()
-        }, 4000/UPGS.buyable4.effect());
-    
-        slider.value = player.settings.slider_value
-        outputValue.textContent = values[slider.value]
-        return result.saveData;
-    } 
-    else if (result.status === 'error') {
-        alert('Request cancelled.')
-        return null;
+            slider.value = player.settings.slider_value
+            outputValue.textContent = values[slider.value]
+            if (player.rarities.nothing.total >= 1 && player.upgrades.buyables[4] > 0) window.onload = offline_prod()
+            else startGame()
+            return result.saveData;
+        } 
+        else if (result.status === 'error') {
+            alert('Request cancelled.')
+            return null;
+        }
+        else {
+            console.error(result.message);
+            alert('Cloud doesn\'t have such save, try again. Or create new one, if you didn\'t.')
+            return null;
+        }
     }
-    else {
-        console.error(result.message);
-        alert('Cloud doesn\'t have such save, try again. Or create new one, if you didn\'t.')
-        return null;
+    catch(error){
+        if (error instanceof TypeError && error.message === 'Failed to fetch') {
+            console.error('CONNECTION ERROR: The request was blocked due to a CORS issue or network error.');
+        } else if (error.message.includes('SERVER ERROR')) {
+            console.error('SERVER ERROR:', error.message);
+        } else {
+            showNotification('CONNECTION TO DATABASE IS FAILED. Loading local save.', 'red', '400px')
+            loadGame(show=false)
+        }
     }
 }

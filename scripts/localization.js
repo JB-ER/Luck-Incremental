@@ -54,8 +54,15 @@ function loadTranslations() {
     text.help.start = i18next.t('startHelpDescription');
     helpTitle.innerHTML = i18next.t('helpTitleText');
 
+    text.changelog.start = i18next.t('startChangelogDescription');
+    changelogTitle.innerHTML = i18next.t('changelogTitleText');
+
     for (let i = 1; i <= 7; i++) {
         text.help[i] = i18next.t(`help${i}`);
+    }
+
+    for (let i = 1; i <= 3; i++) {
+        text.changelog[i] = i18next.t(`changelog${i}`);
     }
 
     statistics.innerHTML = i18next.t(`statistics`, {
@@ -67,7 +74,7 @@ function loadTranslations() {
 
     aboutGame.innerHTML = i18next.t('aboutGame');
 
-    player.settings.autosave_enabled == 'enabled' ? document.querySelector('footer').textContent = `Autosave: ${(player.time.auto_save/1000).toFixed(2)}s` : document.querySelector('footer').textContent = `Autosave: disabled`
+    player.settings.autosave_enabled == 'enabled' ? document.querySelector('footer').textContent = `Autosave: ${(temp.time.auto_save/1000).toFixed(2)}s` : document.querySelector('footer').textContent = `Autosave: disabled`
     document.getElementById('autosave_enable').textContent = `Autosave: ${player.settings.autosave_enabled}`
     document.getElementById('syncCloudSave').textContent = `Cloud sync: ${local.settings.cloud_sync}`
 

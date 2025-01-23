@@ -239,7 +239,7 @@ const UPGS = {
             if (bought) player.upgrades.buyables[this.id]++
         },
         effect(x=player.upgrades.buyables[this.id]) {
-            return Math.pow(1.5, x)
+            return Math.pow(1.17647, x)
         },
     },
     buyable4: {
@@ -314,11 +314,11 @@ const UPGS = {
                 autoclicker = ''
                 autoclicker = setInterval(() => {
                     if (player.upgrades.buyables[4] != 0) auto_roll()
-                }, 4000/this.effect());
+                }, 3000/this.effect());
             }
         },
         effect(x=player.upgrades.buyables[this.id]) {
-            return x != 0 ? x == 1 ? 1 : Math.pow(1.33333, x-1) : false
+            return x != 0 ? x == 1 ? 1 : Math.pow(1.25, x-1) : false
         },
     },
     buyable5: {

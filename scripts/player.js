@@ -178,7 +178,6 @@ let player = {
     time: {
         current: new Date().getTime(),
         saved: new Date().getTime(),
-        auto_save: 0,
         start: new Date().getTime(),
     },
     best_: {
@@ -190,7 +189,7 @@ let player = {
     language: "en",
     settings: {
         autosave_enabled: 'enabled',
-        slider_value: 8,
+        slider_value: 4,
     }
 }
 
@@ -214,10 +213,22 @@ let text = {
         6:'',
         7:'',
     },
+    changelogTitle: {
+        1:'Alpha',
+        2:'Beta 1.X',
+        3:'Beta 2.X',
+    },
+    changelog: {
+        start:'',
+        1:'',
+        2:'',
+        3:'',
+    },
 }
 
 const ELS = {
     helpDesc: document.getElementById("helpDescription"),
+    changelogDesc: document.getElementById("changelogDescription"),
     rarity_text: document.getElementsByClassName('rarity_text')
 }
 
@@ -233,4 +244,10 @@ let local = {
         cloud_sync: 'no'
     },
     key: ''
+}
+
+let temp = {
+    time: {
+        auto_save: 0
+    }
 }

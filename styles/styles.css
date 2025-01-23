@@ -372,8 +372,14 @@ button, div, span, footer {
 }
 
 .smallButton {
-    font-size: 22px !important;
-    width: 50px;
+    font-size: 18px !important;
+    width: 100px;
+    height: 40px;
+}
+
+.smallButton:disabled {
+    background-color: #dadada;
+    cursor:not-allowed;
 }
 
 #line {
@@ -381,7 +387,7 @@ button, div, span, footer {
     width: 0.1%;
 }
 
-#helpDiv{
+#helpDiv, #changelogDiv{
     width: 89%;
     /* margin: 0px; */
     max-height: 500px;
@@ -397,12 +403,12 @@ button, div, span, footer {
     font-size: 18px;
 }
 
-#helpDescription {
+#helpDescription, #changelogDescription {
     margin-left: 5px;
     margin-top: 5px;
 }
 
-#helpPageTitle {
+#helpPageTitle, #changelogTitle2 {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
@@ -436,7 +442,7 @@ button, div, span, footer {
     background-color: rgb(190, 190, 190);
 }
 
-#gameHelpWindow {
+#gameHelpWindow, #changelogWindow {
     flex-wrap: wrap;
 }
 
@@ -457,11 +463,15 @@ button, div, span, footer {
     height:1.1px;
 }
 
-#helpPageChooser{
+#helpPageChooser, #changelogPageChooser{
     display: flex;
     height: 90.5%;
     width: 10.7%;
     flex-direction: column;
+}
+
+#changelogPageChooser {
+    height: 91.5%
 }
 
 .titleDivClass {

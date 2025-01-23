@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RNG Incremental Beta 1.3</title>
+    <title>RNG Incremental Beta 1.4</title>
     <meta name="viewport" content="maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Roll to get various rarities and try your luck! Can you get 1 Average with 1/1000000 chance? 🤔">
     <meta name="keywords" content="RNG, luck, RNG Incremental, Incremental, clicker, idle, Luck Incremental, githack, github, idle game, incremental game, random generation number">
@@ -684,7 +684,7 @@
             </div>
             <div id="settingsScreen" style="display: none">
                 <div class="settingsRow">
-                    <button class="settingButton" onclick="saveGame(JSON.stringify(player));">Save</button>
+                    <button class="settingButton" onclick="saveGame();">Save</button>
                     <button class="settingButton" onclick="loadGame()">Load</button>
                     <button id="autosave_enable" class="settingButton" onclick="switchAutosave()">Autosave: </button>
                 </div>
@@ -703,9 +703,9 @@
                     <button class="settingButton" onclick="howToPlay()">How to play</button>
                     <button class="settingButton" onclick="openChangelog()">Changelog</button>
                     <div class="settingButton loadfile" style="flex-direction: column; font-size: 16px">
-                        <label for="customRange">Max offline ticks: <span id="outputValue">1000000</span></label>
+                        <label for="customRange">Max offline ticks: <span id="outputValue">50000</span></label>
                         <input id="customRange" type="range" min="0" max="8" step="1">
-                      </div>
+                    </div>
                 </div>
                 <div class="settingsRow">
                     <button class="settingButton" onclick="saveGameDB(JSON.stringify(player))">Cloud save</button>
@@ -784,6 +784,23 @@
                 <p id="helpDescription"></p>
             </div>
             </div>
+        <div id="changelogWindow" class="gameWindow">
+            <div class="titleDivClass">
+                <p id="changelogTitle" class="windowTitle">Changelog</p>
+            </div>
+            <button onclick="hidePopup()" class="closeWindow"></button>
+            <div id="horizontalLine"></div>
+            <div id="changelogPageChooser">
+                <button onclick="showChangelogPage(text.changelog[3], text.changelogTitle[3])" id="changelogTab3" class="versionButton versionButtonVertical">2.x Beta</button>
+                <button onclick="showChangelogPage(text.changelog[2], text.changelogTitle[2])" id="changelogTab2" class="versionButton versionButtonVertical">1.x Beta</button>
+                <button onclick="showChangelogPage(text.changelog[1], text.changelogTitle[1])" id="changelogTab1" class="versionButton versionButtonVertical">Alpha</button>
+            </div>
+            <div id="line"></div>
+            <div id="changelogDiv" class="windowDesc">
+                <p id="changelogTitle2">Press buttons on left to check it's page</p>
+                <p id="changelogDescription"></p>
+            </div>
+            </div>
         <div id="offlineWindow" class="gameWindow">
             <div class="titleDivClass">
                 <p class="windowTitle">Offline production</p>
@@ -792,6 +809,11 @@
             <div id="offlineDiv" class="windowDesc">
                 <p id="offlineProd">Loading...</p>
             </div>
+            <div id="offlineButtons" class="windowDesc" style="display: flex; justify-content: center; width: 100%">
+                <button onclick="speedUpOffline()" id="speedUpOfflineButton" class="whiteButton smallButton">Speed up</button>
+                <button onclick="skipOffline()" class="whiteButton smallButton">Skip</button>
+            </div>
+
         </div>
     <footer>
         Autosave: 10.34s
@@ -809,13 +831,13 @@
             if (local.settings.cloud_sync == 'yes') {
                 autoLoadGameDB(local.key)
             }
-            else loadGame()
+            else {
+                loadGame()
+            if (player.rarities.nothing.total >= 1 && player.upgrades.buyables[4] > 0) window.onload = offline_prod()
+            else startGame()
+            }
         }
-
         window.onload = choose_to_load();
-        if (player.rarities.nothing.total >= 1 && player.upgrades.buyables[4] > 0) setTimeout(() => {window.onload = offline_prod()}, 100); 
-        else startGame()
-        console.log(player.time.saved)
     </script>
 </body>
 </html>

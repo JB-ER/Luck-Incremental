@@ -4,7 +4,7 @@ let tick = 0, language = 'en', to_roll = 1
 
 function roll() {
     if (rollCD == 0){
-        rollCD += 2000/UPGS.buyable3.effect()
+        rollCD += 1500/UPGS.buyable3.effect()
 
         auto_roll()
     }
@@ -73,7 +73,11 @@ function rollCooldown() {
     if (rollCD > 0) {
         rollCD -= tick
         document.getElementById('cdText').textContent = rollCD > 0 ? `${(rollCD/1000).toFixed(2)}s` : ''
-        document.getElementById('rollCooldownProgress').style.width = rollCD > 0 ? isMobile ? (rollCD/2000*UPGS.buyable3.effect())*120 + 'px' : (rollCD/2000*UPGS.buyable3.effect())*80 : 0
+        if (rollCD > 0) {
+            if (isMobile) document.getElementById('rollCooldownProgress').style.width = (rollCD/1500*UPGS.buyable3.effect())*120 + 'px'  
+            else document.getElementById('rollCooldownProgress').style.width = (rollCD/1500*UPGS.buyable3.effect())*80 + 'px'
+        }  
+        else document.getElementById('rollCooldownProgress').style.width = 0
     }
     else {
         rollCD = 0
@@ -91,15 +95,14 @@ function updateTick() {
     updateTime()
     rollCooldown()
     UNL.display.check()
-    if (player.time.auto_save >= 30000) {
+    if (temp.time.auto_save >= 30000) {
         if (local.settings.cloud_sync == 'yes') {
             if (player.rolls >= 100) autoSaveGameDB(local.key, JSON.stringify(player))
-            else {
-            saveGame()
-            showNotification("You need 100 or more rolls to sync with cloud. Game saved locally.", "white", "500px") 
-            }
+            else { showNotification("You need 100 or more rolls to sync with cloud. Game saved locally.", "white", "500px"); setTimeout(showNotification("Game autosaved!"), 3000) }
         }
-        else saveGame()
+        else showNotification("Game autosaved!")
+        saveGame(auto=true)
+
     }
     max = 1024 * UPGS.buyable5.effect()
     checkMobile()
@@ -110,7 +113,7 @@ function updateTime() {
     player.time.current = new Date().getTime()
     tick = player.time.current - player.time.saved
     player.time.saved = new Date().getTime()
-    if (player.settings.autosave_enabled == 'enabled') player.time.auto_save += tick
+    if (player.settings.autosave_enabled == 'enabled') temp.time.auto_save += tick
     for (let i = 0; i < document.getElementsByClassName('rarity_text').length; i++) {
         const element = document.getElementsByClassName('rarity_text')[i];
         text_disappear[i] -= tick

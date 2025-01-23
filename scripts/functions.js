@@ -84,6 +84,7 @@ function hidePopup() {
     windowGame.style.display = "none";
     myPopupBackdrop1.style.display = "none";
     gameHelpWindow.style.display = "none"
+    changelogWindow.style.display = "none"
     offlineWindow.style.display = 'none'
 }
 
@@ -125,6 +126,11 @@ function howToPlay(){
     myPopupBackdrop1.style.display = "flex";
 }
 
+function openChangelog(){
+    changelogWindow.style.display = "flex"
+    myPopupBackdrop1.style.display = "flex";
+}
+
 function startGame() {
     setInterval(() => {
         updateTick()
@@ -135,12 +141,26 @@ function offline_prod(){ //10000 ticks per second = 1000 per 100ms = 100 per 10m
     offlineWindow.style.display = "flex"
     myPopupBackdrop2.style.display = "flex";
     UNL.display.check()
+    let to_roll = calculate_roll()
 
-    OFFLINE.interval = new Date().getTime() - player.time.saved
+    OFFLINE.interval = (new Date().getTime() - player.time.saved)
     OFFLINE.ticks = Math.min(OFFLINE.interval/50, values[slider.value]) // 50000
     ticks = Math.min(OFFLINE.interval/50, values[slider.value]) // 50000
     OFFLINE.completed_ticks = 0
     let offline_rolls
+    player.time.current = new Date().getTime()
+    player.time.saved = new Date().getTime()
+
+    window.speedUpOffline = function() {
+        if (OFFLINE.ticks >= 100000) {
+            ticks /= 2
+            OFFLINE.ticks /=2
+        }
+    }
+
+    window.skipOffline = function() {
+        OFFLINE.ticks = 0
+    }
 
     let offline_interval = setInterval(() => {
         let received_ticks = Math.min(533, OFFLINE.ticks)
@@ -150,9 +170,11 @@ function offline_prod(){ //10000 ticks per second = 1000 per 100ms = 100 per 10m
         runRollDev(offline_rolls)
         OFFLINE.completed_rolls += Math.floor(offline_rolls)
         offlineProd.innerHTML = `Loading: ${formatNumber((OFFLINE.completed_ticks/ticks)*100)}% <br> Ticks: ${formatNumber(OFFLINE.completed_ticks)}/${formatNumber(ticks)}`
-        if (OFFLINE.ticks <= 0) {
+        if (OFFLINE.ticks < 100000) document.getElementById('speedUpOfflineButton').disabled = true
+        if (OFFLINE.completed_ticks >= ticks || OFFLINE.ticks <= 0) {
             clearInterval(offline_interval)
-            offlineProd.innerHTML = `Welcome back! <br> You were offline ${formatNumber(OFFLINE.interval/1000)} seconds <br> And did: <br> ${OFFLINE.completed_rolls} rolls!`
+            offlineButtons.style.display = 'none'
+            offlineProd.innerHTML = `Welcome back! <br> You were offline ${formatNumber(OFFLINE.interval/1000)} seconds <br> And did: <br> ${OFFLINE.completed_rolls*to_roll} rolls!`
             startGame()
             closeOffline.disabled = false
         }
@@ -164,8 +186,9 @@ function showHelpPage(help, helpName) {
     helpPageTitle.innerHTML = helpName
 }
 
-function openChangelog() {
-    window.open('./changelog.txt', '_blank');
+function showChangelogPage(changelog, changelogName) {
+    ELS.changelogDesc.innerHTML = changelog;
+    changelogTitle2.innerHTML = changelogName
 }
 
 function craft(rariti1, rariti2, multiplier) {
@@ -211,7 +234,7 @@ function showNotification(text = "Notification", color = "white", width = "150px
 }
 
 function switchAutosave() {
-    player.time.auto_save = 0
+    temp.time.auto_save = 0
     if (player.settings.autosave_enabled == 'enabled') {
         player.settings.autosave_enabled = 'disabled'
     }
