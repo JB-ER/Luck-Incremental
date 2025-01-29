@@ -67,6 +67,18 @@
 
 19 average
 
+20 usual
+
+21 Moderate
+
+22 adequate
+
+23 Fair
+
+24 Fine
+
+25 solid
+
 {
     "buyableUpgrade1": [
     "<b>Roll buster! I</b><br>Reduce chance of 3 rarities and increase of rest by 5%<br>Cost: <span class=\"rarityText\" style=\"color: var(--{{color}});\">{{cost1}} {{rarity}}</span>",
@@ -133,3 +145,127 @@
          and <br><span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>
 
          and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>
+
+
+
+Mastery upg 1:
+1. 1 newbie
+2. 1 newbie, 50 common
+3. 2 newbie, 16 Decent, 1 adequate
+
+Mastery upg 2:
+1. 1 newbie
+2. 1 newbie, 50000 disgusting, 300 Bad
+3. 2 newbie, 800000 Absolute worst, 2 Fair
+
+Mastery upg 3:
+1. 1 newbie
+2. 1 newbie, 3000 Terrible, 150 So so
+3. 2 newbie, 8 Moderate, 1 Solid
+
+Mastery upg 4:
+1. 1 newbie
+2. 2 newbie, 750 Unremarkable
+3. 2 newbie, 12000 awful, 60 standard
+
+Mastery upg 5:
+1. 2 newbie
+2. 2 newbie, 50 Regular, 400000 worst
+3. 3 newbie, 4 Fair, 1 Worthy
+
+Mastery upg 6:
+1. 1 newbie
+2. 2 newbie, 750000 nothing, 30 standard
+3. 4 newbie, 250000 abominable, 1 Admirable
+
+Mastery upg 7:
+1. 1 newbie
+2. 2 newbie, 150 common, 80 regular
+3. 3 newbie, 30000 horrible, 30 decent
+
+Mastery upg 8:
+1. 1 newbie
+2. 2 newbie, 2000 poor, 5 average
+3. 3 newbie, 500000 worst, 200000 repulsive
+
+Mastery upg 9:
+1. 2 newbie
+2. 2 newbie, 5 usual, 2 adequate
+3. 3 newbie, 10000 terrible, 25 decent
+
+upg 1:
+9. 100000 worst, 3000 awful, 4 decent
+10. 500000 nothing, 2500 terrible, 800 unremarkable
+
+upg 2:
+9. 300 bad, 100 so so, 40 common
+10. 10000 horrible, 2 decent
+
+upg 3:
+9. 1000 terrible, 15 regular, 2 average
+10. 15 standarrd, 1 usual
+
+upg 4:
+9. 25000 dreadful, 500 poor, 3 standard
+10. 75000 repulsive, 350 unremarkable, 10 regular
+
+upg 5:
+9. 5000 awful
+10. 100000 abominable, 1000 awful, 1 adequate
+
+upg 7:
+9. 100000 worst, 10000 dreadful
+10. 3 average, 1 usual
+
+upg 8:
+9. 64000 disgusting, 256 bad, 4 standard
+10. 100 common
+
+upg 9:
+9. 200000 nothing, 5000 horrible, 3 decent
+10. 1500 terrible, 50 regular, 2 usual
+
+upg 10:
+1. 3000 dreadful
+2. 200 poor
+3. 70000 disgusting
+4. 100 bad 4 standard
+5. 888 terrible 88 so so
+6. 16 regular
+7. 48000 repulsive 64 common
+8. 15000 appaling 5000 horrible 2500 awful
+9. 1000 unremarkable 15 standard 3 average
+10. 1000000 absolute worst 5 usual
+
+upg 11:
+1. 10000 abominable
+2. 100000 nothing 20 common
+3. 10 regular 5 standard
+4. 333 unremarkable 100 so so
+5. 666 poor
+6. 20000 appaling 10 standard
+7. 1 Moderate
+8. 66666 dreadful 100 bad
+9. 500000 worst 10 decent
+10. 1000 unremarkable 12 average 2 usual
+
+
+
+
+
+
+
+
+
+
+upg 12:
+1. 1 decent
+2. 500 terrible
+3. 2500 awful 35 common
+4. 11 regular
+5. 25000 dreadful 100 so so
+6. 1 decent 1 average 1 usual
+7. 100000 repulsive 500 poor 10 standard
+8. 777 unremarkable
+9. 100 common 10 regular 1 standard
+10. 2500 terrible 500 bad

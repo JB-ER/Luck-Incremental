@@ -1,7 +1,9 @@
-function formatNumber(number, type='') {
+function formatNumber(number, type='', n=0, m=0) {
     if (typeof number == "string") return ''
     else if (number < 10 && number >= 0 && type == 'chance')
         return number.toFixed(1)
+    else if (number < m && type == 'custom')
+        return number.toFixed(n)
     else if (number < 10 && number >= 0)
         return number.toFixed(0)
     else if (number >= 10 && number < 1000000)
@@ -26,7 +28,7 @@ function selectTab(argument, isFlex) {
         rarity_arg.style.display = "flex"
         halfElement.style.width = '50%'
         if (isMobile) {
-            halfElement.style.height = '35vh'
+            halfElement.style.height = '45vh'
         }
     }
     else {
@@ -39,9 +41,18 @@ function selectTab(argument, isFlex) {
     else arg.style.display = "flex"
 }
 
-function selectSubTab(argument, isFlex) {
-    const tabsToHide = ['gameStatsScreen', 'raritiesStatsScreen', 'aboutStatsScreen']
-    for (const tabId of tabsToHide) {
+function selectSubTab(argument, isFlex, group) {
+    const tabsToHide1 = ['commonUpgrades', 'masteryUpgrades']
+    const tabsToHide2 = ['gameStatsScreen', 'raritiesStatsScreen', 'aboutStatsScreen']
+    if (group == 'upgrades')
+    for (const tabId of tabsToHide1) {
+        const tab = document.getElementById(tabId);
+        if (tab) {
+            tab.style.display = "none";
+        }
+    }
+    else 
+    for (const tabId of tabsToHide2) {
         const tab = document.getElementById(tabId);
         if (tab) {
             tab.style.display = "none";
@@ -53,32 +64,70 @@ function selectSubTab(argument, isFlex) {
 }
 
 document.getElementsByClassName('buyableUpgrade')[0].addEventListener("click", function() {
-    UPGS.buyable1.buy()
+    UPGS.common.buyables.buyable1.buy()
 })  
 document.getElementsByClassName('buyableUpgrade')[1].addEventListener("click", function() {
-    UPGS.buyable2.buy()
+    UPGS.common.buyables.buyable2.buy()
 })  
 document.getElementsByClassName('buyableUpgrade')[2].addEventListener("click", function() {
-    UPGS.buyable3.buy()
+    UPGS.common.buyables.buyable3.buy()
 })  
 document.getElementsByClassName('buyableUpgrade')[3].addEventListener("click", function() {
-    UPGS.buyable4.buy()
+    UPGS.common.buyables.buyable4.buy()
 })  
 document.getElementsByClassName('buyableUpgrade')[4].addEventListener("click", function() {
-    UPGS.buyable5.buy()
+    UPGS.common.buyables.buyable5.buy()
 })  
 document.getElementsByClassName('buyableUpgrade')[5].addEventListener("click", function() {
-    UPGS.buyable6.buy()
+    UPGS.common.buyables.buyable6.buy()
 })  
 document.getElementsByClassName('buyableUpgrade')[6].addEventListener("click", function() {
-    UPGS.buyable7.buy()
+    UPGS.common.buyables.buyable7.buy()
 })  
 document.getElementsByClassName('buyableUpgrade')[7].addEventListener("click", function() {
-    UPGS.buyable8.buy()
+    UPGS.common.buyables.buyable8.buy()
 })  
 document.getElementsByClassName('buyableUpgrade')[8].addEventListener("click", function() {
-    UPGS.buyable9.buy()
+    UPGS.common.buyables.buyable9.buy()
 })  
+document.getElementsByClassName('buyableUpgrade')[9].addEventListener("click", function() {
+    UPGS.common.buyables.buyable10.buy()
+})  
+document.getElementsByClassName('buyableUpgrade')[10].addEventListener("click", function() {
+    UPGS.common.buyables.buyable11.buy()
+})  
+document.getElementsByClassName('buyableUpgrade')[11].addEventListener("click", function() {
+    UPGS.common.buyables.buyable12.buy()
+})  
+
+document.getElementsByClassName('masteryBuyableUpgrade')[0].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable1.buy()
+})  
+document.getElementsByClassName('masteryBuyableUpgrade')[1].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable2.buy()
+})  
+document.getElementsByClassName('masteryBuyableUpgrade')[2].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable3.buy()
+})  
+document.getElementsByClassName('masteryBuyableUpgrade')[3].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable4.buy()
+})  
+document.getElementsByClassName('masteryBuyableUpgrade')[4].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable5.buy()
+})  
+document.getElementsByClassName('masteryBuyableUpgrade')[5].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable6.buy()
+})  
+document.getElementsByClassName('masteryBuyableUpgrade')[6].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable7.buy()
+})  
+document.getElementsByClassName('masteryBuyableUpgrade')[7].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable8.buy()
+})  
+document.getElementsByClassName('masteryBuyableUpgrade')[8].addEventListener("click", function() {
+    UPGS.mastery.buyables.buyable9.buy()
+})  
+
 
 function hidePopup() {
     windowGame.style.display = "none";
@@ -141,7 +190,7 @@ function offline_prod(){ //10000 ticks per second = 1000 per 100ms = 100 per 10m
     offlineWindow.style.display = "flex"
     myPopupBackdrop2.style.display = "flex";
     UNL.display.check()
-    let to_roll = calculate_roll()
+    let to_roll = UPGS.common.buyables.buyable9.effect()
 
     OFFLINE.interval = (new Date().getTime() - player.time.saved)
     OFFLINE.ticks = Math.min(OFFLINE.interval/50, values[slider.value]) // 50000
@@ -165,7 +214,7 @@ function offline_prod(){ //10000 ticks per second = 1000 per 100ms = 100 per 10m
     let offline_interval = setInterval(() => {
         let received_ticks = Math.min(533, OFFLINE.ticks)
         OFFLINE.ticks -= received_ticks
-        offline_rolls = Math.max(Math.floor(received_ticks/5/2/UPGS.buyable4.effect()), 0)
+        offline_rolls = Math.max(Math.floor(received_ticks/5/2/UPGS.common.buyables.buyable4.effect()), 0)
         OFFLINE.completed_ticks += Math.min(533, OFFLINE.ticks)
         runRollDev(offline_rolls)
         OFFLINE.completed_rolls += Math.floor(offline_rolls)
@@ -199,9 +248,9 @@ function craft(rariti1, rariti2, multiplier) {
 }
 
 function decraft(rariti1, rariti2, multiplier) {
-    if (player.rarities[rariti2].current >= multiplier) {
-        player.rarities[rariti2].current -= multiplier
-        player.rarities[rariti1].current += 2*multiplier
+    if (player.rarities[rariti2].current >= 2*multiplier) {
+        player.rarities[rariti2].current -= 2*multiplier
+        player.rarities[rariti1].current += 3*multiplier
     }
 }
 
@@ -241,39 +290,6 @@ function switchAutosave() {
     else player.settings.autosave_enabled = 'enabled'
 }
 
-function calculate_roll() {
-    let multi_rolls = 1 
-    switch (true) {
-        case player.upgrades.buyables[9] >= 8:
-            multi_rolls = 15
-            break;
-        case player.upgrades.buyables[9] >= 7:
-            multi_rolls = 10
-            break;
-        case player.upgrades.buyables[9] >= 6:
-            multi_rolls = 8
-            break;
-        case player.upgrades.buyables[9] >= 5:
-            multi_rolls = 6
-            break;
-        case player.upgrades.buyables[9] >= 4:
-            multi_rolls = 5
-            break;
-        case player.upgrades.buyables[9] >= 3:
-            multi_rolls = 4
-            break;
-        case player.upgrades.buyables[9] >= 2:
-            multi_rolls = 3
-            break;
-        case player.upgrades.buyables[9] >= 1:
-            multi_rolls = 2
-            break;
-        default:
-            to_roll = 1
-    }
-    return multi_rolls
-}
-
 const slider = document.getElementById("customRange");
 const output = document.getElementById("outputValue");
 
@@ -283,3 +299,7 @@ slider.addEventListener("input", () => {
     output.textContent = values[slider.value];
     player.settings.slider_value = slider.value
 });
+
+function makeCapital(text){
+    return text.charAt(0).toUpperCase() + text.slice(1).replace(/_/g, ' ')
+}

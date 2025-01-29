@@ -1,5 +1,10 @@
 let player = {
     rolls: 0,
+    mastery_rolls: 0,
+    cooldowns: {
+        rolls: 0,
+        mastery_rolls: 0
+    },
     rarities: {
         nothing: {
             current: 0,
@@ -161,9 +166,77 @@ let player = {
             total: 0,
             first_roll: 0,
         },
+        impressive: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        significant: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        important: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        highquality: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        remarkable: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        great: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        exceptional: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        excellent: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+    },
+    mastery_rarities: {
+        none: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        newbie: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        }
     },
     upgrades:{
         buyables:{
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0,
+            9: 0,
+            10: 0,
+            11: 0,
+            12: 0
+        }
+    },
+    mastery_upgrades: {
+        buyables: {
             1: 0,
             2: 0,
             3: 0,
@@ -199,9 +272,10 @@ let text = {
         2:'Roll system',
         3:'Rarities',
         4:'Upgrades',
-        7:'FAQ',
+        8:'FAQ',
         5:'Crafter',
-        6:'Decrafter'
+        6:'Decrafter',
+        7:'Mastery'
     },
     help: {
         start:'',
@@ -212,11 +286,12 @@ let text = {
         5:'',
         6:'',
         7:'',
+        8:'',
     },
     changelogTitle: {
         1:'Alpha',
         2:'Beta 1.X',
-        3:'Beta 2.X',
+        3:'Beta 2.0',
     },
     changelog: {
         start:'',

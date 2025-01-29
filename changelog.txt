@@ -1,5 +1,8 @@
 -=Changelog=-
 
+    "changelog3": "<b>29.01.2024 | RNG Incremental Beta 2.0:</b><br>- MASTERY! UNLOCK NEW DICE, RARITY AND UPGRADES TO IMPROVE YOUR PROGRESS EVEN MORE.<br>- NEW DICE.<br>- NEW MASTERY RARITY.<br>- 9 NEW MASTERY UPGRADES!<br>- +3 NEW UPGRADES.<br>- +8 RARITIES.<br>- NEW UPGRADE LEVELS LIMIT - 10!<br>- Crafter and Decrafter UI remake.<br>- Small UI improvements.<br>- Mobile adaptation improvements.<br>- Decrafter use 2 high rarities to make 3 lower instead of 1 to 2.<br>- Decrafter lowest rarity is Standard.<br>- Small fixes for upgrades text.",
+
+
 23.01.2025 | RNG Incremental Beta 1.4:
 - Added changelog as in-game window.
 - Added \"Speed up\" and \"Skip\" buttons for offline ticks window.

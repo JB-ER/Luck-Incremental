@@ -55,7 +55,7 @@ async function loadGameDB() {
         clearInterval(autoclicker)
         autoclicker = setInterval(() => {
             if (player.upgrades.buyables[4] != 0) auto_roll()
-        }, 4000/UPGS.buyable4.effect());
+        }, 4000/UPGS.common.buyables.buyable4.effect());
     
         slider.value = player.settings.slider_value
         outputValue.textContent = values[slider.value]
@@ -121,7 +121,7 @@ function loadGame(show=true) {
     clearInterval(autoclicker)
     autoclicker = setInterval(() => {
         if (player.upgrades.buyables[4] != 0) auto_roll()
-    }, 4000/UPGS.buyable4.effect());
+    }, 3000/UPGS.common.buyables.buyable4.effect());
 
     slider.value = player.settings.slider_value
     outputValue.textContent = values[slider.value]
@@ -262,7 +262,7 @@ async function autoLoadGameDB(key) {
             clearInterval(autoclicker)
             autoclicker = setInterval(() => {
                 if (player.upgrades.buyables[4] != 0) auto_roll()
-            }, 4000/UPGS.buyable4.effect());
+            }, 4000/UPGS.common.buyables.buyable4.effect());
         
             slider.value = player.settings.slider_value
             outputValue.textContent = values[slider.value]

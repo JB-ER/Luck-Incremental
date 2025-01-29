@@ -22,21 +22,43 @@ setInterval(() => {
 
 // Загрузка переводов
 function loadTranslations() {
-    let buyables = document.getElementsByClassName('buyableUpgrade')
+    let buyables = document.getElementsByClassName('buyableUpgrade'), mastery_buyables = document.getElementsByClassName('masteryBuyableUpgrade')
     for (let i = 0; i < buyables.length; i++) {
         const index = i+1
         let number_loop = player.upgrades.buyables[index]
-        player.upgrades.buyables[6] == 0 && player.upgrades.buyables[index] >= 5 ? number_loop = 9 : number_loop = player.upgrades.buyables[index]
+        if (player.upgrades.buyables[6] == 0 && player.upgrades.buyables[index] >= 5) 
+            number_loop = 12
+        else if (player.mastery_upgrades.buyables[6] < 2 && player.upgrades.buyables[index] >= 8) {
+            number_loop = 11
+        }
         buyables[i].innerHTML = i18next.t(`buyableUpgrade${index}.${number_loop}`, {
-            color1: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]],
-            color2: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]],
-            color3: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]],
-            cost1: formatNumber(UPGS[`buyable${index}`].cost[player.upgrades.buyables[index]][0]),
-            cost2: formatNumber(UPGS[`buyable${index}`].cost[player.upgrades.buyables[index]][1]),
-            cost3: formatNumber(UPGS[`buyable${index}`].cost[player.upgrades.buyables[index]][2]),
-            rarity1: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]].charAt(0).toUpperCase() + rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]].slice(1).replace(/_/g, ' '),
-            rarity2: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]].charAt(0).toUpperCase() + rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]].slice(1).replace(/_/g, ' '),
-            rarity3: rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]].charAt(0).toUpperCase() + rarity[UPGS[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]].slice(1).replace(/_/g, ' '),
+            color1: rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]],
+            color2: rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]],
+            color3: rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]],
+            effect2: formatNumber(UPGS.common.buyables[`buyable${index}`].text_effect1(), 'custom', 2, 10),
+            effect: formatNumber(UPGS.common.buyables[`buyable${index}`].text_effect2(), 'custom', 2, 10),
+            cost1: formatNumber(UPGS.common.buyables[`buyable${index}`].cost[player.upgrades.buyables[index]][0]),
+            cost2: formatNumber(UPGS.common.buyables[`buyable${index}`].cost[player.upgrades.buyables[index]][1]),
+            cost3: formatNumber(UPGS.common.buyables[`buyable${index}`].cost[player.upgrades.buyables[index]][2]),
+            rarity1: rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]].charAt(0).toUpperCase() + rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][0]].slice(1).replace(/_/g, ' '),
+            rarity2: rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]].charAt(0).toUpperCase() + rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][1]].slice(1).replace(/_/g, ' '),
+            rarity3: rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]].charAt(0).toUpperCase() + rarity[UPGS.common.buyables[`buyable${index}`].rarity[player.upgrades.buyables[index]][2]].slice(1).replace(/_/g, ' '),
+        })
+    }
+    for (let i = 0; i < mastery_buyables.length; i++) {
+        const index = i+1
+        let number_loop = player.mastery_upgrades.buyables[index]
+        // player.mastery_upgrades.buyables[6] == 0 && player.mastery_upgrades.buyables[index] >= 3 ? number_loop = 4 : number_loop = player.mastery_upgrades.buyables[index]
+        mastery_buyables[i].innerHTML = i18next.t(`masteryBuyableUpgrade${index}.${number_loop}`, {
+            color1: mastery_rarity[UPGS.mastery.buyables[`buyable${index}`].mastery_rarity[player.mastery_upgrades.buyables[index]][0]],
+            color2: rarity[UPGS.mastery.buyables[`buyable${index}`].rarity[player.mastery_upgrades.buyables[index]][1]],
+            color3: rarity[UPGS.mastery.buyables[`buyable${index}`].rarity[player.mastery_upgrades.buyables[index]][2]],
+            cost1: formatNumber(UPGS.mastery.buyables[`buyable${index}`].cost[player.mastery_upgrades.buyables[index]][0]),
+            cost2: formatNumber(UPGS.mastery.buyables[`buyable${index}`].cost[player.mastery_upgrades.buyables[index]][1]),
+            cost3: formatNumber(UPGS.mastery.buyables[`buyable${index}`].cost[player.mastery_upgrades.buyables[index]][2]),
+            rarity1: mastery_rarity[UPGS.mastery.buyables[`buyable${index}`].mastery_rarity[player.mastery_upgrades.buyables[index]][0]].charAt(0).toUpperCase() + mastery_rarity[UPGS.mastery.buyables[`buyable${index}`].mastery_rarity[player.mastery_upgrades.buyables[index]][0]].slice(1).replace(/_/g, ' '),
+            rarity2: rarity[UPGS.mastery.buyables[`buyable${index}`].rarity[player.mastery_upgrades.buyables[index]][1]].charAt(0).toUpperCase() + rarity[UPGS.mastery.buyables[`buyable${index}`].rarity[player.mastery_upgrades.buyables[index]][1]].slice(1).replace(/_/g, ' '),
+            rarity3: rarity[UPGS.mastery.buyables[`buyable${index}`].rarity[player.mastery_upgrades.buyables[index]][2]].charAt(0).toUpperCase() + rarity[UPGS.mastery.buyables[`buyable${index}`].rarity[player.mastery_upgrades.buyables[index]][2]].slice(1).replace(/_/g, ' '),
         })
     }
 
@@ -49,7 +71,17 @@ function loadTranslations() {
             document.getElementsByClassName('first_roll')[Object.keys(rarities).indexOf(rarity)].textContent = `${formatNumber(player.rarities[rarity].first_roll)}`
             document.getElementsByClassName('total_amount')[Object.keys(rarities).indexOf(rarity)].textContent = `${formatNumber(player.rarities[rarity].total)}`
         }
+    for (let mastery_rarity in mastery_rarities) {
+        document.getElementsByClassName('masteryRarityCount')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${mastery_rarity.charAt(0).toUpperCase() + mastery_rarity.slice(1).replace(/_/g, ' ')}: ${formatNumber(player.mastery_rarities[mastery_rarity].current)} (1/${formatNumber(mastery_max/mastery_rarities[mastery_rarity].chance(), 'chance')})`;
+    
+        document.getElementsByClassName('mastery_name')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${mastery_rarity.charAt(0).toUpperCase() + mastery_rarity.slice(1).replace(/_/g, ' ')}`
+        document.getElementsByClassName('mastery_amount')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${formatNumber(player.mastery_rarities[mastery_rarity].current)}`
+        document.getElementsByClassName('mastery_chance')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `(1/${formatNumber(mastery_max/mastery_rarities[mastery_rarity].chance())})`
+        document.getElementsByClassName('mastery_first_roll')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${formatNumber(player.mastery_rarities[mastery_rarity].first_roll)}`
+        document.getElementsByClassName('mastery_total_amount')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${formatNumber(player.mastery_rarities[mastery_rarity].total)}`
+    }
     document.getElementById('rollsCount').textContent = `Rolls: ${formatNumber(player.rolls)}`;
+    document.getElementById('rollsCount2').textContent = `Rolls: ${formatNumber(player.mastery_rolls)}`;
 
     text.help.start = i18next.t('startHelpDescription');
     helpTitle.innerHTML = i18next.t('helpTitleText');
@@ -57,7 +89,7 @@ function loadTranslations() {
     text.changelog.start = i18next.t('startChangelogDescription');
     changelogTitle.innerHTML = i18next.t('changelogTitleText');
 
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= 8; i++) {
         text.help[i] = i18next.t(`help${i}`);
     }
 
@@ -78,7 +110,7 @@ function loadTranslations() {
     document.getElementById('autosave_enable').textContent = `Autosave: ${player.settings.autosave_enabled}`
     document.getElementById('syncCloudSave').textContent = `Cloud sync: ${local.settings.cloud_sync}`
 
-    rollButton.textContent = `Roll (x${calculate_roll()})`
+    rollButton.textContent = `Roll (x${UPGS.common.buyables.buyable9.effect()})`
 }
 
 const marqueeText = document.getElementById("marquee-text");
