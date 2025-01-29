@@ -196,16 +196,16 @@ button, div, span, footer {
     border-radius: 3px;
 }
 
-#raritiesScreen::-webkit-scrollbar {
+#raritiesScreen::-webkit-scrollbar, #raritiesTable::-webkit-scrollbar {
     width: 6px; /* Ширина полосы прокрутки */
   }
   
-#raritiesScreen::-webkit-scrollbar-thumb {
+#raritiesScreen::-webkit-scrollbar-thumb, #raritiesTable::-webkit-scrollbar-thumb {
     background-color: #555; /* Темно-серая полоса */
     border-radius: 3px; /* Округлённые края */
   }
   
-#raritiesScreen::-webkit-scrollbar-track {
+#raritiesScreen::-webkit-scrollbar-track, #raritiesTable::-webkit-scrollbar-track {
     background: transparent; /* Прозрачный фон */
   }
 
