@@ -1083,7 +1083,7 @@ const UPGS = {
                     }
                     if (bought) player.upgrades.buyables[this.id]++
                 },
-                effect(x=player.upgrades.buyables[this.id]) {
+                effect(x=player.upgrades.buyables[this.id]+1) {
                     return 1-(0.02*x)
                 },
                 text_effect1(x=player.upgrades.buyables[this.id]) {

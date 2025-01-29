@@ -314,7 +314,7 @@ let rarities = {
 let mastery_rarities = {
     none: {
         chance: () => mastery_max * (UPGS.common.buyables.buyable11.effect()),
-        range: () => mastery_max - mastery_rarities.none.chance() //1024-487=537
+        range: () => mastery_max - mastery_rarities.none.chance()//1024-487=537
     },
     newbie: {
         chance: () => mastery_rarities.none.range()
