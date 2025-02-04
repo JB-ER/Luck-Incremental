@@ -522,16 +522,10 @@
 
     <script> 
         function choose_to_load() {
-            loadKeys()
-            if (local.settings.cloud_sync == 'yes') {
-                autoLoadGameDB(local.key)
-            }
-            else {
-                loadGame()
+            loadGame()
             if (player.rarities.nothing.total >= 1 && player.upgrades.buyables[4] > 0) window.onload = offline_prod()
             else startGame()
             }
-        }
         window.onload = choose_to_load();
     </script>
 </body>

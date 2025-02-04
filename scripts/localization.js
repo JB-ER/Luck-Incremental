@@ -141,7 +141,7 @@ function loadTranslations() {
 
     player.settings.autosave_enabled == 'enabled' ? document.querySelector('footer').textContent = `Autosave: ${(temp.time.auto_save/1000).toFixed(2)}s` : document.querySelector('footer').textContent = `Autosave: disabled`
     document.getElementById('autosave_enable').textContent = `Autosave: ${player.settings.autosave_enabled}`
-    document.getElementById('syncCloudSave').textContent = `Cloud sync: ${local.settings.cloud_sync}`
+    // document.getElementById('syncCloudSave').textContent = `Cloud sync: ${local.settings.cloud_sync}`
 
     rollButton.textContent = `Roll (x${UPGS.common.buyables.buyable9.effect()})`
 }
