@@ -13,7 +13,7 @@ function formatNumber(number, type='', n=0, m=0) {
 }
 
 function selectTab(argument, isFlex) {
-    const tabsToHide = ['rollScreen', 'upgradesScreen', 'craftScreen', 'decraftScreen', 'statsScreen', 'settingsScreen', 'raritiesScreen']
+    const tabsToHide = ['rollScreen', 'upgradesScreen', 'craftScreen', 'decraftScreen', 'statsScreen', 'settingsScreen', 'raritiesScreen', 'prestigeScreen']
     const isMobile = (window.outerWidth <= 768)
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
@@ -24,11 +24,11 @@ function selectTab(argument, isFlex) {
     let arg = document.getElementById(argument)
     let rarity_arg = document.getElementById('raritiesScreen')
     const halfElement = document.querySelector('.half');
-    if (argument == 'rollScreen' || argument == 'upgradesScreen' || argument == 'craftScreen' || argument == 'decraftScreen') {
+    if (argument == 'rollScreen' || argument == 'upgradesScreen' || argument == 'craftScreen' || argument == 'decraftScreen' || argument == 'prestigeScreen') {
         rarity_arg.style.display = "flex"
         halfElement.style.width = '50%'
         if (isMobile) {
-            halfElement.style.height = '45vh'
+            halfElement.style.height = '35vh'
         }
     }
     else {
@@ -44,19 +44,43 @@ function selectTab(argument, isFlex) {
 function selectSubTab(argument, isFlex, group) {
     const tabsToHide1 = ['commonUpgrades', 'masteryUpgrades']
     const tabsToHide2 = ['gameStatsScreen', 'raritiesStatsScreen', 'aboutStatsScreen']
-    if (group == 'upgrades')
-    for (const tabId of tabsToHide1) {
-        const tab = document.getElementById(tabId);
-        if (tab) {
-            tab.style.display = "none";
-        }
-    }
-    else 
-    for (const tabId of tabsToHide2) {
-        const tab = document.getElementById(tabId);
-        if (tab) {
-            tab.style.display = "none";
-        }
+    const tabsToHide3 = ['commonRarities', 'masteryRarities', 'prestigeRarities']
+    const tabsToHide4 = ['prestigeReset', 'prestigeUpgrades']
+    switch (group) {
+        case 'upgrades':
+            for (const tabId of tabsToHide1) {
+                const tab = document.getElementById(tabId);
+                if (tab) {
+                    tab.style.display = "none";
+                }
+            }
+            break;
+        case 'stats':
+            for (const tabId of tabsToHide2) {
+                const tab = document.getElementById(tabId);
+                if (tab) {
+                    tab.style.display = "none";
+                }
+            }
+            break;
+        case 'rarities':
+            for (const tabId of tabsToHide3) {
+                const tab = document.getElementById(tabId);
+                if (tab) {
+                    tab.style.display = "none";
+                }
+            }
+            break;
+        case 'prestige':
+            for (const tabId of tabsToHide4) {
+                const tab = document.getElementById(tabId);
+                if (tab) {
+                    tab.style.display = "none";
+                }
+            }
+            break;
+        default:
+            break;
     }
     let arg = document.getElementById(argument)
     if (!isFlex) arg.style.display = "block"
@@ -126,6 +150,55 @@ document.getElementsByClassName('masteryBuyableUpgrade')[7].addEventListener("cl
 })  
 document.getElementsByClassName('masteryBuyableUpgrade')[8].addEventListener("click", function() {
     UPGS.mastery.buyables.buyable9.buy()
+})  
+
+document.getElementsByClassName('prestigeSingleUpgrade')[0].addEventListener("click", function() {
+    UPGS.prestige.singles.single1.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[1].addEventListener("click", function() {
+    UPGS.prestige.singles.single2.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[2].addEventListener("click", function() {
+    UPGS.prestige.singles.single3.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[3].addEventListener("click", function() {
+    UPGS.prestige.singles.single4.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[4].addEventListener("click", function() {
+    UPGS.prestige.singles.single5.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[5].addEventListener("click", function() {
+    UPGS.prestige.singles.single6.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[6].addEventListener("click", function() {
+    UPGS.prestige.singles.single7.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[7].addEventListener("click", function() {
+    UPGS.prestige.singles.single8.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[8].addEventListener("click", function() {
+    UPGS.prestige.singles.single9.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[9].addEventListener("click", function() {
+    UPGS.prestige.singles.single10.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[10].addEventListener("click", function() {
+    UPGS.prestige.singles.single11.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[11].addEventListener("click", function() {
+    UPGS.prestige.singles.single12.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[12].addEventListener("click", function() {
+    UPGS.prestige.singles.single13.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[13].addEventListener("click", function() {
+    UPGS.prestige.singles.single14.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[14].addEventListener("click", function() {
+    UPGS.prestige.singles.single15.buy()
+})  
+document.getElementsByClassName('prestigeSingleUpgrade')[15].addEventListener("click", function() {
+    UPGS.prestige.singles.single16.buy()
 })  
 
 
@@ -213,8 +286,9 @@ function offline_prod(){ //10000 ticks per second = 1000 per 100ms = 100 per 10m
 
     let offline_interval = setInterval(() => {
         let received_ticks = Math.min(533, OFFLINE.ticks)
+        let slower = player.prestige.upgrades.singles.includes(13) ? 2 : 5
         OFFLINE.ticks -= received_ticks
-        offline_rolls = Math.max(Math.floor(received_ticks/5/2/UPGS.common.buyables.buyable4.effect()), 0)
+        offline_rolls = Math.max(Math.floor(received_ticks/slower/2/UPGS.common.buyables.buyable4.effect()), 0)
         OFFLINE.completed_ticks += Math.min(533, OFFLINE.ticks)
         runRollDev(offline_rolls)
         OFFLINE.completed_rolls += Math.floor(offline_rolls)

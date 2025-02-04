@@ -59,6 +59,10 @@ async function loadGameDB() {
     
         slider.value = player.settings.slider_value
         outputValue.textContent = values[slider.value]
+
+        if (player.total_rolls == 0) player.total_rolls = player.rolls
+        if (player.total_mastery_rolls == 0) player.total_mastery_rolls = player.mastery_rolls
+        
         return result.saveData;
     } 
     else if (result.status === 'error') {
@@ -125,6 +129,9 @@ function loadGame(show=true) {
 
     slider.value = player.settings.slider_value
     outputValue.textContent = values[slider.value]
+
+    if (player.total_rolls == 0) player.total_rolls = player.rolls
+    if (player.total_mastery_rolls == 0) player.total_mastery_rolls = player.mastery_rolls
 }
 
 function loadKeys() {
@@ -140,7 +147,7 @@ function exportGame() {
     
     let today = new Date();
     let date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
-    let filename = 'RNG-Incremental-Save-' + formatNumber(player.rolls) + '-rolls-' + date + '.txt';
+    let filename = player.prestige.resets == 0 ? 'RNGI Save ' + formatNumber(player.rolls) + ' rolls [' + date + '].txt' : 'RNGI Save ' + formatNumber(player.prestige.resets) + ' prestiges [' + date + '].txt'
 
   // создание и запись содержимого в новый файл
     let file = new Blob([base64], {type: 'text/plain'});

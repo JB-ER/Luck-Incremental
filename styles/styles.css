@@ -38,6 +38,7 @@
     --uncommon: rgb(245, 255, 100);
     --good: rgb(255, 255, 95);
     --valuable: rgb(255, 240, 80);
+
     --impressive: rgb(255, 230, 75);
     --significant: rgb(255, 220, 70);
     --important: rgb(255, 210, 65);
@@ -46,6 +47,23 @@
     --great: rgb(255, 180, 50);
     --exceptional: rgb(255, 175, 45);
     --excellent: rgb(255, 170, 40);
+
+    --refined: rgb(255, 160, 35);
+    --exquisite: rgb(255, 150, 30);
+    --elegant: rgb(255, 140, 25);
+    --rare: rgb(255, 130, 20);
+    --extraordinary: rgb(255, 120, 15);
+    --outstanding: rgb(255, 110, 10);
+    --satisfactory: rgb(255, 100, 5);
+    --respectable: rgb(255, 90, 0);
+    --well-made: rgb(255, 80, 0);
+    --shining: rgb(255, 70, 0);
+
+    --unknown: rgb(255, 231, 200);
+    --forgotten: rgb(255, 220, 174);
+    --obscure: rgb(255, 205, 141);
+    --unnoted: rgb(255, 195, 135);
+    --noticed: rgb(255, 185, 130);
 }
 
 
@@ -79,7 +97,7 @@ button, div, span, footer {
     flex-direction: column;
 }
 
-#buttons, #statsButtons, #upgradesButtons {
+#buttons, #statsButtons, #upgradesButtons, #prestigeButtons {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -87,14 +105,15 @@ button, div, span, footer {
 
 .whiteButton{
     margin: 7px;
-    border: 1px black solid;
+    border: 2px black solid;
     background-color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 16px;
+    transition: background-color 0.3s
 }
 
 .whiteButton.mobile{
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .half {
@@ -131,8 +150,7 @@ button, div, span, footer {
 }
 
 #raritiesScreen {
-    overflow-y: auto;
-    height: 70vh;
+    height:83vh;
     justify-content: flex-start;
     text-align: center;
 }
@@ -141,17 +159,17 @@ button, div, span, footer {
     height: 45vh;
 }
 
-#rollButton, #rollButton2 {
-    height:100px;
-    width: 100px;
-    border: 1px black solid;
+#rollButton, #rollButton2, #rollButton3 {
+    height:110px;
+    width: 110px;
+    border: 2px black solid;
     background-color: white;
     border-radius: 10px;
-    font-size: 22px;
+    font-size: 20px;
     transition: background-color 0.3s
 }
 
-#rollButton.mobile, #rollButton2.mobile {
+#rollButton.mobile, #rollButton2.mobile, #rollButton3.mobile {
     height:150px;
     width: 150px;
     font-size: 30px;
@@ -162,9 +180,21 @@ button, div, span, footer {
     width: 210px;
     margin: 5px;
     background-color: white;
-    border: 1px black solid;
+    border: 2px black solid;
     border-radius: 3px;
     font-size: 11px;
+}
+
+.template-upgrade{
+    height: 110px;
+    width: 210px;
+    margin: 5px;
+    background-color: white;
+    border: 2px black solid;
+    border-radius: 3px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background-color 0.3s
 }
 
 .buyableUpgrade.mobile, .settingButton.mobile, .masteryBuyableUpgrade.mobile {
@@ -176,7 +206,7 @@ button, div, span, footer {
 #rollButton2, .masteryBuyableUpgrade, .masteryButton {
     color: #fff;
     background-color: #222222; /* Тёмный фон кнопки */
-    border: 1px solid #8a2be2; /* Цвет контура */
+    border: 2px solid #8a2be2; /* Цвет контура */
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 0 10px #8a2be2, inset 0 0 10px #8a2be2;
@@ -196,16 +226,16 @@ button, div, span, footer {
     border-radius: 3px;
 }
 
-#raritiesScreen::-webkit-scrollbar, #raritiesTable::-webkit-scrollbar {
+#raritiesScreen::-webkit-scrollbar {
     width: 6px; /* Ширина полосы прокрутки */
   }
   
-#raritiesScreen::-webkit-scrollbar-thumb, #raritiesTable::-webkit-scrollbar-thumb {
+#raritiesScreen::-webkit-scrollbar-thumb {
     background-color: #555; /* Темно-серая полоса */
     border-radius: 3px; /* Округлённые края */
   }
   
-#raritiesScreen::-webkit-scrollbar-track, #raritiesTable::-webkit-scrollbar-track {
+#raritiesScreen::-webkit-scrollbar-track {
     background: transparent; /* Прозрачный фон */
   }
 
@@ -242,7 +272,7 @@ button, div, span, footer {
     font-size: 30px;
 }
 
-#upgradesScreen, #settingsScreen {
+#upgradesScreen, #settingsScreen, .prestigeScreens {
     display: flex;
     flex-direction: column;
 }
@@ -252,7 +282,7 @@ button, div, span, footer {
     flex-direction: row;
 }
 
-#rollCooldown, #rollCooldown2 {
+#rollCooldown, #rollCooldown2, #rollCooldown3 {
     height: 20px;
     width: 80px;
     border: 3px black solid;
@@ -261,29 +291,29 @@ button, div, span, footer {
     text-align: center;
 }
 
-#rollCooldown.mobile, #rollCooldown2.mobile {
+#rollCooldown.mobile, #rollCooldown2.mobile, #rollCooldown3.mobile {
     height: 30px;
     width: 120px;
 }
 
-#rollCooldownProgress, #rollCooldownProgress2 {
+#rollCooldownProgress, #rollCooldownProgress2, #rollCooldownProgress3 {
     position: absolute;
     height: 20px;
     width: 0px;
     background-color: #AAAAAA;
 }
 
-#rollCooldownProgress.mobile, #rollCooldownProgress2.mobile {
+#rollCooldownProgress.mobile, #rollCooldownProgress2.mobile, #rollCooldownProgress3.mobile {
     height: 30px;
 }
 
-#cdText, #cdText2 {
+#cdText, #cdText2, .prestige-bar-text, #cdText3 {
     font-size:15px;
     position:relative;
     z-index: 9999;
 }
 
-#cdText.mobile, #cdText2.mobile {
+#cdText.mobile, #cdText2.mobile, #cdText3.mobile {
     font-size:22px;
     margin-left: 27px;
 }
@@ -611,14 +641,14 @@ td {
     -webkit-text-fill-color: transparent;
 }
 
-#statsScreen, #upgradesScreen {
+#statsScreen, #upgradesScreen, #prestigeScreen {
     flex-direction: column;
     justify-content: start;
     height: 100%;
     text-align: center;
 }
 
-.statsScreens, .upgradesScreens {
+.statsScreens, .upgradesScreens, .prestigeScreens {
     display: flex;
     align-items: center;
     height: 100%;
@@ -754,4 +784,89 @@ input[type="range"] {
     height: 50px;
     border: #3b3b3b 1px solid;
     font-size: 23px;
+}
+
+.prestige-class, .prestige-bar-base {
+    border: rgb(235, 182, 113) 2px solid !important;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255)
+}
+
+.prestige-bar-base {
+    margin: 3px 0px;
+    width: 217px;
+}
+
+.prestige-class:hover {
+    background-color: rgb(247, 189, 113) !important;
+    color: black
+}
+
+.prestige-bar {
+    background-color: rgb(207, 163, 106);
+    position: absolute;
+    height: 21px;
+    width: 100px;
+}
+
+.prestige-bar.mobile {
+    height: 30px;
+}
+
+#prestigeScreen {
+    flex-direction: column;
+    text-align: center;
+}
+
+.raritiesList {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 70vh;
+}
+
+#rollButton3 {
+    cursor: pointer;
+}
+
+.prestigeSingleUpgrade:disabled {
+    border-color: rgb(231, 124, 124) !important;
+    background-color: #7e7e7e;
+}
+
+.prestigeSingleUpgrade:disabled:hover {
+    background-color: rgb(255, 104, 104) !important;
+}
+
+.prestigeSingleUpgrade.purchased {
+    background-color: rgb(247, 189, 113);
+}
+
+#gameStatsScreen, #aboutStatsScreen {
+    flex-direction: column;
+}
+
+#discordServer {
+    margin: 20px;
+    height: 50px;
+    width: 250px;
+    background-color: #b1b6eb;
+    border: 2px #4752c2 solid;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+#discordServer:hover {
+    background-color: #5865F2;
+}
+
+#discordServer img {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
 }

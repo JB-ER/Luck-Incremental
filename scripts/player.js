@@ -1,6 +1,43 @@
 let player = {
     rolls: 0,
     mastery_rolls: 0,
+    total_rolls: 0,
+    total_mastery_rolls: 0,
+    prestige: {
+        resets: 0,
+        dice: 0,
+        rolls: 0,
+        upgrades: {
+            singles: []
+        },
+        rarities: {
+            unknown: {
+                current: 0,
+                total: 0,
+                first_roll: 0,
+            },
+            forgotten: {
+                current: 0,
+                total: 0,
+                first_roll: 0,
+            },
+            obscure: {
+                current: 0,
+                total: 0,
+                first_roll: 0,
+            },
+            unnoted: {
+                current: 0,
+                total: 0,
+                first_roll: 0,
+            },
+            noticed: {
+                current: 0,
+                total: 0,
+                first_roll: 0,
+            }
+        }
+    },
     cooldowns: {
         rolls: 0,
         mastery_rolls: 0
@@ -206,6 +243,56 @@ let player = {
             total: 0,
             first_roll: 0,
         },
+        refined: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        exquisite: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        elegant: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        rare: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        extraordinary: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        outstanding: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        satisfactory: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        respectable: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        well_made: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
+        shining: {
+            current: 0,
+            total: 0,
+            first_roll: 0,
+        },
     },
     mastery_rarities: {
         none: {
@@ -252,6 +339,7 @@ let player = {
         current: new Date().getTime(),
         saved: new Date().getTime(),
         start: new Date().getTime(),
+        current_prestige: new Date().getTime()
     },
     best_: {
         rarity: {
@@ -275,7 +363,8 @@ let text = {
         8:'FAQ',
         5:'Crafter',
         6:'Decrafter',
-        7:'Mastery'
+        7:'Mastery',
+        9:'Prestige'
     },
     help: {
         start:'',
@@ -287,17 +376,20 @@ let text = {
         6:'',
         7:'',
         8:'',
+        9:''
     },
     changelogTitle: {
         1:'Alpha',
         2:'Beta 1.X',
         3:'Beta 2.0',
+        4:'1.0'
     },
     changelog: {
         start:'',
         1:'',
         2:'',
         3:'',
+        4:''
     },
 }
 

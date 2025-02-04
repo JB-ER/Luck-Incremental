@@ -4,7 +4,7 @@ let tick = 0, language = 'en', to_roll = 1
 
 function roll() {
     if (player.cooldowns.rolls == 0){
-        player.cooldowns.rolls += 1500/UPGS.common.buyables.buyable3.effect()
+        player.cooldowns.rolls += 1500/UPGS.common.buyables.buyable3.effect()*UPGS.prestige.singles.single5.effect()
 
         auto_roll()
     }
@@ -12,7 +12,7 @@ function roll() {
 
 function mastery_roll() {
     if (player.cooldowns.mastery_rolls == 0){
-        player.cooldowns.mastery_rolls += 60000/UPGS.common.buyables.buyable10.effect()
+        player.cooldowns.mastery_rolls += 60000/UPGS.common.buyables.buyable10.effect()*UPGS.prestige.singles.single5.effect()*UPGS.prestige.singles.single9.effect()
 
         auto_mastery_roll()
     }
@@ -28,6 +28,8 @@ function auto_roll() {
             player.rolls++;
 
             let number = Math.floor(Math.random() * max);
+            player.prestige.upgrades.singles.includes(12) ? number = number+100 : number
+
             let number_double_rarity = Math.floor(Math.random() * 100)+1;
             let number_upgrade_rarity = Math.floor(Math.random() * 100)+1;
             let lowerBound = 1;
@@ -77,6 +79,10 @@ function auto_roll() {
         if (get_mastered_roll <= UPGS.common.buyables.buyable12.effect()*1e6) {
             auto_mastery_roll()
         }
+        if (player.prestige.upgrades.singles.includes(14)) {
+            player.rarities.nothing.current++
+            player.rarities.nothing.total++
+        }  
     }
 }
 
@@ -117,8 +123,8 @@ function rollCooldown() {
         player.cooldowns.rolls -= tick
         document.getElementById('cdText').textContent = player.cooldowns.rolls > 0 ? `${(player.cooldowns.rolls/1000).toFixed(2)}s` : ''
         if (player.cooldowns.rolls > 0) {
-            if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect())*120 + 'px'  
-            else document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect())*80 + 'px'
+            if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect()/UPGS.prestige.singles.single5.effect())*120 + 'px'  
+            else document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect()/UPGS.prestige.singles.single5.effect())*80 + 'px'
         }  
         else document.getElementById('rollCooldownProgress').style.width = 0
     }
@@ -133,8 +139,8 @@ function rollCooldown2() {
         player.cooldowns.mastery_rolls -= tick
         document.getElementById('cdText2').textContent = player.cooldowns.mastery_rolls > 0 ? `${(player.cooldowns.mastery_rolls/1000).toFixed(2)}s` : ''
         if (player.cooldowns.mastery_rolls > 0) {
-            if (isMobile) document.getElementById('rollCooldownProgress2').style.width = (player.cooldowns.mastery_rolls/60000*UPGS.common.buyables.buyable10.effect()*120) + 'px'  
-            else document.getElementById('rollCooldownProgress2').style.width = (player.cooldowns.mastery_rolls/60000*UPGS.common.buyables.buyable10.effect()*80) + 'px'
+            if (isMobile) document.getElementById('rollCooldownProgress2').style.width = (player.cooldowns.mastery_rolls/60000*UPGS.common.buyables.buyable10.effect()/UPGS.prestige.singles.single5.effect()/UPGS.prestige.singles.single9.effect()*120) + 'px'  
+            else document.getElementById('rollCooldownProgress2').style.width = (player.cooldowns.mastery_rolls/60000*UPGS.common.buyables.buyable10.effect()/UPGS.prestige.singles.single5.effect()/UPGS.prestige.singles.single9.effect()*80) + 'px'
         }  
         else document.getElementById('rollCooldownProgress2').style.width = 0
     }
@@ -155,7 +161,10 @@ function updateTick() {
     updateTime()
     rollCooldown()
     rollCooldown2()
+    PRESTIGE.dice.rollCooldown()
     UNL.display.check()
+    UPGS.prestige.checkDisable()
+    PRESTIGE.updateProgressBar()
     if (temp.time.auto_save >= 30000) {
         if (local.settings.cloud_sync == 'yes') {
             if (player.rolls >= 100) autoSaveGameDB(local.key, JSON.stringify(player))
@@ -165,7 +174,7 @@ function updateTick() {
         saveGame(auto=true)
 
     }
-    max = 1024 * UPGS.common.buyables.buyable5.effect()
+    max = 1024 * UPGS.common.buyables.buyable5.effect() * UPGS.prestige.singles.single6.effect()
     checkMobile()
 }
 
@@ -181,7 +190,6 @@ function updateTime() {
         element.style.opacity = text_disappear[i]/15000
     }
 }
-
 
 
 let rarities = {
@@ -309,12 +317,42 @@ let rarities = {
     excellent: {
         chance: () => rarities.exceptional.chance() / 2, // 2/2=1
     },
+    refined: {
+        chance: () => rarities.excellent.chance() / 2, // 2/2=1
+    },
+    exquisite: {
+        chance: () => rarities.refined.chance() / 2, // 2/2=1
+    },
+    elegant: {
+        chance: () => rarities.exquisite.chance() / 2, // 2/2=1
+    },
+    rare: {
+        chance: () => rarities.elegant.chance() / 2, // 2/2=1
+    },
+    extraordinary: {
+        chance: () => rarities.rare.chance() / 2, // 2/2=1
+    },
+    outstanding: {
+        chance: () => rarities.extraordinary.chance() / 2, // 2/2=1
+    },
+    satisfactory: {
+        chance: () => rarities.outstanding.chance() / 2, // 2/2=1
+    },
+    respectable: {
+        chance: () => rarities.satisfactory.chance() / 2, // 2/2=1
+    },
+    well_made: {
+        chance: () => rarities.respectable.chance() / 2, // 2/2=1
+    },
+    shining: {
+        chance: () => rarities.well_made.chance() / 2, // 2/2=1
+    },
 };
 
 let mastery_rarities = {
     none: {
         chance: () => mastery_max * (UPGS.common.buyables.buyable11.effect()),
-        range: () => mastery_max - mastery_rarities.none.chance()//1024-487=537
+        range: () => mastery_max - mastery_rarities.none.chance() //1024-487=537
     },
     newbie: {
         chance: () => mastery_rarities.none.range()
@@ -379,15 +417,36 @@ const UNL = {
                 req() {return player.upgrades.buyables[6] >= 4},
             },
             9: {
-                name: 'masteryRarity1',
-                type: 'block',
-                element: document.getElementById('masteryRarity1'),
+                name: 'masteryRaritiesButton',
+                type: 'flex',
+                element: document.getElementById('masteryRaritiesButton'),
                 req() {return player.upgrades.buyables[6] >= 4},
             },
+            10: {
+                name: 'prestigeTab',
+                type: 'block',
+                element: document.getElementById('prestigeScreenButton'),
+                req() {return player.upgrades.buyables[6] >= 5 || player.prestige.resets > 0}
+            },
+            11: {
+                name: 'prestigeRaritiesButton',
+                type: 'flex',
+                element: document.getElementById('prestigeRaritiesButton'),
+                req() {return player.upgrades.buyables[6] >= 5 || player.prestige.resets > 0}
+            },
+            12: {
+                name: 'aaa',
+                type: 'flex',
+                element: document.getElementById('roll3'),
+                req() {return player.prestige.resets > 0}
+            }
         }
     }
 }
 
+discordServer.addEventListener('click', function() {
+    window.open('https://discord.gg/BY6E6Gd8', '_blank');
+});
 
 
 function checkMobile() {
@@ -404,6 +463,8 @@ function checkMobile() {
     const elements9 = document.querySelectorAll('.masteryBuyableUpgrade');
     const elements10 = document.querySelectorAll('.optionList');
     const elements11 = document.querySelectorAll('.expandable-list');
+    const elements13 = document.querySelectorAll('.prestige-bar');
+    
     if (isMobile) {
         document.getElementById('game').classList.add('mobile')
         elements.forEach(element => {
@@ -442,6 +503,9 @@ function checkMobile() {
         elements12.forEach(element => {
             element.classList.add('mobile')
         });
+        elements13.forEach(element => {
+            element.classList.add('mobile')
+        });
         document.querySelector('body').classList.add('mobile')
         document.querySelector('footer').classList.add('mobile')
         document.querySelector('table').classList.add('mobile')
@@ -464,6 +528,12 @@ function checkMobile() {
         document.getElementsByClassName('marquee-container')[0].classList.add('mobile')
         document.getElementById('toggleButton').classList.add('mobile')
         document.getElementById('toggleButton2').classList.add('mobile')
+
+        document.getElementById('rollCooldown3').classList.add('mobile')
+        document.getElementById('rollCooldownProgress3').classList.add('mobile')
+        document.getElementById('rollsCount3').classList.add('mobile')
+        document.getElementById('rollButton3').classList.add('mobile')
+        document.getElementById('cdText3').classList.add('mobile')
     }
     else {
         document.getElementById('game').classList.remove('mobile')
@@ -503,6 +573,9 @@ function checkMobile() {
         elements12.forEach(element => {
             element.classList.remove('mobile')
         });
+        elements13.forEach(element => {
+            element.classList.remove('mobile')
+        });
         document.querySelector('body').classList.remove('mobile')
         document.querySelector('footer').classList.remove('mobile')
         document.querySelector('table').classList.remove('mobile')
@@ -526,6 +599,12 @@ function checkMobile() {
         document.getElementById('decraftBlock').classList.remove('mobile')
         document.getElementById('toggleButton').classList.remove('mobile')
         document.getElementById('toggleButton2').classList.remove('mobile')
+
+        document.getElementById('rollCooldown3').classList.remove('mobile')
+        document.getElementById('rollCooldownProgress3').classList.remove('mobile')
+        document.getElementById('rollsCount3').classList.remove('mobile')
+        document.getElementById('rollButton3').classList.remove('mobile')
+        document.getElementById('cdText3').classList.remove('mobile')
     }
 }
 

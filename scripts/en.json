@@ -227,6 +227,67 @@
         "<b>Win The Dice III</b><br>Additionaly receive 3 rolls while rolling (+6 ➔ +9)<br>Cost: <span class=\"masteryRarityColor\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span> and <span class=\"rarityText\" style=\"color: var(--{{color2}});\">{{cost2}} {{rarity2}} </span> and <span class=\"rarityText\" style=\"color: var(--{{color3}});\">{{cost3}} {{rarity3}}</span>",
         "<b>Win The Dice III</b><br>Additionaly receive 3 rolls while rolling (+9)<br> Level: max"
     ],
+    "prestigeSingleUpgrade1": [
+        "<b>Double Power</b><br> Double rolls <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Double Power</b><br> Double rolls <br> Currently: x2</span>"
+    ],
+    "prestigeSingleUpgrade2": [
+        "<b>Advanced Roll</b><br> Add +100 to RNG <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Advanced Roll</b><br> Add +100 to RNG <br> Currently: +100 </span>"
+    ],
+    "prestigeSingleUpgrade3": [
+        "<b>Nap time</b><br> Offline production slowed to 2 times instead of 5 <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Nap time</b><br> Offline production slowed to 2 times instead of 5 <br> Currently: /2"
+    ],
+    "prestigeSingleUpgrade4": [
+        "<b>Always the Nothing</b><br> Receive Nothing with each roll <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Always the Nothing</b><br> Receive Nothing with each roll <br> Currently: <span class=\"rarityText\" style=\"color: var(--{{nothing}});\">Nothing</span> with each roll"
+    ],
+    "prestigeSingleUpgrade5": [
+        "<b>Velocity</b><br> Reduce all types of roll cooldowns by 10% <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Velocity</b><br> Reduce all types of roll cooldowns by 10% <br> Currently: -10%"
+    ],
+    "prestigeSingleUpgrade6": [
+        "<b>Expansion</b><br> Increase Max RNG by 16 times <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Expansion</b><br> Increase Max RNG by 16 times <br> Currently: x16</span>"
+    ],
+    "prestigeSingleUpgrade7": [
+        "<b>Warrior Trophy</b><br> Add +3 levels for Trophy (soon) <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Warrior Trophy</b><br> Add +3 levels for Trophy (soon) <br> Currently: how did you buy it?</span>"
+    ],
+    "prestigeSingleUpgrade8": [
+        "<b>Strong Hammer</b><br> Blacksmith always upgrades rarity to +1, effect is divided by 10 and upgrades to +2 (soon) <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Strong Hammer</b><br> Blacksmith always upgrades rarity to +1, effect is divided by 10 and upgrades to +2 (soon) <br> Currently: always +1</span>"
+    ],
+    "prestigeSingleUpgrade9": [
+        "<b>Mastery Kit</b><br> Reduce Mastery Roll cooldown by 10% and increase Newbie chance by 10% <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Mastery Kit</b><br> Reduce Mastery Roll cooldown by 10% and increase Newbie chance by 10% <br> Currently: -10% and +10%</span>"
+    ],
+    "prestigeSingleUpgrade10": [
+        "<b>Mastered Mastery</b><br> Increase all Mastery Upgrades effects by 10% <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Mastered Mastery</b><br> Increase all Mastery Upgrades effects by 10% <br> Currently: +10%</span>"
+    ],
+    "prestigeSingleUpgrade11": [
+        "Placeholder"
+    ],
+    "prestigeSingleUpgrade12": [
+        "Placeholder"
+    ],
+    "prestigeSingleUpgrade13": [
+        "<b>Popular Dice</b><br> Multiply Prestige Dice gain by 3 <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Popular Dice</b><br> Multiply Prestige Dice gain by 3 <br> Currently: x3</span>"
+    ],
+    "prestigeSingleUpgrade14": [
+        "<b>Discount! </b><br> Reduce Prestige requirements <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Discount! </b><br> Reduce Prestige requirements <br> Currently: -20%</span>"
+    ],
+    "prestigeSingleUpgrade15": [
+        "<b>Prestige Accelerator</b><br> Reduce Prestige Roll cooldown by 50% <br> Cost: <span class=\"rarityText\" style=\"color: var(--{{color1}});\">{{cost1}} {{rarity1}}</span>",
+        "<b>Prestige Accelerator</b><br> Reduce Prestige Roll cooldown by 50% <br> Currenty: -50%"
+    ],
+    "prestigeSingleUpgrade16": [
+        "Placeholder"
+    ],
 
     "messages": [
         "COEMS 🤑🤑🤑",
@@ -283,8 +344,9 @@
         "Purple"
     ],
     
-    "statistics": "<b>Statistics</b><br>You have been played for {{time}} seconds.<br>You made {{rolls}} rolls.",
-    "aboutGame": "<b>About game</b><br>RNG Incremental Beta 2.0<br>Developed by Humfrey<br>Inspired by Luck Idle level by 000000000000011 in Geometry Dash.",
+    "statistics": "<b>Statistics</b><br>You have been played for {{time}} seconds.<br>You made {{rolls}} rolls in total.",
+    "statistics2": "<br><b>Prestige</b><br>You got {{dice}} Prestige Dice in total.<br>You became Prestige for {{resets}} times.<br>You spent {{time}} seconds in current Prestige.<br>You made {{rolls}} rolls in current Prestige.",
+    "aboutGame": "<b>About game</b><br>RNG Incremental 1.0 Final Release<br>Developed by Humfrey<br>Inspired by Luck Idle level by 000000000000011 in Geometry Dash.",
     "startHelpDescription": "Choose the page to read it",
     "startChangelogDescription": "Choose the version to read it",
     "helpTitleText": "How to play?",
@@ -298,8 +360,10 @@
     "help6": "<b>Decrafter</b><br><br> Decrafter is another tool which can be unlocked after buying Trophy III. It disassembles rarity into lower ones and requires 1 high rarity to make 2 lower. You also can decraft 10, 100, 1000 and 10000 in further game.",
     "help7": "<b>Mastery</b><br><br> Congratulations! You have unlocked Mastery! Get new Mastery Dice which has long cooldown, but you will receive brand new Mastery Rarities, and first one is Newbie.<br><br>With Mastery Rarities you can buy Mastery Upgrades and they can improve your upgrades even more! Pro tip: if you want to reduce cooldown of Mastery Dice, then I recommend you buy Mastered Trophy, it will unlock new 3 upgrades especially for Mastery Dice.",
     "help8": "<b>Frequently asked questions (FAQ)</b><br><br>Q: There is missing a lot things!<br>A: I know, it's raw version without QoL stuff. I'll add in future updates: offline progress, disable of autosave, mobile adaption, language, news ticker, improvement of UI, loading screen, prestige layer and so on. <br><br>Q: What's endgame?<br>A: There is no endgame, well you can have 3 goals: Buy Trophy I ➔ Get all upgrades maxed (and buy Trophy I) ➔ Get 1 Average. Well for next thing you need to buy Trophy.<br><br>Q: Game is so unbalanced.<br>A: Let me know in my discord server how I can improve it. Y'all testers so I'd appreciate any feedback! Also it might be your bad luck XD.<br><br>Q: Game looks so poor<br>A: Duh what you expect from raw 1.0? I'll add much more stuff in 1.1! I just want y'all to play this game early!<br><br>",
+    "help9": "<b>Prestige</b><br><br> If you see this you are close to Prestige! <br><br> For first you need to fill 5 various requirements: Trophy V, rolls, mastery rolls, newbie and Worthy rarity. <br><br> After Prestige you reset everything except total stuff and of course Prestige content (in future resets). <br><br> You also gain Prestige Dice and unlock new Prestige Roll which gives you Prestige Rarities (for now only Unknown) and has very long cooldown. <br><br> You can spend Prestige Rarities on brand new 16 (yet 13) Prestige Upgrades to make progress between prestiges faster!",
 
     "changelog1": "<b>07.11.2024 | RNG Incremental Alpha 1:</b><br>- GAME ALPHA RELEASE! There is gameplay for few hours to get endgame goal - Trophy I.<br>- 20 RARITIES! <br>- 6 NEW UPGRADES WITH 5 LEVELS MAX EACH EXCEPT TROPHY!<br>[Dev comment: this is very alpha version just to show you how chance mechanic works, in future versions I'm gonna add all missing QoL stuff. I made this within 4 days but it's only few hours of gameplay. For beta release (0.1-0.3) I want to add a lot details like info about game, discord server button, offline prod and so on. For final release (1.0) I'm gonna add at least few days of gameplay. Maybe I'll change my mind, unlike Digital God I barely have noted ideas for Luck Incremental. But I hope I receive positive feedback for this game so it would make motivate me more. Now I'm gonna finish Digital God 0.13 I swear.]",
     "changelog2": "<b>23.01.2025 | RNG Incremental Beta 1.4:</b><br>- Added changelog as in-game window.<br>- Added \"Speed up\" and \"Skip\" buttons for offline ticks window.<br>- Cloud saves improvement which let you load local save if you can't connect to API.<br>- Balanced Speed Up, reduced base effect percent from 25% to 15% and reduced starting Roll Cooldown from 2s to 1.5s.<br>- Balanced Autoclicker, reduced base effect percent from 25% to 20% and reduced starting cooldown from 4s to 3s.<br><br><br><b>21.01.2025 | RNG Incremental Beta 1.3:</b><br>- CLOUD SAVES! You can save your game into cloud to sync your game across devices. The only thing you need is secret key to prevent stealing (EXPERIMENTAL FEATURE, MAY NOT WORK PROPERLY).<br>- Nerfed Play Dice to max effect x15.<br><br><br><b>17.01.2025 | RNG Incremental Beta 1.2:</b><br>- Added offline production which 5 times slower than autoroll. You can control max ticks in settings.<br>- Added mobile adaptation.<br>- Game layout improvements.<br>- Upgrades prices increased.<br>- Nerfed Play Dice to max effect x50.<br>- Nerfed Autoclicker from 2s to 4s.<br>- Blacksmith base effect reduced from 7% to 6%.<br>- Added info about current -> next effects in 7-9 upgrades.<br><br><br><b>16.01.2025 | RNG Incremental Beta 1.1:</b><br>- Added \"About game\" tab.<br>- Removed \"Enter\" block button, so you can hold button to roll.<br>- Fixed bug with 5+ levels of upgrades being available before Trophy I.<br>- Improved Play Dice effect scaling.<br><br><br><b>15.01.2025 | RNG Incremental Beta 1:</b><br>- GAME BETA RELEASE!<br>- GAMEPLAY CONTINUED! Current endgame is Trophy IV<br>- 12 NEW RARITIES!<br>- 3 NEW UPGRADES!<br>- +3 NEW LEVELS FOR ALL UPGRADES! Except Trophy.<br>- CRAFTER! Assemble lower rarities to get higher one!<br>- DECRAFTER! Dissemble higher rarity to get lower ones!<br>- NEWS TICKER! Join discord server to suggest more funny tickers!<br>- Improvement in roll button.<br>- Added autosave disable and timer.<br>- Added notification when you save, load, export.<br>- Added \"Rarities\" tab in Information.<br>- Added new How To Play tabs.",
-    "changelog3": "<b>29.01.2025 | RNG Incremental Beta 2.0:</b><br>- MASTERY! UNLOCK NEW DICE, RARITY AND UPGRADES TO IMPROVE YOUR PROGRESS EVEN MORE.<br>- NEW DICE.<br>- NEW MASTERY RARITY.<br>- 9 NEW MASTERY UPGRADES!<br>- +3 NEW UPGRADES.<br>- +8 RARITIES.<br>- NEW UPGRADE LEVELS LIMIT - 10!<br>- Crafter and Decrafter UI remake.<br>- Small UI improvements.<br>- Mobile adaptation improvements.<br>- Decrafter use 2 high rarities to make 3 lower instead of 1 to 2.<br>- Decrafter lowest rarity is Standard.<br>- Small fixes for upgrades text."
+    "changelog3": "<b>29.01.2025 | RNG Incremental Beta 2.0:</b><br>- MASTERY! UNLOCK NEW DICE, RARITY AND UPGRADES TO IMPROVE YOUR PROGRESS EVEN MORE.<br>- NEW DICE.<br>- NEW MASTERY RARITY.<br>- 9 NEW MASTERY UPGRADES!<br>- +3 NEW UPGRADES.<br>- +8 RARITIES.<br>- NEW UPGRADE LEVELS LIMIT - 10!<br>- Crafter and Decrafter UI remake.<br>- Small UI improvements.<br>- Mobile adaptation improvements.<br>- Decrafter use 2 high rarities to make 3 lower instead of 1 to 2.<br>- Decrafter lowest rarity is Standard.<br>- Small fixes for upgrades text.",
+    "changelog4": "<b>04.02.2025 | RNG Incremental 1.0 Final Release:</b><br>- PRESTIGE SYSTEM! Reset all progress and gain Prestige Dice to roll Prestige Rarities!<br>- NEW DICE - Prestige Dice.<br>- NEW PRESTIGE RARITY!<br>- 16 NEW PRESTIGE UPGRADES!<br>- +10 NEW RARITIES.<br>- Increased prices of upgrades.<br>- Added Discord button in About Game.<br>- Added Max RNG text.<br>- Fixed Win The Dice didn't add rolls.<br>- Small UI improvements."
 }

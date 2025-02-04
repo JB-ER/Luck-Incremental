@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RNG Incremental Beta 2.0</title>
+    <title>RNG Incremental 1.0</title>
     <meta name="viewport" content="maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Roll to get various rarities and try your luck! Can you get 1 Average with 1/1000000 chance? 🤔">
     <meta name="keywords" content="RNG, luck, RNG Incremental, Incremental, clicker, idle, Luck Incremental, githack, github, idle game, incremental game, random generation number">
@@ -18,6 +18,7 @@
     <div id="buttons">
         <button onclick="selectTab('rollScreen', true)" class="whiteButton">Roll</button>
         <button onclick="selectTab('upgradesScreen', true)" class="whiteButton">Upgrades</button>
+        <button id="prestigeScreenButton" onclick="selectTab('prestigeScreen', true)" class="whiteButton prestige-class">Prestige</button>
         <button id="craftScreenButton" onclick="selectTab('craftScreen', true)" class="whiteButton">Crafter</button>
         <button id="decraftScreenButton" onclick="selectTab('decraftScreen', true)" class="whiteButton">Decrafter</button>
         <button onclick="selectTab('statsScreen', true)" class="whiteButton">Information</button>
@@ -46,6 +47,15 @@
                     </div>
                     <button onclick="mastery_roll()" id="rollButton2">Mastery Roll</button>
                     <span id="rollsCount2">Rolls: 0</span>
+                </div>
+                <div class="roll" id="roll3">
+                    <div id="rollCooldown3">
+                        <div id="rollCooldownProgress3"></div>
+                        <span id="cdText3"></span>
+                    </div>
+                    <button onclick="PRESTIGE.dice.roll()" id="rollButton3" class="prestige-class">Prestige Roll</button>
+                    <span id="diceCount">Dice left: 0</span>
+                    <span id="rollsCount3">Rolls: 0</span>
                 </div>
             </div>
             <div id="upgradesScreen" style="display: none">
@@ -91,6 +101,72 @@
                         <button class="masteryBuyableUpgrade">Upgrade #5</button>
                         <button class="masteryBuyableUpgrade">Upgrade #6</button>
                     </div>
+                </div>
+            </div>
+            <div id="prestigeScreen" style="display: none;">
+                <div id="prestigeButtons">
+                    <button onclick="selectSubTab('prestigeReset', true, 'prestige')" class="whiteButton prestige-class">Reset</button>
+                    <button onclick="selectSubTab('prestigeUpgrades', true, 'prestige')" class="whiteButton prestige-class">Upgrades</button>
+                </div>
+                <div id="prestigeReset" class="prestigeScreens">
+                    <button class="template-upgrade prestige-class" onclick="PRESTIGE.reset()"><b>Become Prestige</b> <br> Reset everything and gain 1 Prestige Dice</button>
+                    <span>Requirements: </span>
+                    <div class="prestige-bar-base">
+                        <div class="prestige-bar"></div>
+                        <span class="prestige-bar-text">Trophy V (0/1)
+                        </span>
+                    </div>
+                    <div class="prestige-bar-base">
+                        <div class="prestige-bar"></div>
+                        <span class="prestige-bar-text">Rolls (1e6/1e7)
+                        </span>
+                    </div>
+                    <div class="prestige-bar-base">
+                        <div class="prestige-bar"></div>
+                        <span class="prestige-bar-text">Mastery Rolls (1000/2500)
+                        </span>
+                    </div>
+                    <div class="prestige-bar-base">
+                        <div class="prestige-bar"></div>
+                        <span class="prestige-bar-text">Newbie (10/100)
+                        </span>
+                    </div>
+                    <div class="prestige-bar-base">
+                        <div class="prestige-bar"></div>
+                        <span class="prestige-bar-text">Worthy (0/1)
+                        </span>
+                    </div>
+                    <!-- <div class="prestige-class prestige-bar">Trophy V (0/1)</div>
+                    <div class="prestige-class prestige-bar">Rolls (1e6/1e7)</div>
+                    <div class="prestige-class prestige-bar">Mastery Rolls (1e6/1e7)</div>
+                    <div class="prestige-class prestige-bar">Newbie (50/100)</div>
+                    <div class="prestige-class prestige-bar">Fine (1/1)</div> -->
+                </div>
+                <div id="prestigeUpgrades" class="prestigeScreens" style="display: none">
+                        <div class="upgradeRow">
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class"></button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class"></button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #3</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #4</button>
+                        </div>
+                        <div class="upgradeRow">
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #4</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #5</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #6</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #4</button>
+                        </div>
+                        <div id="thirdUpgradeRow" class="upgradeRow">
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #4</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #5</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #6</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #4</button>
+                        </div>
+                        <div id="fourthUpgradeRow" class="upgradeRow">
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #4</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #5</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #6</button>
+                            <button class="prestigeSingleUpgrade template-upgrade prestige-class">Upgrade #4</button>
+                        </div>
                 </div>
             </div>
             <div id="craftScreen" style="display: none">
@@ -191,6 +267,7 @@
                 </div>
                 <div id="gameStatsScreen" class="statsScreens">
                     <span id="statistics">Stats</span>
+                    <span id="statistics2">Stats</span>
                 </div>
                 <div id="raritiesStatsScreen" class="statsScreens" style="display: none">
                 <table>
@@ -239,10 +316,22 @@
                     <tr class="rarityTable" style="color: var(--great)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
                     <tr class="rarityTable" style="color: var(--exceptional)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
                     <tr class="rarityTable" style="color: var(--excellent)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+
+                    <tr class="rarityTable" style="color: var(--refined)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--exquisite)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--elegant)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--rare)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--extraordinary)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--outstanding)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--satisfactory)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--respectable)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--well-made)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
+                    <tr class="rarityTable" style="color: var(--shining)"><td class="name"></td><td class="amount"></td><td class="chance"></td><td class="first_roll"></td><td class="total_amount"></td></tr>
                 </table>   
                 </div>
                 <div id="aboutStatsScreen" class="statsScreens" style="display: none">
                     <span id="aboutGame">Stats</span>
+                    <button id="discordServer"><img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg">Join my discord server!</button>
                 </div>
             </div>
             <div id="settingsScreen" style="display: none">
@@ -279,8 +368,13 @@
             </div>
         </div>
         <div id="raritiesScreen" class="half">
-                <span class="masteryRarityCount" style="color: var(--newbie); display: none">Newbie: 0 (1/100)</span>
-                <span class="masteryRarityCount" id="masteryRarity1" style="color: var(--newbie)">Newbie: 0 (1/100)</span>
+            <div style="display: flex;">
+                <button onclick="selectSubTab('commonRarities', true, 'rarities')" class="whiteButton">Rarities</button>
+                <button id="masteryRaritiesButton" onclick="selectSubTab('masteryRarities', true, 'rarities')" class="whiteButton">Mastery</button>
+                <button id="prestigeRaritiesButton" onclick="selectSubTab('prestigeRarities', true, 'rarities')"  class="whiteButton">Prestige</button>
+            </div>
+            <div class="raritiesList" id="commonRarities">
+                <span id="rarityMaxRNG" style="font-size: 24px; font-weight: 900;">Max RNG: 1024</span>
                 <span class="rarityCount" style="color: rgba(255, 255, 255, 0)">Nothing: 0 (1/2)</span>
                 <span class="rarityCount" style="color: rgb(0, 0, 0)">Absolute worst: 0 (1/4)</span>
                 <span class="rarityCount" style="color: rgb(18, 18, 18)">Worst: 0 (1/8)</span>
@@ -321,6 +415,30 @@
                 <span class="rarityCount" style="color: var(--great)">Great: 0 (1/65536)</span>
                 <span class="rarityCount" style="color: var(--exceptional)">Exceptional: 0 (1/65536)</span>
                 <span class="rarityCount" style="color: var(--excellent)">Excellent: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--refined)">Refined: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--exquisite)">Exquisite: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--elegant)">Elegant: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--rare)">Rare: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--extraordinary)">Extraordinary: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--outstanding)">Outstanding: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--satisfactory)">Satisfactory: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--respectable)">Respectable: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--well-made)">Wellmade: 0 (1/65536)</span>
+                <span class="rarityCount" style="color: var(--shining)">Shining: 0 (1/65536)</span>
+            </div>
+            <div class="raritiesList" id="masteryRarities" style="display: none;">
+                <span style="font-size: 24px; font-weight: 900;">Max RNG: 1000000</span>
+                <span class="masteryRarityCount" style="color: var(--newbie); display: none">None: 0 (1/100)</span>
+                <span class="masteryRarityCount" id="masteryRarity1" style="color: var(--newbie)">Newbie: 0 (1/100)</span>
+            </div>
+            <div class="raritiesList" id="prestigeRarities" style="display: none;">
+                <span style="font-size: 24px; font-weight: 900;">Max RNG: 1000000</span>
+                <span class="prestigeRarityCount rarityText" style="color: var(--unknown)">Unknown: 0 (1/100)</span>
+                <span class="prestigeRarityCount rarityText" style="display: none; color: var(--forgotten)">Forgotten: 0 (1/100)</span>
+                <span class="prestigeRarityCount rarityText" style="display: none; color: var(--obscure)">Obscure: 0 (1/100)</span>
+                <span class="prestigeRarityCount rarityText" style="display: none; color: var(--unnoted)">Unnoted: 0 (1/100)</span>
+                <span class="prestigeRarityCount rarityText" style="display: none; color: var(--noticed)">Noticed: 0 (1/100)</span>
+            </div>
         </div>
     </div>
     <div id="myPopupBackdrop1" class="myPopupBackdrop"></div>
@@ -351,6 +469,7 @@
                 <button onclick="showHelpPage(text.help[6], text.helpTitle[6])" id="helpTab6" class="versionButton versionButtonVertical">Decrafter</button>
                 <button onclick="showHelpPage(text.help[7], text.helpTitle[7])" id="helpTab7" class="versionButton versionButtonVertical">Mastery</button>
                 <button onclick="showHelpPage(text.help[8], text.helpTitle[8])" id="helpTab8" class="versionButton versionButtonVertical">FAQ</button>
+                <button onclick="showHelpPage(text.help[9], text.helpTitle[9])" id="helpTab9" class="versionButton versionButtonVertical">Prestige</button>
             </div>
             <div id="line"></div>
             <div id="helpDiv" class="windowDesc">
@@ -365,6 +484,7 @@
             <button onclick="hidePopup()" class="closeWindow"></button>
             <div id="horizontalLine"></div>
             <div id="changelogPageChooser">
+                <button onclick="showChangelogPage(text.changelog[4], text.changelogTitle[4])" id="changelogTab4" class="versionButton versionButtonVertical">1.0</button>
                 <button onclick="showChangelogPage(text.changelog[3], text.changelogTitle[3])" id="changelogTab3" class="versionButton versionButtonVertical">2.0 Beta</button>
                 <button onclick="showChangelogPage(text.changelog[2], text.changelogTitle[2])" id="changelogTab2" class="versionButton versionButtonVertical">1.x Beta</button>
                 <button onclick="showChangelogPage(text.changelog[1], text.changelogTitle[1])" id="changelogTab1" class="versionButton versionButtonVertical">Alpha</button>
@@ -392,6 +512,7 @@
     <footer>
         Autosave: 10.34s
     </footer>
+    <script src="scripts/prestige.js"></script>
     <script src="scripts/game.js"></script>
     <script src="scripts/functions.js"></script>
     <script src="scripts/upgrades.js"></script>

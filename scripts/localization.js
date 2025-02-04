@@ -22,7 +22,7 @@ setInterval(() => {
 
 // Загрузка переводов
 function loadTranslations() {
-    let buyables = document.getElementsByClassName('buyableUpgrade'), mastery_buyables = document.getElementsByClassName('masteryBuyableUpgrade')
+    let buyables = document.getElementsByClassName('buyableUpgrade'), mastery_buyables = document.getElementsByClassName('masteryBuyableUpgrade'), prestige_singles = document.getElementsByClassName('prestigeSingleUpgrade')
     for (let i = 0; i < buyables.length; i++) {
         const index = i+1
         let number_loop = player.upgrades.buyables[index]
@@ -61,6 +61,17 @@ function loadTranslations() {
             rarity3: rarity[UPGS.mastery.buyables[`buyable${index}`].rarity[player.mastery_upgrades.buyables[index]][2]].charAt(0).toUpperCase() + rarity[UPGS.mastery.buyables[`buyable${index}`].rarity[player.mastery_upgrades.buyables[index]][2]].slice(1).replace(/_/g, ' '),
         })
     }
+    for (let j = 1; j <= 4; j++) {
+        for (let i = 0; i < 4; i++) {
+            const index = (i+1)+4*(j-1), id = j*10+(i+1)
+            let number_loop = +player.prestige.upgrades.singles.includes(id)
+            prestige_singles[index-1].innerHTML = i18next.t(`prestigeSingleUpgrade${index}.${number_loop}`, {
+                color1: prestige_rarity[UPGS.prestige.singles[`single${index}`].rarity()],
+                cost1: formatNumber(UPGS.prestige.singles[`single${index}`].cost()),
+                rarity1: prestige_rarity[UPGS.prestige.singles[`single${index}`].rarity()].charAt(0).toUpperCase() + prestige_rarity[UPGS.prestige.singles[`single${index}`].rarity()].slice(1).replace(/_/g, ' '),
+            })
+        }
+    }
 
     for (let rarity in rarities) {
             document.getElementsByClassName('rarityCount')[Object.keys(rarities).indexOf(rarity)].textContent = `${rarity.charAt(0).toUpperCase() + rarity.slice(1).replace(/_/g, ' ')}: ${formatNumber(player.rarities[rarity].current)} (1/${formatNumber(max/rarities[rarity].chance(), 'chance')})`;
@@ -80,8 +91,23 @@ function loadTranslations() {
         document.getElementsByClassName('mastery_first_roll')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${formatNumber(player.mastery_rarities[mastery_rarity].first_roll)}`
         document.getElementsByClassName('mastery_total_amount')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${formatNumber(player.mastery_rarities[mastery_rarity].total)}`
     }
+
+    for (let prestige_rarity in PRESTIGE.rarities) {
+        document.getElementsByClassName('prestigeRarityCount')[Object.keys(PRESTIGE.rarities).indexOf(prestige_rarity)].textContent = `${prestige_rarity.charAt(0).toUpperCase() + prestige_rarity.slice(1).replace(/_/g, ' ')}: ${formatNumber(player.prestige.rarities[prestige_rarity].current)} (1/${formatNumber(PRESTIGE.max/PRESTIGE.rarities[prestige_rarity].chance(), 'chance')})`;
+    
+        // document.getElementsByClassName('mastery_name')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${mastery_rarity.charAt(0).toUpperCase() + mastery_rarity.slice(1).replace(/_/g, ' ')}`
+        // document.getElementsByClassName('mastery_amount')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${formatNumber(player.mastery_rarities[mastery_rarity].current)}`
+        // document.getElementsByClassName('mastery_chance')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `(1/${formatNumber(mastery_max/mastery_rarities[mastery_rarity].chance())})`
+        // document.getElementsByClassName('mastery_first_roll')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${formatNumber(player.mastery_rarities[mastery_rarity].first_roll)}`
+        // document.getElementsByClassName('mastery_total_amount')[Object.keys(mastery_rarities).indexOf(mastery_rarity)].textContent = `${formatNumber(player.mastery_rarities[mastery_rarity].total)}`
+    }
+
     document.getElementById('rollsCount').textContent = `Rolls: ${formatNumber(player.rolls)}`;
     document.getElementById('rollsCount2').textContent = `Rolls: ${formatNumber(player.mastery_rolls)}`;
+    document.getElementById('diceCount').textContent = `Dice left: ${formatNumber(player.prestige.dice)}`;
+    document.getElementById('rollsCount3').textContent = `Rolls: ${formatNumber(player.prestige.rolls)}`;
+
+    document.getElementById('rarityMaxRNG').textContent = `Max RNG: ${formatNumber(max)}`
 
     text.help.start = i18next.t('startHelpDescription');
     helpTitle.innerHTML = i18next.t('helpTitleText');
@@ -89,20 +115,27 @@ function loadTranslations() {
     text.changelog.start = i18next.t('startChangelogDescription');
     changelogTitle.innerHTML = i18next.t('changelogTitleText');
 
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= 9; i++) {
         text.help[i] = i18next.t(`help${i}`);
     }
 
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 4; i++) {
         text.changelog[i] = i18next.t(`changelog${i}`);
     }
 
     statistics.innerHTML = i18next.t(`statistics`, {
         time: formatNumber((player.time.current - player.time.start)/1000),
-        rolls: formatNumber(player.rolls),
+        rolls: formatNumber(player.total_rolls),
         start1: player.time.start1,
         start2: player.time.start2
     });
+
+    statistics2.innerHTML = player.prestige.resets >0 ? i18next.t(`statistics2`, {
+        dice: formatNumber(player.prestige.dice),
+        resets: formatNumber(player.prestige.resets),
+        time: formatNumber((player.time.current - player.time.current_prestige)/1000),
+        rolls: player.rolls
+    }) : ''
 
     aboutGame.innerHTML = i18next.t('aboutGame');
 
