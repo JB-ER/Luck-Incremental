@@ -25,7 +25,8 @@ function auto_roll() {
         if (double_roll > 0 && double_roll < UPGS.common.buyables.buyable2.effect()) to_roll *= 2
 
         for (let i = 0; i < to_roll; i++) {
-            player.rolls++;
+            player.rolls++
+            player.total_rolls++
 
             let number = Math.floor(Math.random() * max);
             player.prestige.upgrades.singles.includes(12) ? number = number+100 : number
