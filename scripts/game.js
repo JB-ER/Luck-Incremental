@@ -4,7 +4,7 @@ let tick = 0, language = 'en', to_roll = 1
 
 function roll() {
     if (player.cooldowns.rolls == 0){
-        player.cooldowns.rolls += 1500/UPGS.common.buyables.buyable3.effect()*UPGS.prestige.singles.single5.effect()
+        player.cooldowns.rolls += (500/UPGS.common.buyables.buyable3.effect()*UPGS.prestige.singles.single5.effect())-(UPGS.mastery.buyables.buyable3.effect()*1000)
 
         auto_roll()
     }
@@ -124,8 +124,8 @@ function rollCooldown() {
         player.cooldowns.rolls -= tick
         document.getElementById('cdText').textContent = player.cooldowns.rolls > 0 ? `${(player.cooldowns.rolls/1000).toFixed(2)}s` : ''
         if (player.cooldowns.rolls > 0) {
-            if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect()/UPGS.prestige.singles.single5.effect())*120 + 'px'  
-            else document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect()/UPGS.prestige.singles.single5.effect())*80 + 'px'
+            if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/500*UPGS.common.buyables.buyable3.effect()/UPGS.prestige.singles.single5.effect())*120 + 'px'  
+            else document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/500*UPGS.common.buyables.buyable3.effect()/UPGS.prestige.singles.single5.effect())*80 + 'px'
         }  
         else document.getElementById('rollCooldownProgress').style.width = 0
     }
@@ -164,6 +164,8 @@ function updateTick() {
     rollCooldown2()
     PRESTIGE.dice.rollCooldown()
     UNL.display.check()
+    UPGS.common.checkDisable()
+    UPGS.mastery.checkDisable()
     UPGS.prestige.checkDisable()
     PRESTIGE.updateProgressBar()
     if (temp.time.auto_save >= 30000) {

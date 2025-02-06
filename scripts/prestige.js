@@ -33,28 +33,28 @@ let PRESTIGE = {
     progressBar: {
         1() {
             // if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect())*120 + 'px'  
-            document.getElementsByClassName('prestige-bar')[0].style.width = (Math.min(player.upgrades.buyables[6]/5, 1))*217 + 'px'
+            document.getElementsByClassName('prestige-bar')[0].style.width = (Math.min(player.upgrades.buyables[6]/5, 1))*225 + 'px'
             document.getElementsByClassName('prestige-bar-text')[0].innerHTML = `Trophy upgrades: ${player.upgrades.buyables[6]}/5`
         },
         2() {
             // if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect())*120 + 'px'  
-            document.getElementsByClassName('prestige-bar')[1].style.width = (Math.min(player.rolls/(player.prestige.upgrades.singles.includes(42) ? 7.5e6 : 1e7), 1))*217 + 'px'
+            document.getElementsByClassName('prestige-bar')[1].style.width = (Math.min(player.rolls/(player.prestige.upgrades.singles.includes(42) ? 7.5e6 : 1e7), 1))*225 + 'px'
             document.getElementsByClassName('prestige-bar-text')[1].innerHTML = `Rolls: ${formatNumber(player.rolls)}/${player.prestige.upgrades.singles.includes(42) ? formatNumber(7.5e6) : formatNumber(1e7)}`
         },
         3() {
             // if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect())*120 + 'px'  
-            document.getElementsByClassName('prestige-bar')[2].style.width = (Math.min(player.mastery_rolls/(player.prestige.upgrades.singles.includes(42) ? 2000 : 2500), 1))*217 + 'px'
-            document.getElementsByClassName('prestige-bar-text')[2].innerHTML = `Mastery Rolls: ${player.mastery_rolls}/${player.prestige.upgrades.singles.includes(42) ? formatNumber(2000) : formatNumber(2599)}`
+            document.getElementsByClassName('prestige-bar')[2].style.width = (Math.min(player.mastery_rolls/(player.prestige.upgrades.singles.includes(42) ? 2000 : 2500), 1))*225 + 'px'
+            document.getElementsByClassName('prestige-bar-text')[2].innerHTML = `Mastery rolls: ${player.mastery_rolls}/${player.prestige.upgrades.singles.includes(42) ? formatNumber(2000) : formatNumber(2500)}`
         },
         4() {
             // if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect())*120 + 'px'  
-            document.getElementsByClassName('prestige-bar')[3].style.width = (Math.min(player.mastery_rarities.newbie.current/(player.prestige.upgrades.singles.includes(42) ? 80 : 100), 1))*217 + 'px'
+            document.getElementsByClassName('prestige-bar')[3].style.width = (Math.min(player.mastery_rarities.newbie.current/(player.prestige.upgrades.singles.includes(42) ? 80 : 100), 1))*225 + 'px'
             document.getElementsByClassName('prestige-bar-text')[3].innerHTML = `Newbie: ${player.mastery_rarities.newbie.current}/${player.prestige.upgrades.singles.includes(42) ? formatNumber(80) : formatNumber(100)}`
         },
         5() {
             // if (isMobile) document.getElementById('rollCooldownProgress').style.width = (player.cooldowns.rolls/1500*UPGS.common.buyables.buyable3.effect())*120 + 'px'  
-            document.getElementsByClassName('prestige-bar')[4].style.width = (Math.min((player.prestige.upgrades.singles.includes(42) ? player.rarities.fine.current : player.rarities.worthy.current)/1, 1))*217 + 'px'
-            player.prestige.upgrades.singles.includes(42) ? document.getElementsByClassName('prestige-bar-text')[4].innerHTML = `Fine: ${player.rarities.fine.current}/1` : document.getElementsByClassName('prestige-bar-text')[4].innerHTML = `Worthy: ${player.rarities.worthy.current}/1`
+            document.getElementsByClassName('prestige-bar')[4].style.width = (Math.min((player.prestige.upgrades.singles.includes(42) ? player.rarities.fair.current : player.rarities.fine.current)/1, 1))*225 + 'px'
+            player.prestige.upgrades.singles.includes(42) ? document.getElementsByClassName('prestige-bar-text')[4].innerHTML = `Fair: ${player.rarities.fair.current}/1` : document.getElementsByClassName('prestige-bar-text')[4].innerHTML = `Fine: ${player.rarities.fine.current}/1`
         },
     },
     requirements: {
@@ -71,7 +71,7 @@ let PRESTIGE = {
             return player.mastery_rarities.newbie.current >= player.prestige.upgrades.singles.includes(42) ? 80 : 100
         },
         5() {
-            return player.prestige.upgrades.singles.includes(42) ? player.rarities.fine.current >= 1 : player.rarities.worthy.current >= 1
+            return player.prestige.upgrades.singles.includes(42) ? player.rarities.fair.current >= 1 : player.rarities.fine.current >= 1
         }
     },
     reset() {

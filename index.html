@@ -16,7 +16,6 @@
         <div class="marquee-text" id="marquee-text">Loading...</div>
     </div>
     <div id="buttons">
-        <button onclick="selectTab('rollScreen', true)" class="whiteButton">Roll</button>
         <button onclick="selectTab('upgradesScreen', true)" class="whiteButton">Upgrades</button>
         <button id="prestigeScreenButton" onclick="selectTab('prestigeScreen', true)" class="whiteButton prestige-class">Prestige</button>
         <button id="craftScreenButton" onclick="selectTab('craftScreen', true)" class="whiteButton">Crafter</button>
@@ -31,34 +30,7 @@
         </div>
     <div id="game">
         <div class="half">
-            <div id="rollScreen">
-                <div class="roll">
-                    <div id="rollCooldown">
-                        <div id="rollCooldownProgress"></div>
-                        <span id="cdText"></span>
-                    </div>
-                    <button onclick="roll()" id="rollButton">Roll</button>
-                    <span id="rollsCount">Rolls: 0</span>
-                </div>
-                <div class="roll" id="roll2">
-                    <div id="rollCooldown2">
-                        <div id="rollCooldownProgress2"></div>
-                        <span id="cdText2"></span>
-                    </div>
-                    <button onclick="mastery_roll()" id="rollButton2">Mastery Roll</button>
-                    <span id="rollsCount2">Rolls: 0</span>
-                </div>
-                <div class="roll" id="roll3">
-                    <div id="rollCooldown3">
-                        <div id="rollCooldownProgress3"></div>
-                        <span id="cdText3"></span>
-                    </div>
-                    <button onclick="PRESTIGE.dice.roll()" id="rollButton3" class="prestige-class">Prestige Roll</button>
-                    <span id="diceCount">Dice left: 0</span>
-                    <span id="rollsCount3">Rolls: 0</span>
-                </div>
-            </div>
-            <div id="upgradesScreen" style="display: none">
+            <div id="upgradesScreen">
                 <div id="upgradesButtons">
                     <button onclick="selectSubTab('commonUpgrades', true, 'upgrades')" class="whiteButton">Upgrades</button>
                     <button onclick="selectSubTab('masteryUpgrades', true, 'upgrades')" id="masteryUpgradesTab" class="whiteButton masteryButton">Mastery upgrades</button>
@@ -368,76 +340,109 @@
             </div>
         </div>
         <div id="raritiesScreen" class="half">
+            <div id="rollScreen">
+                <div class="roll">
+                    <div id="rollCooldown">
+                        <div id="rollCooldownProgress"></div>
+                        <span id="cdText"></span>
+                    </div>
+                    <button onclick="roll()" id="rollButton">Roll</button>
+                    <span id="rollsCount">Rolls: 0</span>
+                </div>
+                <div class="roll" id="roll2">
+                    <div id="rollCooldown2">
+                        <div id="rollCooldownProgress2"></div>
+                        <span id="cdText2"></span>
+                    </div>
+                    <button onclick="mastery_roll()" id="rollButton2">Mastery Roll</button>
+                    <span id="rollsCount2">Rolls: 0</span>
+                </div>
+                <div class="roll" id="roll3">
+                    <div id="rollCooldown3">
+                        <div id="rollCooldownProgress3"></div>
+                        <span id="cdText3"></span>
+                    </div>
+                    <button onclick="PRESTIGE.dice.roll()" id="rollButton3" class="prestige-class">Prestige Roll</button>
+                    <span id="diceCount">Dice left: 0</span>
+                    <span id="rollsCount3">Rolls: 0</span>
+                </div>
+            </div>
             <div style="display: flex;">
                 <button onclick="selectSubTab('commonRarities', true, 'rarities')" class="whiteButton">Rarities</button>
                 <button id="masteryRaritiesButton" onclick="selectSubTab('masteryRarities', true, 'rarities')" class="whiteButton">Mastery</button>
                 <button id="prestigeRaritiesButton" onclick="selectSubTab('prestigeRarities', true, 'rarities')"  class="whiteButton">Prestige</button>
             </div>
-            <div class="raritiesList" id="commonRarities">
+            <div class="list-of-rarities" id="commonRarities">
                 <span id="rarityMaxRNG" style="font-size: 24px; font-weight: 900;">Max RNG: 1024</span>
-                <span class="rarityCount" style="color: rgba(255, 255, 255, 0)">Nothing: 0 (1/2)</span>
-                <span class="rarityCount" style="color: rgb(0, 0, 0)">Absolute worst: 0 (1/4)</span>
-                <span class="rarityCount" style="color: rgb(18, 18, 18)">Worst: 0 (1/8)</span>
-                <span class="rarityCount" style="color: rgb(45, 45, 45)">Disgusting: 0 (1/16)</span>
-                <span class="rarityCount" style="color: rgb(61, 61, 61)">Abominable: 0 (1/32)</span>
-                <span class="rarityCount" style="color: rgb(77, 77, 77)">Repulsive: 0 (1/64)</span>
-                <span class="rarityCount" style="color: rgb(96, 96, 96)">Dreadful: 0 (1/128)</span>
-                <span class="rarityCount" style="color: rgb(119, 117, 117)">Appaling: 0 (1/256)</span>
-                <span class="rarityCount" style="color: rgb(132, 131, 131)">Horrible: 0 (1/512)</span>
-                <span class="rarityCount" style="color: rgb(152, 150, 150)">Awful: 0 (1/1024)</span>
-                <span class="rarityCount" style="color: rgb(172, 169, 169)">Terrible: 0 (1/2048)</span>
-                <span class="rarityCount" style="color: rgb(180, 180, 180)">Poor: 0 (1/4096)</span>
-                <span class="rarityCount" style="color: rgb(200, 200, 200)">Unremarkable: 0 (1/8192)</span>
-                <span class="rarityCount" style="color: rgb(216, 216, 216)">Bad: 0 (1/16384)</span>
-                <span class="rarityCount" style="color: rgb(234, 234, 234)">So so: 0 (1/32768)</span>
-                <span class="rarityCount" style="color: var(--common)">Common: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--regular)">regular: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--standard)">standard: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--decent)">decent: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--average)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--usual)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--moderate)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--adequate)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--fair)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--fine)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--solid)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--worthy)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--admirable)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--unusual)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--uncommon)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--good)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--valuable)">average: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--impressive)">Impressive: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--significant)">Significant: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--important)">Important: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--highquality)">High-quality: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--remarkable)">Remarkable: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--great)">Great: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--exceptional)">Exceptional: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--excellent)">Excellent: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--refined)">Refined: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--exquisite)">Exquisite: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--elegant)">Elegant: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--rare)">Rare: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--extraordinary)">Extraordinary: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--outstanding)">Outstanding: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--satisfactory)">Satisfactory: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--respectable)">Respectable: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--well-made)">Wellmade: 0 (1/65536)</span>
-                <span class="rarityCount" style="color: var(--shining)">Shining: 0 (1/65536)</span>
+                <div class="raritiesList">
+                    <span class="rarityCount" style="color: rgba(255, 255, 255, 0)">Nothing: 0 (1/2)</span>
+                    <span class="rarityCount" style="color: rgb(0, 0, 0)">Absolute worst: 0 (1/4)</span>
+                    <span class="rarityCount" style="color: rgb(18, 18, 18)">Worst: 0 (1/8)</span>
+                    <span class="rarityCount" style="color: rgb(45, 45, 45)">Disgusting: 0 (1/16)</span>
+                    <span class="rarityCount" style="color: rgb(61, 61, 61)">Abominable: 0 (1/32)</span>
+                    <span class="rarityCount" style="color: rgb(77, 77, 77)">Repulsive: 0 (1/64)</span>
+                    <span class="rarityCount" style="color: rgb(96, 96, 96)">Dreadful: 0 (1/128)</span>
+                    <span class="rarityCount" style="color: rgb(119, 117, 117)">Appaling: 0 (1/256)</span>
+                    <span class="rarityCount" style="color: rgb(132, 131, 131)">Horrible: 0 (1/512)</span>
+                    <span class="rarityCount" style="color: rgb(152, 150, 150)">Awful: 0 (1/1024)</span>
+                    <span class="rarityCount" style="color: rgb(172, 169, 169)">Terrible: 0 (1/2048)</span>
+                    <span class="rarityCount" style="color: rgb(180, 180, 180)">Poor: 0 (1/4096)</span>
+                    <span class="rarityCount" style="color: rgb(200, 200, 200)">Unremarkable: 0 (1/8192)</span>
+                    <span class="rarityCount" style="color: rgb(216, 216, 216)">Bad: 0 (1/16384)</span>
+                    <span class="rarityCount" style="color: rgb(234, 234, 234)">So so: 0 (1/32768)</span>
+                    <span class="rarityCount" style="color: var(--common)">Common: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--regular)">regular: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--standard)">standard: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--decent)">decent: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--average)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--usual)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--moderate)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--adequate)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--fair)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--fine)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--solid)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--worthy)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--admirable)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--unusual)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--uncommon)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--good)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--valuable)">average: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--impressive)">Impressive: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--significant)">Significant: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--important)">Important: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--highquality)">High-quality: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--remarkable)">Remarkable: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--great)">Great: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--exceptional)">Exceptional: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--excellent)">Excellent: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--refined)">Refined: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--exquisite)">Exquisite: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--elegant)">Elegant: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--rare)">Rare: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--extraordinary)">Extraordinary: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--outstanding)">Outstanding: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--satisfactory)">Satisfactory: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--respectable)">Respectable: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--well-made)">Wellmade: 0 (1/65536)</span>
+                    <span class="rarityCount" style="color: var(--shining)">Shining: 0 (1/65536)</span>
+                </div>
             </div>
-            <div class="raritiesList" id="masteryRarities" style="display: none;">
+            <div class="list-of-rarities" id="masteryRarities" style="display: none;">
                 <span style="font-size: 24px; font-weight: 900;">Max RNG: 1000000</span>
-                <span class="masteryRarityCount" style="color: var(--newbie); display: none">None: 0 (1/100)</span>
-                <span class="masteryRarityCount" id="masteryRarity1" style="color: var(--newbie)">Newbie: 0 (1/100)</span>
+                <div class="raritiesList">
+                    <span class="masteryRarityCount" style="color: var(--newbie); display: none">None: 0 (1/100)</span>
+                    <span class="masteryRarityCount" id="masteryRarity1" style="color: var(--newbie)">Newbie: 0 (1/100)</span>
+                </div>
             </div>
-            <div class="raritiesList" id="prestigeRarities" style="display: none;">
+            <div class="list-of-rarities" id="prestigeRarities" style="display: none;">
                 <span style="font-size: 24px; font-weight: 900;">Max RNG: 1000000</span>
-                <span class="prestigeRarityCount rarityText" style="color: var(--unknown)">Unknown: 0 (1/100)</span>
-                <span class="prestigeRarityCount rarityText" style="display: none; color: var(--forgotten)">Forgotten: 0 (1/100)</span>
-                <span class="prestigeRarityCount rarityText" style="display: none; color: var(--obscure)">Obscure: 0 (1/100)</span>
-                <span class="prestigeRarityCount rarityText" style="display: none; color: var(--unnoted)">Unnoted: 0 (1/100)</span>
-                <span class="prestigeRarityCount rarityText" style="display: none; color: var(--noticed)">Noticed: 0 (1/100)</span>
+                <div class="raritiesList">
+                    <span class="prestigeRarityCount rarityText" style="color: var(--unknown)">Unknown: 0 (1/100)</span>
+                    <span class="prestigeRarityCount rarityText" style="display: none; color: var(--forgotten)">Forgotten: 0 (1/100)</span>
+                    <span class="prestigeRarityCount rarityText" style="display: none; color: var(--obscure)">Obscure: 0 (1/100)</span>
+                    <span class="prestigeRarityCount rarityText" style="display: none; color: var(--unnoted)">Unnoted: 0 (1/100)</span>
+                    <span class="prestigeRarityCount rarityText" style="display: none; color: var(--noticed)">Noticed: 0 (1/100)</span>
+                </div>
             </div>
         </div>
     </div>

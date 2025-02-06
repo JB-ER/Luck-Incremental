@@ -13,7 +13,7 @@ function formatNumber(number, type='', n=0, m=0) {
 }
 
 function selectTab(argument, isFlex) {
-    const tabsToHide = ['rollScreen', 'upgradesScreen', 'craftScreen', 'decraftScreen', 'statsScreen', 'settingsScreen', 'raritiesScreen', 'prestigeScreen']
+    const tabsToHide = ['upgradesScreen', 'craftScreen', 'decraftScreen', 'statsScreen', 'settingsScreen', 'raritiesScreen', 'prestigeScreen']
     const isMobile = (window.outerWidth <= 768)
     for (const tabId of tabsToHide) {
         const tab = document.getElementById(tabId);
@@ -24,7 +24,7 @@ function selectTab(argument, isFlex) {
     let arg = document.getElementById(argument)
     let rarity_arg = document.getElementById('raritiesScreen')
     const halfElement = document.querySelector('.half');
-    if (argument == 'rollScreen' || argument == 'upgradesScreen' || argument == 'craftScreen' || argument == 'decraftScreen' || argument == 'prestigeScreen') {
+    if (argument == 'upgradesScreen' || argument == 'craftScreen' || argument == 'decraftScreen' || argument == 'prestigeScreen') {
         rarity_arg.style.display = "flex"
         halfElement.style.width = '50%'
         if (isMobile) {

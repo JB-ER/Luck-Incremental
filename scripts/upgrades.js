@@ -89,8 +89,45 @@ const BUY = {
     },
 }
 
+const CHECK = {
+    common: {
+        q(x, rarity_arg, cost_arg) {
+            return player.rarities[rarity[rarity_arg[x][0]]].current >= cost_arg[x][0]
+        },
+        w(x, rarity_arg, cost_arg) {
+            return player.rarities[rarity[rarity_arg[x][0]]].current >= cost_arg[x][0] && 
+                   player.rarities[rarity[rarity_arg[x][1]]].current >= cost_arg[x][1]
+        },
+        e(x, rarity_arg, cost_arg) {
+            return player.rarities[rarity[rarity_arg[x][0]]].current >= cost_arg[x][0] && 
+                player.rarities[rarity[rarity_arg[x][1]]].current >= cost_arg[x][1] && 
+                player.rarities[rarity[rarity_arg[x][2]]].current >= cost_arg[x][2]
+        },
+    },
+    mastery: {
+        mq(x, mastery_rarity_arg, rarity_arg, cost_arg) {
+            return player.mastery_rarities[mastery_rarity[mastery_rarity_arg[x][0]]].current >= cost_arg[x][0]
+        },
+        mw(x, mastery_rarity_arg, rarity_arg, cost_arg) {
+            return player.mastery_rarities[mastery_rarity[mastery_rarity_arg[x][0]]].current >= cost_arg[x][0] &&
+                player.rarities[rarity[rarity_arg[x][1]]].current >= cost_arg[x][1]
+        },
+        me(x, mastery_rarity_arg, rarity_arg, cost_arg) {
+            return player.mastery_rarities[mastery_rarity[mastery_rarity_arg[x][0]]].current >= cost_arg[x][0] &&
+                player.rarities[rarity[rarity_arg[x][1]]].current >= cost_arg[x][1] &&
+                player.rarities[rarity[rarity_arg[x][2]]].current >= cost_arg[x][2]
+        },
+    }
+}
+
 const UPGS = {
     common: {
+        checkDisable() {
+            for (let i = 0; i < Object.keys(this.buyables).length-1; i++) {
+                if (this.buyables[`buyable${i+1}`].disable()) document.getElementsByClassName('buyableUpgrade')[i].disabled = false
+                else document.getElementsByClassName('buyableUpgrade')[i].disabled = true
+            }
+        },
         buyables: {
             buyable1: {
                 id: 1,
@@ -98,12 +135,12 @@ const UPGS = {
                     [20],
                     [25],
                     [20, 10],
-                    [13, 4],
-                    [150, 5],
-                    [2000, 100, 30],
-                    [13500, 1450, 10],
-                    [200, 13],
-                    [70000, 2000, 3],
+                    [13, 3],
+                    [120, 5],
+                    [1800, 100, 30],
+                    [12500, 1300, 8],
+                    [200, 10],
+                    [65000, 1800, 3],
                     [350000, 2000, 600],
                     [9999]
                 ],
@@ -120,6 +157,7 @@ const UPGS = {
                     [0, 10, 12],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -188,14 +226,14 @@ const UPGS = {
                 id: 2,
                 cost: [
                     [25],
-                    [30, 4, 1],
+                    [25, 4, 1],
                     [1],
-                    [800, 2],
-                    [500, 3],
+                    [750, 2],
+                    [450, 3],
                     [4, 1],
-                    [3000, 250, 14],
+                    [2500, 250, 14],
                     [2],
-                    [225, 65, 25],
+                    [200, 60, 25],
                     [6750, 2],
                     [9999],
                 ],
@@ -203,7 +241,7 @@ const UPGS = {
                     [1, 0, 0],
                     [3, 5, 7],
                     [10, 0, 0],
-                    [0, 11, 0],
+                    [0, 10, 0],
                     [1, 12, 0],
                     [12, 15, 0],
                     [2, 8, 13],
@@ -212,6 +250,7 @@ const UPGS = {
                     [8, 18, 0],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -276,19 +315,20 @@ const UPGS = {
                     return (4+UPGS.mastery.buyables.buyable2.effect())*x
                 }
             },
+            disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
             buyable3: {
                 id: 3,
                 cost: [
-                    [12],
+                    [10],
                     [5, 1],
-                    [130, 6],
-                    [140, 1],
-                    [170, 4, 2],
-                    [1000, 50],
+                    [120, 6],
+                    [130, 1],
+                    [160, 4, 2],
+                    [850, 50],
                     [2, 1],
-                    [55555],
-                    [600, 9, 2],
-                    [12, 1],
+                    [50000],
+                    [550, 8, 2],
+                    [10, 1],
                     [9999],
                 ],
                 rarity: [
@@ -304,6 +344,7 @@ const UPGS = {
                     [17, 20, 0],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -359,28 +400,28 @@ const UPGS = {
                     if (bought) player.upgrades.buyables[this.id]++
                 },
                 effect(x=player.upgrades.buyables[this.id]) {
-                    return Math.pow(1.17647, x)
+                    return Math.pow(1.1111, x)
                 },
                 text_effect1(x=player.upgrades.buyables[this.id]) {
-                    return 1.5/Math.pow(1.17647, x)-UPGS.mastery.buyables.buyable3.effect()
+                    return 0.5/Math.pow(1.1111, x)-UPGS.mastery.buyables.buyable3.effect()
                 },
                 text_effect2(x=player.upgrades.buyables[this.id]+1) {
-                    return 1.5/Math.pow(1.17647, x)-UPGS.mastery.buyables.buyable3.effect()
+                    return 0.5/Math.pow(1.1111, x)-UPGS.mastery.buyables.buyable3.effect()
                 }
             },
             buyable4: {
                 id: 4,
                 cost: [
                     [2],
-                    [60, 34, 3],
-                    [70, 4],
-                    [12, 4],
-                    [60, 3],
-                    [36],
-                    [12, 3, 1],
+                    [55, 30, 3],
+                    [65, 4],
+                    [10, 4],
+                    [50, 2],
+                    [33],
+                    [11, 3, 1],
                     [2],
-                    [20000, 350, 3],
-                    [50000, 250, 8],
+                    [19000, 325, 3],
+                    [50000, 225, 8],
                     [9999],
                 ],
                 rarity: [
@@ -396,6 +437,7 @@ const UPGS = {
                     [5, 12, 16],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -471,15 +513,15 @@ const UPGS = {
                 id: 5,
                 cost: [
                     [1],
-                    [114, 10, 2],
-                    [4, 2],
+                    [100, 10, 2],
+                    [4, 1],
                     [3, 1],
                     [5],
                     [3,2,1],
-                    [800,50,1],
+                    [750,50,1],
                     [2,1],
-                    [3500],
-                    [60000, 700, 1],
+                    [3000],
+                    [55000, 650, 1],
                     [9999],
                 ],
                 rarity: [
@@ -495,6 +537,7 @@ const UPGS = {
                     [4, 11, 20],
                     [19, 0, 0],
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -550,33 +593,34 @@ const UPGS = {
                     if (bought) player.upgrades.buyables[this.id]++
                 },
                 effect(x=player.upgrades.buyables[this.id]) {
-                    return x == 0 ? 1 : Math.pow(4+UPGS.mastery.buyables.buyable5.effect(), x) * 2
+                    return x == 0 ? 1 : Math.pow(4+UPGS.mastery.buyables.buyable5.effect(), x)
                 },
                 text_effect1(x=player.upgrades.buyables[this.id]) {
-                    return 1024*Math.pow(4+UPGS.mastery.buyables.buyable5.effect(), x) * 2
+                    return 1024*Math.pow(4+UPGS.mastery.buyables.buyable5.effect(), x)
                 },
                 text_effect2(x=player.upgrades.buyables[this.id]+1) {
-                    return 1024*Math.pow(4+UPGS.mastery.buyables.buyable5.effect(), x) * 2
+                    return 1024*Math.pow(4+UPGS.mastery.buyables.buyable5.effect(), x)
                 }
             },
             buyable6: {
                 id: 6,
                 cost: [
                     [2],
-                    [12500, 800, 8],
-                    [75, 10],
-                    [70000, 1],
-                    [500000, 3],
+                    [11500, 750, 6],
+                    [64, 8],
+                    [64000, 1],
+                    [450000, 3],
                     [9999],
                 ],
                 rarity: [
-                    [13, 0, 0],
+                    [11, 0, 0],
                     [0, 5, 11],
                     [10, 12, 0],
                     [1, 20, 0],
                     [0, 21, 0],
                     [19, 0, 0],
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -619,15 +663,15 @@ const UPGS = {
             buyable7: {
                 id: 7,
                 cost: [
-                    [18],
-                    [250, 3],
-                    [18, 6],
+                    [16],
+                    [225, 3],
+                    [16, 6],
                     [2, 1],
-                    [13],
+                    [11],
                     [3],
-                    [550,2],
-                    [200,10,1],
-                    [60000, 7000],
+                    [500,2],
+                    [180,10,1],
+                    [50000, 6500],
                     [2, 1],
                     [9999],
                 ],
@@ -644,6 +688,7 @@ const UPGS = {
                     [19, 20, 0],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -712,15 +757,15 @@ const UPGS = {
                 id: 8,
                 cost: [
                     [8],
-                    [75, 15],
-                    [8],
-                    [4, 3],
-                    [400, 100],
-                    [300, 1],
-                    [5000, 750],
-                    [100000, 1],
-                    [45000, 200, 4],
-                    [75],
+                    [65, 12],
+                    [6],
+                    [4, 2],
+                    [350, 80],
+                    [250, 1],
+                    [4500, 650],
+                    [80000, 1],
+                    [40000, 180, 4],
+                    [70],
                     [9999],
                 ],
                 rarity: [
@@ -736,6 +781,7 @@ const UPGS = {
                     [15, 0, 0],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -805,14 +851,14 @@ const UPGS = {
                 cost: [
                     [1],
                     [3, 1],
-                    [25000, 10],
-                    [45, 5, 2],
+                    [22500, 8],
+                    [42, 5, 2],
                     [3, 1],
-                    [200000, 4000],
-                    [5],
+                    [185000, 3500],
+                    [4],
                     [3, 2, 1],
-                    [100000, 3000, 3],
-                    [1000, 40, 2],
+                    [80000, 2500, 3],
+                    [850, 40, 2],
                     [9999],
                 ],
                 rarity: [
@@ -828,6 +874,7 @@ const UPGS = {
                     [10, 15, 20],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -932,16 +979,16 @@ const UPGS = {
             buyable10: {
                 id: 10,
                 cost: [
-                    [2500],
-                    [150],
-                    [50000],
-                    [75, 4],
-                    [600, 65],
-                    [14],
-                    [40000, 60],
-                    [12500, 4500, 2250],
-                    [777, 13, 3],
-                    [650000, 4],
+                    [2250],
+                    [125],
+                    [45000],
+                    [64, 4],
+                    [500, 64],
+                    [12],
+                    [38500, 56],
+                    [12000, 4000, 2000],
+                    [720, 12, 3],
+                    [600000, 4],
                     [9999],
                 ],
                 rarity: [
@@ -957,6 +1004,7 @@ const UPGS = {
                     [1, 20, 0],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1025,15 +1073,15 @@ const UPGS = {
                 id: 11,
                 cost: [
                     [7000],
-                    [75000, 15],
+                    [70000, 14],
                     [8, 4],
-                    [280, 75],
-                    [500],
-                    [10000, 7],
+                    [250, 70],
+                    [475],
+                    [8500, 6],
                     [1],
-                    [50000, 70],
-                    [300000, 7],
-                    [700, 8, 2],
+                    [45000, 65],
+                    [250000, 7],
+                    [650, 6, 2],
                     [9999],
                 ],
                 rarity: [
@@ -1049,6 +1097,7 @@ const UPGS = {
                     [12, 18, 20],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1117,15 +1166,15 @@ const UPGS = {
                 id: 12,
                 cost: [
                     [1],
-                    [280],
-                    [1800, 30],
-                    [9],
-                    [22500, 70],
+                    [250],
+                    [1500, 30],
+                    [6],
+                    [20000, 65],
                     [1,1,1],
-                    [70000, 400, 8],
-                    [750],
-                    [75, 7, 2],
-                    [2000, 300],
+                    [60000, 350, 6],
+                    [700],
+                    [64, 6, 2],
+                    [1800, 250],
                     [9999],
                 ],
                 rarity: [
@@ -1141,6 +1190,7 @@ const UPGS = {
                     [10, 13, 0],
                     [19, 0, 0]
                 ],
+                disable(x=player.upgrades.buyables[this.id]) { return CHECK.common[Object.keys(CHECK.common)[this.cost[x].length-1]](x, this.rarity, this.cost) },
                 buy(x=player.upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1208,6 +1258,12 @@ const UPGS = {
         }
     },
     mastery: {
+        checkDisable() {
+            for (let i = 0; i < Object.keys(this.buyables).length-1; i++) {
+                if (this.buyables[`buyable${i+1}`].disable()) document.getElementsByClassName('masteryBuyableUpgrade')[i].disabled = false
+                else document.getElementsByClassName('masteryBuyableUpgrade')[i].disabled = true
+            }
+        },
         buyables: {
             buyable1: {
                 id: 1,
@@ -1229,6 +1285,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1272,6 +1329,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1315,6 +1373,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1358,6 +1417,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1401,6 +1461,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1444,6 +1505,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1484,6 +1546,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1527,6 +1590,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {
@@ -1570,6 +1634,7 @@ const UPGS = {
                     [1, 0, 0],
                     [1, 0, 0]
                 ],
+                disable(x=player.mastery_upgrades.buyables[this.id]) { return CHECK.mastery[Object.keys(CHECK.mastery)[this.cost[x].length-1]](x, this.mastery_rarity, this.rarity, this.cost) },
                 buy(x=player.mastery_upgrades.buyables[this.id]) {
                     let bought = false
                     if (x==0) {

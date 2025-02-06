@@ -183,6 +183,15 @@ button, div, span, footer {
     border: 2px black solid;
     border-radius: 3px;
     font-size: 11px;
+    transition: background-color 0.3s;
+}
+
+.buyableUpgrade:disabled  {
+    background-color: rgb(197, 197, 197) !important;
+}
+
+.buyableUpgrade:disabled:hover  {
+    background-color: rgb(189, 109, 109) !important;
 }
 
 .template-upgrade{
@@ -205,12 +214,22 @@ button, div, span, footer {
 
 #rollButton2, .masteryBuyableUpgrade, .masteryButton {
     color: #fff;
-    background-color: #222222; /* Тёмный фон кнопки */
+    background-color: #271d2b; /* Тёмный фон кнопки */
     border: 2px solid #8a2be2; /* Цвет контура */
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 0 10px #8a2be2, inset 0 0 10px #8a2be2;
     transition: background-color 0.3s
+}
+
+.masteryBuyableUpgrade:disabled  {
+    background-color:#222222 ;
+    border-color: #222222;
+    box-shadow: 0 0 0
+}
+
+.masteryBuyableUpgrade:disabled:hover  {
+    background-color: rgb(189, 109, 109) !important;
 }
 
 #rollButton:hover, #buttons button:hover, #statsButtons button:hover, .buyableUpgrade:hover, .settingButton:hover, .smallButton:hover, .whiteButton:hover {
@@ -794,7 +813,7 @@ input[type="range"] {
 
 .prestige-bar-base {
     margin: 3px 0px;
-    width: 217px;
+    width: 225px;
 }
 
 .prestige-class:hover {
@@ -805,7 +824,7 @@ input[type="range"] {
 .prestige-bar {
     background-color: rgb(207, 163, 106);
     position: absolute;
-    height: 21px;
+    height: 22px;
     width: 100px;
 }
 
@@ -818,7 +837,7 @@ input[type="range"] {
     text-align: center;
 }
 
-.raritiesList {
+.list-of-rarities, .raritiesList {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
